@@ -13,84 +13,88 @@
         <title></title>
     </head>
     <body>
-
+        <!--The xs(phone), sm(tablets), md(destop) and lg(lager destop) grids(Ex class="col-sm-3 col-xs-3") 
+        will all "stack" vertically on screens/viewports less than 768 pixels. 
+        This is where the xs grid fits in. Columns that use the col-xs-* classes will not stack vertically 
+        and continue to scale down on the smallest screens. -->
+        
         <!--nav bar-->
         <div class="row">
-            <div class="col-sm-3"><p>home</p></div>
-            <div class="col-sm-7"><p>nothing</p></div>
-            <div class="col-sm-2"><p>login</p></div>
+            <div class="col-sm-3 col-xs-3"><p>home</p></div>
+            <div class="col-sm-7 col-xs-7"><p>nothing</p></div>
+            <div class="col-sm-2 col-xs-2"><p>login</p></div>
         </div>
         
         <!--nav bar but for the room-->
         <div class="row">
-            <div class="col-sm-4"><p>room</p></div>
-            <div class="col-sm-4"><p>nothing</p></div>
-            <div class="col-sm-4"><p>week</p></div>
+            <div class="col-sm-4 col-xs-4"><p>room</p></div>
+            <div class="col-sm-4 col-xs-4"><p>nothing</p></div>
+            <div class="col-sm-4 col-xs-4"><p>week</p></div>
         </div>
         
         <!--table 1-->
         <div class="row">
-            <div class="col-sm-12"><p>Room name</p></div>
+            <div class="col-sm-12 col-xs-12"><p>Room name</p></div>
         </div>
         
         <div class="row">
-            <div class="col-sm-12"><p>table</p></div>
+            <div class="col-sm-12 col-xs-12"><p>table</p></div>
         </div>
         <div class="row">
-            <div class="col-sm-8"><p>nothing</p></div>
-            <div class="col-sm-4"><p>booking</p></div>
+            <div class="col-sm-8 col-xs-8"><p>nothing</p></div>
+            <div class="col-sm-4 col-xs-4"><p>booking</p></div>
         </div>
         
         <!--table 2-->
         <div class="row">
-            <div class="col-sm-12"><p>Room name</p></div>
+            <div class="col-sm-12 col-xs-12"><p>Room name</p></div>
         </div>
         
         <div class="row">
-            <div class="col-sm-12"><p>table</p></div>
+            <div class="col-sm-12 col-xs-12"><p>table</p></div>
         </div>
         <div class="row">
-            <div class="col-sm-8"><p>nothing</p></div>
-            <div class="col-sm-4"><p>booking</p></div>
+            <div class="col-sm-8 col-xs-8"><p>nothing</p></div>
+            <div class="col-sm-4 col-xs-4"><p>booking</p></div>
         </div>
         
         <!--table 3-->
         <div class="row">
-            <div class="col-sm-12"><p>Room name</p></div>
+            <div class="col-sm-12 col-xs-12"><p>Room name</p></div>
         </div>
         
         <div class="row">
-            <div class="col-sm-12"><p>table</p></div>
+            <div class="col-sm-12 col-xs-12"><p>table</p></div>
         </div>
         <div class="row">
-            <div class="col-sm-8"><p>nothing</p></div>
-            <div class="col-sm-4"><p>booking</p></div>
+            <div class="col-sm-8 col-xs-8"><p>nothing</p></div>
+            <div class="col-sm-4 col-xs-4"><p>booking</p></div>
         </div>
         
         <!--table 4-->
         <div class="row">
-            <div class="col-sm-12"><p>Room name</p></div>
+            <div class="col-sm-12 col-xs-12"><p>Room name</p></div>
         </div>
         
         <div class="row">
-            <div class="col-sm-12"><p>table</p></div>
+            <div class="col-sm-12 col-xs-12"><p>table</p></div>
         </div>
         <div class="row">
-            <div class="col-sm-8"><p>nothing</p></div>
-            <div class="col-sm-4"><p>booking</p></div>
+            <div class="col-sm-8 col-xs-8"><p>nothing</p></div>
+            <div class="col-sm-4 col-xs-4"><p>booking</p></div>
         </div>
         
         <!--table 5-->
         <div class="row">
-            <div class="col-sm-12"><p>Room name</p></div>
+            <div class="col-sm-12 col-xs-12"><p>Room name</p></div>
         </div>
         
         <div class="row">
-            <div class="col-sm-12"><p>table</p></div>
+            <div class="col-sm-12 col-xs-12"><p>table</p></div>
         </div>
         <div class="row">
-            <div class="col-sm-8"><p>nothing</p></div>
-            <div class="col-sm-4"><p>booking</p></div>
+            <div class="col-sm-8 col-xs-8"><p>nothing</p></div>
+            <div class="col-sm-4 col-xs-4"><p>booking</p></div>
         </div>
 
   

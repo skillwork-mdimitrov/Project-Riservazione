@@ -6,15 +6,27 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"> <!-- to support IE 9 or IE 8 -->
         <meta name="viewport" content="width=device-width, initial-scale=1"> <!-- render the width of the page at the width of its own screen, So if that screen
         is 320px wide, the browser window will be 320px wide -->
-        <link rel="stylesheet" href="CSS/indexCSS.css">
+        <link rel="stylesheet" type="text/css" href="CSS/indexCSS.css">
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script> <!-- Justification of this is needed -->
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script> <!-- Justification of this is needed -->
-
         <title></title>
+        <style>
+        div 
+        {
+            border-bottom: 1px solid;
+            border-top: 1px solid;
+            border-left: 1px solid;
+            border-right: 1px solid;
+        }
+        
+        .row{
+            background-color: gray;
+        }
+        </style>
     </head>
     <body>
-        <div class="container"> <!-- bootstrap grid (which is used below) requires a container class
+        <div class="fluid-container"> <!-- bootstrap grid (which is used below) requires a container class
         <!--The xs(phone), sm(tablets), md(desktop) and lg(lager destop) grids(Ex class="col-sm-3 col-xs-3") 
         will all "stack" vertically on screens/viewports less than 768 pixels. 
         This is where the xs grid fits in. Columns that use the col-xs-* classes will not stack vertically 
@@ -25,7 +37,6 @@
             <div class="col-sm-7 col-xs-7"><p>nothing</p></div>
             <div class="col-sm-2 col-xs-2"><p>login</p></div>
         </div>
-
         <!--nav bar but for the room-->
         <div class="row">
             <div class="col-sm-4 col-xs-4"><p>room</p></div>

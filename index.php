@@ -111,9 +111,11 @@
 
 
         <!--footer-->
+        <div class="row">
         <footer class="container-fluid text-center">
           <p>Footer Text</p>
         </footer>
+        </div>
         </div>
   </body>
 </html>

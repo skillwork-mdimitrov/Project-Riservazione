@@ -10,7 +10,8 @@
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script> <!-- Justification of this is needed -->
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script> <!-- Justification of this is needed -->
-        <title></title>
+        <title>HomePage</title>
+        
         <style>
         div 
         {
@@ -23,7 +24,12 @@
         .row{
             background-color: gray;
         }
+        
+        #signupLogin{
+            display: inline-block;
+        }
         </style>
+        
     </head>
     <body>
         <div class="fluid-container"> <!-- bootstrap grid (which is used below) requires a container class
@@ -33,9 +39,25 @@
         and continue to scale down on the smallest screens. -->
         <!--nav bar-->
         <div class="row">
-            <div class="col-sm-3 col-xs-3"><p>home</p></div>
-            <div class="col-sm-7 col-xs-7"><p>nothing</p></div>
-            <div class="col-sm-2 col-xs-2"><p>login</p></div>
+            <div class="col-sm-3 col-xs-3"><p>HOme</p></div>
+            <div class="col-sm-5 col-xs-5"><p>nothing</p></div>
+            
+            <div id="signupLogin" class="col-sm-2 col-xs-2">
+                
+                
+                <h2>Sign up</h2>
+                
+
+            </div>
+            
+            <div id="signupLogin" class="col-sm-2 col-xs-2">
+                
+                
+                
+                <h2>Log In</h2>
+
+            </div>
+            
         </div>
         <!--nav bar but for the room-->
         <div class="row">

@@ -1,6 +1,5 @@
 <!DOCTYPE html> <!-- so the browsers can use the latest rendering standards. -->
-<html>
-    <html lang="en"/> <!-- useful for search engines and screen readers -->
+<html lang="en"> <!-- useful for search engines and screen readers -->
     <head>
         <meta charset="UTF-8"/> 
         <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"> <!-- to support IE 9 or IE 8 -->
@@ -32,8 +31,8 @@
         
     </head>
     <body>
-        <div class="fluid-container"> <!-- bootstrap grid (which is used below) requires a container class
-        <!--The xs(phone), sm(tablets), md(desktop) and lg(lager destop) grids(Ex class="col-sm-3 col-xs-3") 
+        <div class="fluid-container"> <!-- bootstrap grid (which is used below) requires a container class. 
+        The xs(phone), sm(tablets), md(desktop) and lg(lager destop) grids(Ex class="col-sm-3 col-xs-3") 
         will all "stack" vertically on screens/viewports less than 768 pixels. 
         This is where the xs grid fits in. Columns that use the col-xs-* classes will not stack vertically 
         and continue to scale down on the smallest screens. -->

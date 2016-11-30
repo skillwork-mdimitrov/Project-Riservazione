@@ -19,7 +19,7 @@
         and continue to scale down on the smallest screens. -->
         <!--nav bar-->
         <div class="row">
-            <div class="col-sm-3 col-xs-3"><img src="Images\logo.png" alt="logo"></div>
+            <div class="col-sm-3 col-xs-3"><img src="Images\logo2.png" alt="logo"></div>
             <div class="col-sm-5 col-xs-5"><p>nothing</p></div>
             
             <div id="signupLogin" class="col-sm-2 col-xs-2">

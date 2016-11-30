@@ -11,25 +11,6 @@
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script> <!-- Justification of this is needed -->
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script> <!-- Justification of this is needed -->
         <title>HomePage</title>
-        
-        <style>
-        div 
-        {
-            border-bottom: 1px solid;
-            border-top: 1px solid;
-            border-left: 1px solid;
-            border-right: 1px solid;
-        }
-        
-        .row{
-            background-color: gray;
-        }
-        
-        #signupLogin{
-            display: inline-block;
-        }
-        </style>
-        
     </head>
     <body>
         <div class="fluid-container"> <!-- bootstrap grid (which is used below) requires a container class

@@ -10,25 +10,6 @@
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script> <!-- Justification of this is needed -->
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script> <!-- Justification of this is needed -->
         <title>HomePage</title>
-        
-        <style>
-        div 
-        {
-            border-bottom: 1px solid;
-            border-top: 1px solid;
-            border-left: 1px solid;
-            border-right: 1px solid;
-        }
-        
-        .row{
-            background-color: gray;
-        }
-        
-        #signupLogin{
-            display: inline-block;
-        }
-        </style>
-        
     </head>
     <body>
         <div class="fluid-container"> <!-- bootstrap grid (which is used below) requires a container class. 
@@ -38,7 +19,7 @@
         and continue to scale down on the smallest screens. -->
         <!--nav bar-->
         <div class="row">
-            <div class="col-sm-3 col-xs-3"><p>HOme</p></div>
+            <div class="col-sm-3 col-xs-3"><img src="Images\logo.png" alt="logo"></div>
             <div class="col-sm-5 col-xs-5"><p>nothing</p></div>
             
             <div id="signupLogin" class="col-sm-2 col-xs-2">
@@ -50,7 +31,6 @@
             </div>
             
             <div id="signupLogin" class="col-sm-2 col-xs-2">
-                
                 
                 
                 <h2>Log In</h2>
@@ -67,11 +47,126 @@
 
         <!--table 1-->
         <div class="row">
-            <div class="col-sm-12 col-xs-12"><p>Room name</p></div>
+            <div id="RoomName" class="col-sm-12 col-xs-12"><p>Room name</p></div>
         </div>
 
         <div class="row">
-            <div class="col-sm-12 col-xs-12"><p>table</p></div>
+            <div class="col-sm-12 col-xs-12">
+                <table style="width:100%">
+                    <tr>
+                      <th>Room name</th>
+                      <th>Monday</th> 
+                      <th>Tuesday</th>
+                      <th>Wednesday</th>
+                      <th>Thursday</th>
+                      <th>Friday</th>
+                    </tr>
+                    <tr>
+                      <td>0800</td>
+                      <td></td> 
+                      <td></td>
+                      <td></td>
+                      <td></td> 
+                      <td></td>
+                    </tr>
+                    <tr>
+                      <td>0900</td>
+                      <td></td> 
+                      <td></td>
+                      <td></td>
+                      <td></td> 
+                      <td></td>
+                    </tr>
+                    <tr>
+                      <td>1000</td>
+                      <td></td> 
+                      <td></td>
+                      <td></td>
+                      <td></td> 
+                      <td></td>
+                    </tr>
+                    <tr>
+                      <td>1100</td>
+                      <td></td> 
+                      <td></td>
+                      <td></td>
+                      <td></td> 
+                      <td></td>
+                    </tr>
+                    <tr>
+                      <td>1200</td>
+                      <td></td> 
+                      <td></td>
+                      <td></td>
+                      <td></td> 
+                      <td></td>
+                    </tr>
+                    <tr>
+                      <td>1300</td>
+                      <td></td> 
+                      <td></td>
+                      <td></td>
+                      <td></td> 
+                      <td></td>
+                    </tr>
+                    <tr>
+                      <td>1400</td>
+                      <td></td> 
+                      <td></td>
+                      <td></td>
+                      <td></td> 
+                      <td></td>
+                    </tr>
+                    <tr>
+                      <td>1500</td>
+                      <td></td> 
+                      <td></td>
+                      <td></td>
+                      <td></td> 
+                      <td></td>
+                    </tr>
+                    <tr>
+                      <td>1600</td>
+                      <td></td> 
+                      <td></td>
+                      <td></td>
+                      <td></td> 
+                      <td></td>
+                    </tr>
+                    <tr>
+                      <td>1700</td>
+                      <td></td> 
+                      <td></td>
+                      <td></td>
+                      <td></td> 
+                      <td></td>
+                    </tr>
+                    <tr>
+                      <td>1800</td>
+                      <td></td> 
+                      <td></td>
+                      <td></td>
+                      <td></td> 
+                      <td></td>
+                    </tr>
+                    <tr>
+                      <td>1900</td>
+                      <td></td> 
+                      <td></td>
+                      <td></td>
+                      <td></td> 
+                      <td></td>
+                    </tr>
+                    <tr>
+                      <td>2000</td>
+                      <td></td> 
+                      <td></td>
+                      <td></td>
+                      <td></td> 
+                      <td></td>
+                    </tr>
+                </table>
+            </div>
         </div>
         <div class="row">
             <div class="col-sm-8 col-xs-8"><p>nothing</p></div>
@@ -80,11 +175,126 @@
 
         <!--table 2-->
         <div class="row">
-            <div class="col-sm-12 col-xs-12"><p>Room name</p></div>
+            <div id="RoomName" class="col-sm-12 col-xs-12"><p>Room name</p></div>
         </div>
 
         <div class="row">
-            <div class="col-sm-12 col-xs-12"><p>table</p></div>
+            <div class="col-sm-12 col-xs-12">
+                <table style="width:100%">
+                    <tr>
+                      <th>Room name</th>
+                      <th>Monday</th> 
+                      <th>Tuesday</th>
+                      <th>Wednesday</th>
+                      <th>Thursday</th>
+                      <th>Friday</th>
+                    </tr>
+                    <tr>
+                      <td>0800</td>
+                      <td></td> 
+                      <td></td>
+                      <td></td>
+                      <td></td> 
+                      <td></td>
+                    </tr>
+                    <tr>
+                      <td>0900</td>
+                      <td></td> 
+                      <td></td>
+                      <td></td>
+                      <td></td> 
+                      <td></td>
+                    </tr>
+                    <tr>
+                      <td>1000</td>
+                      <td></td> 
+                      <td></td>
+                      <td></td>
+                      <td></td> 
+                      <td></td>
+                    </tr>
+                    <tr>
+                      <td>1100</td>
+                      <td></td> 
+                      <td></td>
+                      <td></td>
+                      <td></td> 
+                      <td></td>
+                    </tr>
+                    <tr>
+                      <td>1200</td>
+                      <td></td> 
+                      <td></td>
+                      <td></td>
+                      <td></td> 
+                      <td></td>
+                    </tr>
+                    <tr>
+                      <td>1300</td>
+                      <td></td> 
+                      <td></td>
+                      <td></td>
+                      <td></td> 
+                      <td></td>
+                    </tr>
+                    <tr>
+                      <td>1400</td>
+                      <td></td> 
+                      <td></td>
+                      <td></td>
+                      <td></td> 
+                      <td></td>
+                    </tr>
+                    <tr>
+                      <td>1500</td>
+                      <td></td> 
+                      <td></td>
+                      <td></td>
+                      <td></td> 
+                      <td></td>
+                    </tr>
+                    <tr>
+                      <td>1600</td>
+                      <td></td> 
+                      <td></td>
+                      <td></td>
+                      <td></td> 
+                      <td></td>
+                    </tr>
+                    <tr>
+                      <td>1700</td>
+                      <td></td> 
+                      <td></td>
+                      <td></td>
+                      <td></td> 
+                      <td></td>
+                    </tr>
+                    <tr>
+                      <td>1800</td>
+                      <td></td> 
+                      <td></td>
+                      <td></td>
+                      <td></td> 
+                      <td></td>
+                    </tr>
+                    <tr>
+                      <td>1900</td>
+                      <td></td> 
+                      <td></td>
+                      <td></td>
+                      <td></td> 
+                      <td></td>
+                    </tr>
+                    <tr>
+                      <td>2000</td>
+                      <td></td> 
+                      <td></td>
+                      <td></td>
+                      <td></td> 
+                      <td></td>
+                    </tr>
+                </table>
+            </div>
         </div>
         <div class="row">
             <div class="col-sm-8 col-xs-8"><p>nothing</p></div>
@@ -93,11 +303,126 @@
 
         <!--table 3-->
         <div class="row">
-            <div class="col-sm-12 col-xs-12"><p>Room name</p></div>
+            <div id="RoomName" class="col-sm-12 col-xs-12"><p>Room name</p></div>
         </div>
 
         <div class="row">
-            <div class="col-sm-12 col-xs-12"><p>table</p></div>
+            <div class="col-sm-12 col-xs-12">
+                <table style="width:100%">
+                    <tr>
+                      <th>Room name</th>
+                      <th>Monday</th> 
+                      <th>Tuesday</th>
+                      <th>Wednesday</th>
+                      <th>Thursday</th>
+                      <th>Friday</th>
+                    </tr>
+                    <tr>
+                      <td>0800</td>
+                      <td></td> 
+                      <td></td>
+                      <td></td>
+                      <td></td> 
+                      <td></td>
+                    </tr>
+                    <tr>
+                      <td>0900</td>
+                      <td></td> 
+                      <td></td>
+                      <td></td>
+                      <td></td> 
+                      <td></td>
+                    </tr>
+                    <tr>
+                      <td>1000</td>
+                      <td></td> 
+                      <td></td>
+                      <td></td>
+                      <td></td> 
+                      <td></td>
+                    </tr>
+                    <tr>
+                      <td>1100</td>
+                      <td></td> 
+                      <td></td>
+                      <td></td>
+                      <td></td> 
+                      <td></td>
+                    </tr>
+                    <tr>
+                      <td>1200</td>
+                      <td></td> 
+                      <td></td>
+                      <td></td>
+                      <td></td> 
+                      <td></td>
+                    </tr>
+                    <tr>
+                      <td>1300</td>
+                      <td></td> 
+                      <td></td>
+                      <td></td>
+                      <td></td> 
+                      <td></td>
+                    </tr>
+                    <tr>
+                      <td>1400</td>
+                      <td></td> 
+                      <td></td>
+                      <td></td>
+                      <td></td> 
+                      <td></td>
+                    </tr>
+                    <tr>
+                      <td>1500</td>
+                      <td></td> 
+                      <td></td>
+                      <td></td>
+                      <td></td> 
+                      <td></td>
+                    </tr>
+                    <tr>
+                      <td>1600</td>
+                      <td></td> 
+                      <td></td>
+                      <td></td>
+                      <td></td> 
+                      <td></td>
+                    </tr>
+                    <tr>
+                      <td>1700</td>
+                      <td></td> 
+                      <td></td>
+                      <td></td>
+                      <td></td> 
+                      <td></td>
+                    </tr>
+                    <tr>
+                      <td>1800</td>
+                      <td></td> 
+                      <td></td>
+                      <td></td>
+                      <td></td> 
+                      <td></td>
+                    </tr>
+                    <tr>
+                      <td>1900</td>
+                      <td></td> 
+                      <td></td>
+                      <td></td>
+                      <td></td> 
+                      <td></td>
+                    </tr>
+                    <tr>
+                      <td>2000</td>
+                      <td></td> 
+                      <td></td>
+                      <td></td>
+                      <td></td> 
+                      <td></td>
+                    </tr>
+                </table>
+            </div>
         </div>
         <div class="row">
             <div class="col-sm-8 col-xs-8"><p>nothing</p></div>
@@ -106,11 +431,126 @@
 
         <!--table 4-->
         <div class="row">
-            <div class="col-sm-12 col-xs-12"><p>Room name</p></div>
+            <div id="RoomName" class="col-sm-12 col-xs-12"><p>Room name</p></div>
         </div>
 
         <div class="row">
-            <div class="col-sm-12 col-xs-12"><p>table</p></div>
+            <div class="col-sm-12 col-xs-12">
+                <table style="width:100%">
+                    <tr>
+                      <th>Room name</th>
+                      <th>Monday</th> 
+                      <th>Tuesday</th>
+                      <th>Wednesday</th>
+                      <th>Thursday</th>
+                      <th>Friday</th>
+                    </tr>
+                    <tr>
+                      <td>0800</td>
+                      <td></td> 
+                      <td></td>
+                      <td></td>
+                      <td></td> 
+                      <td></td>
+                    </tr>
+                    <tr>
+                      <td>0900</td>
+                      <td></td> 
+                      <td></td>
+                      <td></td>
+                      <td></td> 
+                      <td></td>
+                    </tr>
+                    <tr>
+                      <td>1000</td>
+                      <td></td> 
+                      <td></td>
+                      <td></td>
+                      <td></td> 
+                      <td></td>
+                    </tr>
+                    <tr>
+                      <td>1100</td>
+                      <td></td> 
+                      <td></td>
+                      <td></td>
+                      <td></td> 
+                      <td></td>
+                    </tr>
+                    <tr>
+                      <td>1200</td>
+                      <td></td> 
+                      <td></td>
+                      <td></td>
+                      <td></td> 
+                      <td></td>
+                    </tr>
+                    <tr>
+                      <td>1300</td>
+                      <td></td> 
+                      <td></td>
+                      <td></td>
+                      <td></td> 
+                      <td></td>
+                    </tr>
+                    <tr>
+                      <td>1400</td>
+                      <td></td> 
+                      <td></td>
+                      <td></td>
+                      <td></td> 
+                      <td></td>
+                    </tr>
+                    <tr>
+                      <td>1500</td>
+                      <td></td> 
+                      <td></td>
+                      <td></td>
+                      <td></td> 
+                      <td></td>
+                    </tr>
+                    <tr>
+                      <td>1600</td>
+                      <td></td> 
+                      <td></td>
+                      <td></td>
+                      <td></td> 
+                      <td></td>
+                    </tr>
+                    <tr>
+                      <td>1700</td>
+                      <td></td> 
+                      <td></td>
+                      <td></td>
+                      <td></td> 
+                      <td></td>
+                    </tr>
+                    <tr>
+                      <td>1800</td>
+                      <td></td> 
+                      <td></td>
+                      <td></td>
+                      <td></td> 
+                      <td></td>
+                    </tr>
+                    <tr>
+                      <td>1900</td>
+                      <td></td> 
+                      <td></td>
+                      <td></td>
+                      <td></td> 
+                      <td></td>
+                    </tr>
+                    <tr>
+                      <td>2000</td>
+                      <td></td> 
+                      <td></td>
+                      <td></td>
+                      <td></td> 
+                      <td></td>
+                    </tr>
+                </table>
+            </div>
         </div>
         <div class="row">
             <div class="col-sm-8 col-xs-8"><p>nothing</p></div>
@@ -119,11 +559,126 @@
 
         <!--table 5-->
         <div class="row">
-            <div class="col-sm-12 col-xs-12"><p>Room name</p></div>
+            <div id="RoomName" class="col-sm-12 col-xs-12"><p>Room name</p></div>
         </div>
 
         <div class="row">
-            <div class="col-sm-12 col-xs-12"><p>table</p></div>
+            <div class="col-sm-12 col-xs-12">
+                <table style="width:100%">
+                    <tr>
+                      <th>Room name</th>
+                      <th>Monday</th> 
+                      <th>Tuesday</th>
+                      <th>Wednesday</th>
+                      <th>Thursday</th>
+                      <th>Friday</th>
+                    </tr>
+                    <tr>
+                      <td>0800</td>
+                      <td></td> 
+                      <td></td>
+                      <td></td>
+                      <td></td> 
+                      <td></td>
+                    </tr>
+                    <tr>
+                      <td>0900</td>
+                      <td></td> 
+                      <td></td>
+                      <td></td>
+                      <td></td> 
+                      <td></td>
+                    </tr>
+                    <tr>
+                      <td>1000</td>
+                      <td></td> 
+                      <td></td>
+                      <td></td>
+                      <td></td> 
+                      <td></td>
+                    </tr>
+                    <tr>
+                      <td>1100</td>
+                      <td></td> 
+                      <td></td>
+                      <td></td>
+                      <td></td> 
+                      <td></td>
+                    </tr>
+                    <tr>
+                      <td>1200</td>
+                      <td></td> 
+                      <td></td>
+                      <td></td>
+                      <td></td> 
+                      <td></td>
+                    </tr>
+                    <tr>
+                      <td>1300</td>
+                      <td></td> 
+                      <td></td>
+                      <td></td>
+                      <td></td> 
+                      <td></td>
+                    </tr>
+                    <tr>
+                      <td>1400</td>
+                      <td></td> 
+                      <td></td>
+                      <td></td>
+                      <td></td> 
+                      <td></td>
+                    </tr>
+                    <tr>
+                      <td>1500</td>
+                      <td></td> 
+                      <td></td>
+                      <td></td>
+                      <td></td> 
+                      <td></td>
+                    </tr>
+                    <tr>
+                      <td>1600</td>
+                      <td></td> 
+                      <td></td>
+                      <td></td>
+                      <td></td> 
+                      <td></td>
+                    </tr>
+                    <tr>
+                      <td>1700</td>
+                      <td></td> 
+                      <td></td>
+                      <td></td>
+                      <td></td> 
+                      <td></td>
+                    </tr>
+                    <tr>
+                      <td>1800</td>
+                      <td></td> 
+                      <td></td>
+                      <td></td>
+                      <td></td> 
+                      <td></td>
+                    </tr>
+                    <tr>
+                      <td>1900</td>
+                      <td></td> 
+                      <td></td>
+                      <td></td>
+                      <td></td> 
+                      <td></td>
+                    </tr>
+                    <tr>
+                      <td>2000</td>
+                      <td></td> 
+                      <td></td>
+                      <td></td>
+                      <td></td> 
+                      <td></td>
+                    </tr>
+                </table>
+            </div>
         </div>
         <div class="row">
             <div class="col-sm-8 col-xs-8"><p>nothing</p></div>

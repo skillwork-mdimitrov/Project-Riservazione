@@ -17,3 +17,18 @@ div
         #signupLogin{
             text-align: right;
         }
+        
+        #RoomName{
+            text-align: center;
+            font-size: 25px;
+        }
+        
+       td {
+            border: 3px solid black;
+            text-align: center;
+        }
+        
+        th{
+            border: 3px solid black;
+            text-align: right;
+        }

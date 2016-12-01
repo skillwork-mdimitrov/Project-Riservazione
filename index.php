@@ -2,42 +2,36 @@
 <html lang="en"> <!-- useful for search engines and screen readers -->
     <head>
         <meta charset="UTF-8"/> 
-        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"> <!-- to support IE 9 or IE 8 -->
-        <meta name="viewport" content="width=device-width, initial-scale=1"> <!-- render the width of the page at the width of its own screen, So if that screen
-        is 320px wide, the browser window will be 320px wide -->
-        <link rel="stylesheet" type="text/css" href="CSS/indexCSS.css">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge"> <!-- to support IE 9, IE 8 -->
+        <meta name="viewport" content="width=device-width, initial-scale=1"> <!-- render the width of the page at the width of its own screen, So if that 
+        screen is 320px wide, the browser window will be 320px wide -->
+        <link rel="stylesheet" type="text/css" href="CSS/indexCSS.css"> <!-- reference to the CSS stylesheet -->
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script> <!-- Justification of this is needed -->
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script> <!-- Justification of this is needed -->
+        <link rel="icon" href="Images/favicon.ico"/> <!-- the icon will be displayed in the browser tabs -->
         <title>HomePage</title>
     </head>
     <body>
-        <div class="fluid-container"> <!-- bootstrap grid (which is used below) requires a container class. 
-        The xs(phone), sm(tablets), md(desktop) and lg(lager destop) grids(Ex class="col-sm-3 col-xs-3") 
+        <div class="fluid-container"> <!-- WRAPPER. The bootstrap grid used below requires such container. 
+        The xs(phone), sm(tablets), md(desktop) and lg(lager desktop) grids(Example: class="col-sm-3 col-xs-3") 
         will all "stack" vertically on screens/viewports less than 768 pixels. 
-        This is where the xs grid fits in. Columns that use the col-xs-* classes will not stack vertically 
-        and continue to scale down on the smallest screens. -->
-        <!--nav bar-->
-        <div class="row">
-            <div class="col-sm-3 col-xs-3"><img src="Images\Logo2.png" alt="logo"></div>
+        This is where the xs grid fits in. Columns that use the col-xs-* classes will not stack vertically and continue to scale down on the smallest screens. -->
+            
+        <!--Navigation bar-->
+        <div id="nav-bar-container" class="row">
+            <div class="col-sm-3 col-xs-3"><img src="Images/Logo3.png" alt="logo"></div>
             <div class="col-sm-5 col-xs-5"><p>nothing</p></div>
             
-            <div id="signupLogin" class="col-sm-2 col-xs-2">
-                
-                
-                <h2>Sign up</h2>
-                
-
+            <div class="signupLogin col-sm-2 col-xs-2">   
+                <h2>Sign up</h2>          
             </div>
             
-            <div id="signupLogin" class="col-sm-2 col-xs-2">
-                
-                
+            <div class="signupLogin col-sm-2 col-xs-2">
                 <h2>Log In</h2>
-
-            </div>
-            
+            </div> 
         </div>
+        <!-- Navigation bar END -->
         <!--nav bar but for the room-->
         <div class="row">
             <div class="col-sm-4 col-xs-4"><p>room</p></div>
@@ -47,7 +41,7 @@
 
         <!--table 1-->
         <div class="row">
-            <div id="RoomName" class="col-sm-12 col-xs-12"><p>Room name</p></div>
+            <div class="RoomName col-sm-12 col-xs-12"><p>Room name</p></div>
         </div>
 
         <div class="row">
@@ -175,7 +169,7 @@
 
         <!--table 2-->
         <div class="row">
-            <div id="RoomName" class="col-sm-12 col-xs-12"><p>Room name</p></div>
+            <div class="RoomName col-sm-12 col-xs-12"><p>Room name</p></div>
         </div>
 
         <div class="row">
@@ -303,7 +297,7 @@
 
         <!--table 3-->
         <div class="row">
-            <div id="RoomName" class="col-sm-12 col-xs-12"><p>Room name</p></div>
+            <div class="RoomName col-sm-12 col-xs-12"><p>Room name</p></div>
         </div>
 
         <div class="row">
@@ -431,7 +425,7 @@
 
         <!--table 4-->
         <div class="row">
-            <div id="RoomName" class="col-sm-12 col-xs-12"><p>Room name</p></div>
+            <div class="RoomName col-sm-12 col-xs-12"><p>Room name</p></div>
         </div>
 
         <div class="row">
@@ -559,7 +553,7 @@
 
         <!--table 5-->
         <div class="row">
-            <div id="RoomName" class="col-sm-12 col-xs-12"><p>Room name</p></div>
+            <div class="RoomName col-sm-12 col-xs-12"><p>Room name</p></div>
         </div>
 
         <div class="row">

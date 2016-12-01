@@ -1,34 +1,39 @@
+/* === HEAD section === */
 @-ms-viewport{
   width: device-width;
 } /* Ensuring the website looks as expected on Windows 8 */
+/* === HEAD section ends === */
 
+/* === BODY section === */
 div 
-        {
-            border-bottom: 1px solid;
-            border-top: 1px solid;
-            border-left: 1px solid;
-            border-right: 1px solid;
-        }
-        
-        .row{
-            background-color: gray;
-        }
-        
-        #signupLogin{
-            text-align: right;
-        }
-        
-        #RoomName{
-            text-align: center;
-            font-size: 25px;
-        }
-        
-       td {
-            border: 3px solid black;
-            text-align: center;
-        }
-        
-        th{
-            border: 3px solid black;
-            text-align: right;
-        }
+{
+    border-bottom: 1px solid;
+    border-top: 1px solid;
+    border-left: 1px solid;
+    border-right: 1px solid;
+    font-family: Agency FB, Georgia, serif; /* several font names as a "fallback" system, to ensure maximum compatibility between browsers/operating systems */
+}  
+
+.row{
+    background-color: gray;
+}
+
+.signupLogin{
+    text-align: right;
+}
+
+.RoomName{
+    text-align: center;
+    font-size: 25px;
+}
+
+td {
+    border: 3px solid black;
+    text-align: center;
+}
+
+th{
+    border: 3px solid black;
+    text-align: right;
+}
+/* === BODY section end === */

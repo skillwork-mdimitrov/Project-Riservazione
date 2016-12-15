@@ -7,11 +7,12 @@
 /* === BODY section === */
 div 
 {
+    
     border-bottom: 1px solid;
     border-top: 1px solid;
     border-left: 1px solid;
     border-right: 1px solid;
-    font-family: Agency FB, Georgia, serif; /* several font names as a "fallback" system, to ensure maximum compatibility between browsers/operating systems */
+    font-family: Agency FB, Georgia, serif;  /*several font names as a "fallback" system, to ensure maximum compatibility between browsers/operating systems */
 }  
 
 .row{
@@ -25,6 +26,10 @@ div
 .RoomName{
     text-align: center;
     font-size: 25px;
+}
+
+.week{
+   font-size: 30px;
 }
 
 td {

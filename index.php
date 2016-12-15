@@ -20,12 +20,12 @@
             
         <!--Navigation bar-->
         <div id="nav-bar-container" class="row">
-            <div class="col-sm-3 col-xs-3"><img src="Images/Logo3.png" alt="logo"></div>
+            <div class="col-sm-3 col-xs-3"><img src="Images/Logo3.png" class="img-responsive" alt="logo"></div>
             <div class="col-sm-5 col-xs-5"><p>nothing</p></div>
             
             <div class="signupLogin col-sm-2 col-xs-2">
                 <!--button-->
-                <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#signUp">Sign Up</button>
+                <button type="button" class="btn btn-success btn-md" data-toggle="modal" data-target="#signUp">Sign Up</button>
                 <!--thing that pops up-->
                 <div class="modal fade" id="signUp" role="dialog">
                     <div class="modal-dialog">    
@@ -59,7 +59,7 @@
             
             <div class="signupLogin col-sm-2 col-xs-2">
                 <!--button-->
-                <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#logIn">LogIn</button>
+                <button type="button" class="btn btn-success btn-md" data-toggle="modal" data-target="#logIn">LogIn</button>
                 <!--thing that pops up-->
                 <div class="modal fade" id="logIn" role="dialog">
                     <div class="modal-dialog">    
@@ -92,9 +92,23 @@
         <!-- Navigation bar END -->
         <!--nav bar but for the room-->
         <div class="row">
-            <div class="col-sm-4 col-xs-4"><p>room</p></div>
+            <div class="col-sm-4 col-xs-4">
+                <p>
+                    <button type="button" class="btn btn-primary">Room 1</button>
+                    <button type="button" class="btn btn-info">Room 2</button>
+                    <button type="button" class="btn btn-warning">Room 3</button>
+                    <button type="button" class="btn btn-danger">Room 4</button>
+                    <button type="button" class="btn btn-success">Room 5</button>
+                </p>
+            </div>
             <div class="col-sm-4 col-xs-4"><p>nothing</p></div>
-            <div class="col-sm-4 col-xs-4"><p>week</p></div>
+            <div class="week col-sm-4 col-xs-4">
+                <p>
+                    <button type="button" class="btn btn-primary"><--</button>
+                        week
+                    <button type="button" class="btn btn-primary">--></button>
+                </p>
+            </div>
         </div>
 
         <!--table 1-->

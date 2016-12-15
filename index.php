@@ -23,12 +23,70 @@
             <div class="col-sm-3 col-xs-3"><img src="Images/Logo3.png" alt="logo"></div>
             <div class="col-sm-5 col-xs-5"><p>nothing</p></div>
             
-            <div class="signupLogin col-sm-2 col-xs-2">   
-                <h2>Sign up</h2>          
+            <div class="signupLogin col-sm-2 col-xs-2">
+                <!--button-->
+                <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#signUp">Sign Up</button>
+                <!--thing that pops up-->
+                <div class="modal fade" id="signUp" role="dialog">
+                    <div class="modal-dialog">    
+                        <div class="modal-content">
+                          <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                            <h4 class="modal-title">Sign Up</h4>
+                          </div>
+                          <div class="modal-body">
+                            <p>
+                            <form action="index.php">
+                                Username:<br>
+                                <input type="text" name="username"><br>
+                                Password:<br>
+                                <input type="password" name="password"><br>
+                                Re-enter password:<br>
+                                <input type="password" name="repassword"><br><br>
+                                <input type="submit" value="Submit">
+                            </form>
+                            </p>
+                          </div>
+                          <div class="modal-footer">
+                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                          </div>
+                        </div>
+
+                  </div>
+                </div>
+                <!--end of thing that pops up-->
             </div>
             
             <div class="signupLogin col-sm-2 col-xs-2">
-                <h2>Log In</h2>
+                <!--button-->
+                <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#logIn">LogIn</button>
+                <!--thing that pops up-->
+                <div class="modal fade" id="logIn" role="dialog">
+                    <div class="modal-dialog">    
+                        <div class="modal-content">
+                          <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                            <h4 class="modal-title">LogIn</h4>
+                          </div>
+                          <div class="modal-body">
+                            <p>
+                            <form action="index.php">
+                                Username:<br>
+                                <input type="text" name="username"><br>
+                                Password:<br>
+                                <input type="password" name="password"><br><br>
+                                <input type="submit" value="Submit">
+                            </form>
+                            </p>
+                          </div>
+                          <div class="modal-footer">
+                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                          </div>
+                        </div>
+
+                  </div>
+                </div>
+                <!--end of thing that pops up-->
             </div> 
         </div>
         <!-- Navigation bar END -->
@@ -687,5 +745,11 @@
         </footer>
         </div>
         </div>
+        
+        <script>
+$(document).ready(function(){
+    $('[data-toggle="popover"]').popover();   
+});
+</script>
   </body>
 </html>

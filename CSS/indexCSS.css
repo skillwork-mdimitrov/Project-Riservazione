@@ -41,4 +41,11 @@ th{
     border: 3px solid black;
     text-align: right;
 }
+
+#calendar
+{
+    width: 50%;
+    margin: 0 auto;
+}
+
 /* === BODY section end === */

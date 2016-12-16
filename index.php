@@ -90,6 +90,7 @@
             </div> 
         </div>
         <!-- Navigation bar END -->
+        
         <!--nav bar but for the room-->
         <div class="row">
             <div class="col-sm-4 col-xs-4">
@@ -110,7 +111,13 @@
                 </p>
             </div>
         </div>
-
+        
+        <!-- Public google calendar embedded -->
+        <div id="calendar">
+        <iframe src="https://calendar.google.com/calendar/embed?showPrint=0&amp;height=600&amp;wkst=1&amp;bgcolor=%23ffffff&amp;src=3m5vmovfngbf3f47r65gn60jag%40group.calendar.google.com&amp;color=%238D6F47&amp;ctz=Europe%2FAmsterdam"
+        style="border:solid 1px #777" width="800" height="600" frameborder="0" scrolling="no"></iframe>
+        </div>
+        
         <!--table 1-->
         <div class="row">
             <div class="RoomName col-sm-12 col-xs-12"><p>Room name</p></div>

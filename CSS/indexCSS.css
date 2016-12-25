@@ -7,7 +7,6 @@
 /* === BODY section === */
 div 
 {
-    
     border-bottom: 1px solid;
     border-top: 1px solid;
     border-left: 1px solid;
@@ -15,24 +14,29 @@ div
     font-family: Agency FB, Georgia, serif;  /*several font names as a "fallback" system, to ensure maximum compatibility between browsers/operating systems */
 }  
 
-.row{
-    background-color: gray;
+.row
+{
+    background-color: lightgray;
 }
 
-.signupLogin{
+.signupLogin
+{
     text-align: left;
 }
 
-.RoomName{
+.RoomName
+{
     text-align: center;
     font-size: 25px;
 }
 
-.week{
+.week
+{
    font-size: 30px;
 }
 
-td {
+td 
+{
     border: 3px solid black;
     text-align: center;
 }

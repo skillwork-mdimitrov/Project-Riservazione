@@ -7,32 +7,93 @@
 /* === BODY section === */
 div 
 {
-    border-bottom: 1px solid;
+   /* border-bottom: 1px solid;
     border-top: 1px solid;
     border-left: 1px solid;
-    border-right: 1px solid;
+    border-right: 1px solid;*/
     font-family: Agency FB, Georgia, serif;  /*several font names as a "fallback" system, to ensure maximum compatibility between browsers/operating systems */
 }  
 
-.row
+*
 {
-    background-color: lightgray;
+    margin: 0;
+}
+body{
+    background-image: url(../images/back1.png);
+    background-size:cover;  
+    left: 0;
+    right: 0;
+}
+
+.fluid-container{
+    width: 99.2%;
+    
+}
+
+#Room1{
+   color: white;
+}
+
+#Room2{
+   color: white;
+}
+
+#Room3{
+   color: white;
+}
+
+#Room4{
+   color: white;
+}
+
+#Room5{
+   color: white;
+}
+
+.week{
+    display: inline;
+   
+}
+
+.week1{
+    float:right;
+    margin-right:15px;
+}
+
+.sl{
+    float: right;
 }
 
 .signupLogin
 {
-    text-align: left;
+    float: right;
+    text-align: right;
+    margin-top: 20px;
+    margin-right: 15px;
+}
+
+button{
+    width: 100px;
+    height: 40px;
 }
 
 .RoomName
 {
     text-align: center;
     font-size: 25px;
+    right: 0;
+    left: 0;
 }
 
-.week
+#week
 {
    font-size: 30px;
+   margin-top: -15px;
+}
+
+.w{
+    float: left;
+    margin-top: -10px;
 }
 
 td 
@@ -41,14 +102,49 @@ td
     text-align: center;
 }
 
-th{
-    border: 3px solid black;
-    text-align: right;
-}
+
 
 #calendar
 {
     width: 50%;
     margin: 0 auto;
+}
+
+#nav-bar-container
+{
+    
+}
+
+#buttons
+{
+    margin-left: 5px;
+}
+
+#name
+{
+    border: 3px solid black;
+}
+
+.table{
+     position: absolute;
+     right: 0px;
+     left: 0px;
+     border: 2px solid black;
+}
+
+.booking{
+    margin-top:558px;
+    right: 0;
+    float: right;
+}
+#footer
+{
+  position: fixed;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  padding: 1rem;
+  text-align: center;
+  color: white;
 }
 /* === BODY section end === */

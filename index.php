@@ -174,11 +174,11 @@
                     <table class="table">
                         <tr>
                           <td>Room name</td>
-                          <td>Monday</td> 
-                          <td>Tuesday</td>
-                          <td>Wednesday</td>
-                          <td>Thursday</td>
-                          <td>Friday</td>
+                          <td>Monday<br>day 1</td> 
+                          <td>Tuesday<br>day 2</td>
+                          <td>Wednesday<br>day 3</td>
+                          <td>Thursday<br>day 4</td>
+                          <td>Friday<br>day 5</td>
                         </tr>
                         <tr>
                           <td>0800</td>
@@ -300,11 +300,11 @@
                     <table class="table">
                         <tr>
                           <td>Room name</td>
-                          <td>Monday</td> 
-                          <td>Tuesday</td>
-                          <td>Wednesday</td>
-                          <td>Thursday</td>
-                          <td>Friday</td>
+                          <td>Monday<br>day 1</td> 
+                          <td>Tuesday<br>day 2</td>
+                          <td>Wednesday<br>day 3</td>
+                          <td>Thursday<br>day 4</td>
+                          <td>Friday<br>day 5</td>
                         </tr>
                         <tr>
                           <td>0800</td>
@@ -425,11 +425,11 @@
                     <table class="table">
                         <tr>
                           <td>Room name</td>
-                          <td>Monday</td> 
-                          <td>Tuesday</td>
-                          <td>Wednesday</td>
-                          <td>Thursday</td>
-                          <td>Friday</td>
+                          <td>Monday<br>day 1</td> 
+                          <td>Tuesday<br>day 2</td>
+                          <td>Wednesday<br>day 3</td>
+                          <td>Thursday<br>day 4</td>
+                          <td>Friday<br>day 5</td>
                         </tr>
                         <tr>
                           <td>0800</td>
@@ -550,11 +550,11 @@
                     <table class="table">
                         <tr>
                           <td>Room name</td>
-                          <td>Monday</td> 
-                          <td>Tuesday</td>
-                          <td>Wednesday</td>
-                          <td>Thursday</td>
-                          <td>Friday</td>
+                          <td>Monday<br>day 1</td> 
+                          <td>Tuesday<br>day 2</td>
+                          <td>Wednesday<br>day 3</td>
+                          <td>Thursday<br>day 4</td>
+                          <td>Friday<br>day 5</td>
                         </tr>
                         <tr>
                           <td>0800</td>
@@ -675,11 +675,11 @@
                     <table class="table">
                         <tr>
                           <td>Room name</td>
-                          <td>Monday</td> 
-                          <td>Tuesday</td>
-                          <td>Wednesday</td>
-                          <td>Thursday</td>
-                          <td>Friday</td>
+                          <td>Monday<br>day 1</td> 
+                          <td>Tuesday<br>day 2</td>
+                          <td>Wednesday<br>day 3</td>
+                          <td>Thursday<br>day 4</td>
+                          <td>Friday<br>day 5</td>
                         </tr>
                         <tr>
                           <td>0800</td>
@@ -798,6 +798,7 @@
              <div class="row">
                 <div class="col-sm-8 col-xs-8"><p></p></div>
                 <div class="col-sm-4 col-xs-4">
+                    
                     <p>
                         
                         <!--button-->
@@ -829,12 +830,13 @@
                     </p>
                 </div>
             </div>
-            <!--footer-->
+            <!--footer
             <div class="row" id="footer">
             <footer class="container-fluid text-center">
               <p>Footer Text</p>
             </footer>
             </div>
+            -->
         </div>
   </body>
 </html>

@@ -143,12 +143,14 @@
             <div class="row" id="buttons">
                 <div class="col-sm-4 col-xs-4">
                     <p>
-                        <button type="button" class="btn btn-info" onclick="myFunction('Room1')">Room 1</button>
-                        <button type="button" class="btn btn-danger"  onclick="myFunction('Room2')">Room 2</button>
-                        <button type="button" class="btn btn-info"  onclick="myFunction('Room3')">Room 3</button>
-                        <button type="button" class="btn btn-danger"  onclick="myFunction('Room4')">Room 4</button>
-                        <button type="button" class="btn btn-info"  onclick="myFunction('Room5')">Room 5</button>
-                    </p>
+                        <div id="nameRoom">Room :
+                        <button type="button" class="btn btn-info" onclick="myFunction('Room1')">1</button>
+                        <button type="button" class="btn btn-danger"  onclick="myFunction('Room2')">2</button>
+                        <button type="button" class="btn btn-info"  onclick="myFunction('Room3')">3</button>
+                        <button type="button" class="btn btn-danger"  onclick="myFunction('Room4')">4</button>
+                        <button type="button" class="btn btn-info"  onclick="myFunction('Room5')">5</button>
+                        </div>
+                        </p>
                 </div>
                 <div class="col-sm-4 col-xs-4"><p></p></div>
                 <div class="week col-sm-4 col-xs-4">

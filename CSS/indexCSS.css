@@ -30,6 +30,11 @@ body{
     
 }
 
+#nameRoom{
+    color: white;
+    font-size: 15pt;
+}
+
 #Room1{
    color: white;
 }
@@ -133,6 +138,7 @@ td
 }
 
 .booking{
+    
     margin-top:600px;
     right: 0;
     float: right;

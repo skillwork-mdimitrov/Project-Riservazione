@@ -832,8 +832,10 @@ if(isset($_POST['Submit']))
                                     <form action="index.php">
                                         Room :<br>
                                         <input type="text" name="roomName"><br>
-                                        Date & Time:<br>
-                                        <input type="text" name="DateAndTime"><br><br>
+                                        Date :<br>
+                                        <input type="text" name="date"><br>
+                                        Time :<br>
+                                        <input type="text" name="time"><br>
                                         <input type="submit" value="Submit" name="bookRoom">
                                     </form>
                                     </p>

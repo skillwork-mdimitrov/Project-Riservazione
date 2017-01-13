@@ -1,4 +1,14 @@
-<!DOCTYPE html> <!-- so tde browsers can use tde latest rendering standards. -->
+<?php
+session_start();
+
+if(isset($_POST['Submit']))
+{
+    $_SESSION['username'] = $_POST['username'];
+    $_SESSION['password'] = $_POST['password'];
+}
+?>
+
+<!DOCTYPE html> <!-- so the browsers can use the latest rendering standards. -->
 <html lang="en"> <!-- useful for search engines and screen readers -->
     <head>
         <meta charset="UTF-8"/> 
@@ -9,8 +19,9 @@
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script> <!-- Justification of tdis is needed -->
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script> <!-- Justification of tdis is needed -->
-        <link rel="icon" href="Images/favicon.ico"/> <!-- tde icon will be displayed in tde browser tabs -->
+        <link rel="icon" href="Images/favicon.ico"/> <!-- the icon will be displayed in the browser tabs -->
         <title>HomePage</title>
+        
         <!-- javascript -->
         <script>
             
@@ -64,7 +75,7 @@
         <div class="fluid-container"> <!-- WRAPPER. The bootstrap grid used below requires such container. 
         The xs(phone), sm(tablets), md(desktop) and lg(lager desktop) grids(Example: class="col-sm-3 col-xs-3") 
         will all "stack" vertically on screens/viewports less tdan 768 pixels. 
-        This is where tde xs grid fits in. Columns tdat use tde col-xs-* classes will not stack vertically and continue to scale down on tde smallest screens. -->
+        This is where the xs grid fits in. Columns that use the col-xs-* classes will not stack vertically and continue to scale down on the smallest screens. -->
             
             <!--Navigation bar-->
             <div id="nav-bar-container">
@@ -75,8 +86,10 @@
 
                     <div class="sl col-sm-4 col-xs-4">
                         <!--Sign up button-->
-                        <button type="button" class="signupLogin btn btn-info btn-md" data-toggle="modal" data-target="#signUp">Sign Up</button>
-                        <!--Thing tdat pops up-->
+                        
+                        <!--<button type="button" class="signupLogin btn btn-info btn-md" data-toggle="modal" data-target="#signUp">Sign Up</button>-->
+                        <!--Thing that pops up-->
+                        <!--
                         <div class="modal fade" id="signUp" role="dialog">
                             <div class="modal-dialog">    
                                 <div class="modal-content">
@@ -102,7 +115,7 @@
                                   </div>
                                 </div>
                             </div>
-                        </div>
+                        </div>-->
                         <!--End of thing that pops up-->
                     
                         <!--button-->
@@ -117,12 +130,12 @@
                                   </div>
                                   <div class="modal-body">
                                     <p>
-                                    <form action="index.php">
+                                    <form action="index.php" method="POST">
                                         Username:<br>
                                         <input type="text" name="username"><br>
                                         Password:<br>
                                         <input type="password" name="password"><br><br>
-                                        <input type="submit" value="Submit">
+                                        <input type="submit" value="Submit" name="Submit">
                                     </form>
                                     </p>
                                   </div>
@@ -139,16 +152,16 @@
             </div>
             <!-- Navigation bar END -->
 
-            <!--Room navigation bar (Contains tde different rooms, tde weeks)-->
+            <!--Room navigation bar (Contains the different rooms, the weeks)-->
             <div class="row" id="buttons">
                 <div class="col-sm-4 col-xs-4">
                     <p>
                         <div id="nameRoom">Room :
-                        <button type="button" class="btn btn-info" onclick="myFunction('Room1')">1</button>
-                        <button type="button" class="btn btn-danger"  onclick="myFunction('Room2')">2</button>
-                        <button type="button" class="btn btn-info"  onclick="myFunction('Room3')">3</button>
-                        <button type="button" class="btn btn-danger"  onclick="myFunction('Room4')">4</button>
-                        <button type="button" class="btn btn-info"  onclick="myFunction('Room5')">5</button>
+                        <button type="button" class="btn btn-info" onclick="myFunction('Room1')" id="buttonButton">1</button>
+                        <button type="button" class="btn btn-danger"  onclick="myFunction('Room2')" id="buttonButton">2</button>
+                        <button type="button" class="btn btn-info"  onclick="myFunction('Room3')" id="buttonButton">3</button>
+                        <button type="button" class="btn btn-danger"  onclick="myFunction('Room4')" id="buttonButton">4</button>
+                        <button type="button" class="btn btn-info"  onclick="myFunction('Room5')" id="buttonButton">5</button>
                         </div>
                         </p>
                 </div>
@@ -184,8 +197,8 @@
                         </tr>
                         <tr>
                           <td>0800</td>
-                          <td></td> 
-                          <td></td>
+                          <td><?php echo $_SESSION['username']; ?></td> 
+                          <td><?php echo $_SESSION['password']; ?></td>
                           <td></td>
                           <td></td> 
                           <td></td>
@@ -811,15 +824,17 @@
                                 <div class="modal-content">
                                   <div class="modal-header">
                                     <button type="button" class="close" data-dismiss="modal">&times;</button>
-                                    <h4 class="modal-title">Book</h4>
+                                    <h4 class="modal-title">Booking</h4>
                                   </div>
                                   <div class="modal-body">
                                     <p>
-                                    <p>Are you sure you want to book this room?????</p>
+                                    <p>Enter the Room number and then the date and time to book the room.</p>
                                     <form action="index.php">
-                                        
-                                        <input type="submit" value="yes">
-                                        <input type="submit" value="no">
+                                        Room :<br>
+                                        <input type="text" name="roomName"><br>
+                                        Date & Time:<br>
+                                        <input type="text" name="DateAndTime"><br><br>
+                                        <input type="submit" value="Submit" name="bookRoom">
                                     </form>
                                     </p>
                                   </div>

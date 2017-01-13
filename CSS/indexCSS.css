@@ -153,4 +153,10 @@ td
   text-align: center;
   color: white;
 }
+
+#buttonButton
+{
+    width: 50px;
+    height: 50px;
+}
 /* === BODY section end === */

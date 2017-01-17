@@ -13,8 +13,8 @@ if(isset($_POST['Submit']))
     <head>
         <meta charset="UTF-8"/> 
         <meta http-equiv="X-UA-Compatible" content="IE=edge"> <!-- to support IE 9, IE 8 -->
-        <meta name="viewport" content="widtd=device-widtd, initial-scale=1"> <!-- render tde widtd of tde page at tde widtd of its own screen, So if tdat 
-        screen is 320px wide, tde browser window will be 320px wide -->
+        <meta name="viewport" content="width=device-width, initial-scale=1"> <!-- render the width of the page at the width of its own screen, So if that 
+        screen is 320px wide, the browser window will be 320px wide -->
         <link rel="stylesheet" type="text/css" href="CSS/indexCSS.css"> <!-- reference to tde CSS stylesheet -->
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script> <!-- Justification of tdis is needed -->
@@ -22,54 +22,7 @@ if(isset($_POST['Submit']))
         <link rel="icon" href="Images/favicon.ico"/> <!-- the icon will be displayed in the browser tabs -->
         <title>HomePage</title>
         
-        <!-- javascript -->
-        <script>
-            
-            $(document).ready(function(){
-                $('[data-toggle="popover"]').popover();   
-            });
-    
-            function myFunction(elementID) {
-                switch(elementID){
-                    case 'Room1':
-                        document.getElementById('Room1').style.display = 'block';
-                        document.getElementById('Room2').style.display = 'none';
-                        document.getElementById('Room3').style.display = 'none';
-                        document.getElementById('Room4').style.display = 'none';
-                        document.getElementById('Room5').style.display = 'none';
-                        break;
-                    case 'Room2':
-                        document.getElementById('Room1').style.display = 'none';
-                        document.getElementById('Room2').style.display = 'block';
-                        document.getElementById('Room3').style.display = 'none';
-                        document.getElementById('Room4').style.display = 'none';
-                        document.getElementById('Room5').style.display = 'none';
-                        break;
-                    case 'Room3':
-                        document.getElementById('Room1').style.display = 'none';
-                        document.getElementById('Room2').style.display = 'none';
-                        document.getElementById('Room3').style.display = 'block';
-                        document.getElementById('Room4').style.display = 'none';
-                        document.getElementById('Room5').style.display = 'none';
-                        break;
-                    case 'Room4':
-                        document.getElementById('Room1').style.display = 'none';
-                        document.getElementById('Room2').style.display = 'none';
-                        document.getElementById('Room3').style.display = 'none';
-                        document.getElementById('Room4').style.display = 'block';
-                        document.getElementById('Room5').style.display = 'none';
-                        break;
-                    case 'Room5':
-                        document.getElementById('Room1').style.display = 'none';
-                        document.getElementById('Room2').style.display = 'none';
-                        document.getElementById('Room3').style.display = 'none';
-                        document.getElementById('Room4').style.display = 'none';
-                        document.getElementById('Room5').style.display = 'block';
-                        break;
-                }
-            }
-        </script>
-        <!-- end of javascript-->
+        
     </head>
     <body>
         <div class="fluid-container"> <!-- WRAPPER. The bootstrap grid used below requires such container. 
@@ -86,7 +39,6 @@ if(isset($_POST['Submit']))
 
                     <div class="sl col-sm-4 col-xs-4">
                         <!--Sign up button-->
-                        
                         <!--<button type="button" class="signupLogin btn btn-info btn-md" data-toggle="modal" data-target="#signUp">Sign Up</button>-->
                         <!--Thing that pops up-->
                         <!--
@@ -118,7 +70,7 @@ if(isset($_POST['Submit']))
                         </div>-->
                         <!--End of thing that pops up-->
                     
-                        <!--button-->
+                        <!--Log in button-->
                         <button type="button" class="signupLogin btn btn-danger btn-md" data-toggle="modal" data-target="#logIn">LogIn</button>
                         <!--thing that pops up-->
                         <div class="modal fade" id="logIn" role="dialog">
@@ -126,18 +78,16 @@ if(isset($_POST['Submit']))
                                 <div class="modal-content">
                                   <div class="modal-header">
                                     <button type="button" class="close" data-dismiss="modal">&times;</button>
-                                    <h4 class="modal-title">LogIn</h4>
+                                    <h4 class="modal-title">Login</h4>
                                   </div>
                                   <div class="modal-body">
-                                    <p>
-                                    <form action="index.php" method="POST">
+                                    <form action="#" method="POST">
                                         Username:<br>
                                         <input type="text" name="username"><br>
                                         Password:<br>
                                         <input type="password" name="password"><br><br>
                                         <input type="submit" value="Submit" name="Submit">
-                                    </form>
-                                    </p>
+                                    </form>    
                                   </div>
                                   <div class="modal-footer">
                                     <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
@@ -197,8 +147,8 @@ if(isset($_POST['Submit']))
                         </tr>
                         <tr>
                           <td>0800</td>
-                          <td><?php echo $_SESSION['username']; ?></td> 
-                          <td><?php echo $_SESSION['password']; ?></td>
+                          <td></td> 
+                          <td></td>
                           <td></td>
                           <td></td> 
                           <td></td>
@@ -857,5 +807,53 @@ if(isset($_POST['Submit']))
             </div>
             -->
         </div>
+        <!-- Javascript -->
+        <script>
+            
+            $(document).ready(function(){
+                $('[data-toggle="popover"]').popover();   
+            });
+    
+            function myFunction(elementID) {
+                switch(elementID){
+                    case 'Room1':
+                        document.getElementById('Room1').style.display = 'block';
+                        document.getElementById('Room2').style.display = 'none';
+                        document.getElementById('Room3').style.display = 'none';
+                        document.getElementById('Room4').style.display = 'none';
+                        document.getElementById('Room5').style.display = 'none';
+                        break;
+                    case 'Room2':
+                        document.getElementById('Room1').style.display = 'none';
+                        document.getElementById('Room2').style.display = 'block';
+                        document.getElementById('Room3').style.display = 'none';
+                        document.getElementById('Room4').style.display = 'none';
+                        document.getElementById('Room5').style.display = 'none';
+                        break;
+                    case 'Room3':
+                        document.getElementById('Room1').style.display = 'none';
+                        document.getElementById('Room2').style.display = 'none';
+                        document.getElementById('Room3').style.display = 'block';
+                        document.getElementById('Room4').style.display = 'none';
+                        document.getElementById('Room5').style.display = 'none';
+                        break;
+                    case 'Room4':
+                        document.getElementById('Room1').style.display = 'none';
+                        document.getElementById('Room2').style.display = 'none';
+                        document.getElementById('Room3').style.display = 'none';
+                        document.getElementById('Room4').style.display = 'block';
+                        document.getElementById('Room5').style.display = 'none';
+                        break;
+                    case 'Room5':
+                        document.getElementById('Room1').style.display = 'none';
+                        document.getElementById('Room2').style.display = 'none';
+                        document.getElementById('Room3').style.display = 'none';
+                        document.getElementById('Room4').style.display = 'none';
+                        document.getElementById('Room5').style.display = 'block';
+                        break;
+                }
+            }
+        </script>
+        <!-- end of Javascript-->
   </body>
 </html>

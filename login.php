@@ -10,7 +10,7 @@ else
 {
     if (mysqli_num_rows($CheckingQuery) == 0)
     {
-        echo "<p>The e-mail address/password " . " combination entered is not valid. </p>\n";
+        echo "<span>The e-mail address/password " . " combination entered is not valid. </span>\n";
     } 
     else
     {

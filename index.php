@@ -1,11 +1,14 @@
 <?php
 include 'dbConnection.php'; // grabs the database connection from the php file
-session_start();
+
+session_start(); 
 
 if(isset($_POST['Submit']))
 {
-    $_SESSION['username'] = $_POST['username'];
-    $_SESSION['password'] = $_POST['password'];
+    $userName = stripslashes($_POST['userName']); // stripslashes for security
+    $userPw = stripslashes($_POST['password']); // stripslashes for security
+    $userNameSession = $_SESSION['userName'] = $userName; 
+    $userPwSession = $_SESSION['password'] = $userPw;
 }
 ?>
 
@@ -21,7 +24,7 @@ if(isset($_POST['Submit']))
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script> <!-- Justification of tdis is needed -->
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script> <!-- Justification of tdis is needed -->
         <link rel="icon" href="Images/favicon.ico"/> <!-- the icon will be displayed in the browser tabs -->
-        <title>HomePage</title>
+        <title>Riservatzione</title>
         
         
     </head>
@@ -84,10 +87,10 @@ if(isset($_POST['Submit']))
                                   <div class="modal-body">
                                     <form action="#" method="POST">
                                         Username:<br>
-                                        <input type="text" name="username"><br>
+                                        <input type="text" name="userName"><br>
                                         Password:<br>
                                         <input type="password" name="password"><br><br>
-                                        <input type="submit" value="Submit" name="Submit">
+                                        <input type="submit" value="Submit" name="submit">
                                     </form>    
                                   </div>
                                   <div class="modal-footer">

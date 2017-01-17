@@ -1,14 +1,13 @@
 <?php
-include 'dbConnection.php'; // grabs the database connection from the php file
-
-session_start(); 
+session_start();
 
 if(isset($_POST['Submit']))
 {
     $userName = stripslashes($_POST['userName']); // stripslashes for security
     $userPw = stripslashes($_POST['password']); // stripslashes for security
-    $userNameSession = $_SESSION['userName'] = $userName; 
-    $userPwSession = $_SESSION['password'] = $userPw;
+    require 'login.php';
+    // $userNameSession = $_SESSION['userName'] = $userName; // use later
+    // $userPwSession = $_SESSION['password'] = $userPw; // use later
 }
 ?>
 
@@ -90,7 +89,7 @@ if(isset($_POST['Submit']))
                                         <input type="text" name="userName"><br>
                                         Password:<br>
                                         <input type="password" name="password"><br><br>
-                                        <input type="submit" value="Submit" name="submit">
+                                        <input type="Submit" value="Submit" name="Submit"> <!-- needs to be uppercase -->
                                     </form>    
                                   </div>
                                   <div class="modal-footer">

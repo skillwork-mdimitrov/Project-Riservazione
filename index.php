@@ -1,4 +1,5 @@
 <?php
+include 'dbConnection.php'; // grabs the database connection from the php file
 session_start();
 
 if(isset($_POST['Submit']))
@@ -108,7 +109,7 @@ if(isset($_POST['Submit']))
                     <p>
                         <div id="nameRoom">Room :
                         <button type="button" class="btn btn-info" onclick="myFunction('Room1')" id="buttonButton">1</button>
-                        <button type="button" class="btn btn-danger"  onclick="myFunction('Room2')" id="buttonButton">2</button>
+                    <button type="button" class="btn btn-danger"  onclick="myFunction('Room2')" id="buttonButton">2</button>
                         <button type="button" class="btn btn-info"  onclick="myFunction('Room3')" id="buttonButton">3</button>
                         <button type="button" class="btn btn-danger"  onclick="myFunction('Room4')" id="buttonButton">4</button>
                         <button type="button" class="btn btn-info"  onclick="myFunction('Room5')" id="buttonButton">5</button>

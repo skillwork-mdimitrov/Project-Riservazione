@@ -20,14 +20,13 @@ div
 }
 body{
     background-image: url(../images/back1.png);
-    background-size:cover;  
+    background-size: cover;  
     left: 0;
     right: 0;
 }
 
 .fluid-container{
     width: 99.2%;
-    
 }
 
 #nameRoom{
@@ -77,10 +76,12 @@ body{
     margin-right: 15px;
 }
 
-button{
+button
+{
     width: 100px;
     height: 40px;
 }
+
 
 .RoomName
 {

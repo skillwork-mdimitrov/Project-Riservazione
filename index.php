@@ -1,32 +1,21 @@
 <?php
-session_start();
+    session_start();
 
-if(isset($_POST['Submit']))
-{
-    $userName = stripslashes($_POST['userName']); // stripslashes for security
-    $userPw = stripslashes($_POST['password']); // stripslashes for security
-    require 'login.php';
-    // $userNameSession = $_SESSION['userName'] = $userName; // use later
-    // $userPwSession = $_SESSION['password'] = $userPw; // use later
-}
+    if(isset($_POST['Submit'])) // upon login submit button press
+    {
+        $userName = stripslashes($_POST['userName']); // stripslashes for security
+        $userPw = stripslashes($_POST['password']); // stripslashes for security
+        require 'login.php';
+        // $userNameSession = $_SESSION['userName'] = $userName; // use later
+        // $userPwSession = $_SESSION['password'] = $userPw; // use later
+    }
+    
 ?>
-
-<!DOCTYPE html> <!-- so the browsers can use the latest rendering standards. -->
-<html lang="en"> <!-- useful for search engines and screen readers -->
-    <head>
-        <meta charset="UTF-8"/> 
-        <meta http-equiv="X-UA-Compatible" content="IE=edge"> <!-- to support IE 9, IE 8 -->
-        <meta name="viewport" content="width=device-width, initial-scale=1"> <!-- render the width of the page at the width of its own screen, So if that 
-        screen is 320px wide, the browser window will be 320px wide -->
-        <link rel="stylesheet" type="text/css" href="CSS/indexCSS.css"> <!-- reference to tde CSS stylesheet -->
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script> <!-- Justification of tdis is needed -->
-        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script> <!-- Justification of tdis is needed -->
-        <link rel="icon" href="Images/favicon.ico"/> <!-- the icon will be displayed in the browser tabs -->
-        <title>Riservatzione</title>
-        
-        
-    </head>
+    <!DOCTYPE html> <!-- in order for the browsers to use the latest rendering standards. -->
+    <html lang="en"> <!-- useful for search engines and screen readers -->
+    <?php
+        include 'headSection.php';
+    ?>
     <body>
         <div class="fluid-container"> <!-- WRAPPER. The bootstrap grid used below requires such container. 
         The xs(phone), sm(tablets), md(desktop) and lg(lager desktop) grids(Example: class="col-sm-3 col-xs-3") 
@@ -74,7 +63,9 @@ if(isset($_POST['Submit']))
                         <!--End of thing that pops up-->
                     
                         <!--Log in button-->
-                        <button type="button" class="signupLogin btn btn-danger btn-md" data-toggle="modal" data-target="#logIn">LogIn</button>
+                        <button type="button" class="signupLogin btn btn-danger btn-md" id="login" data-toggle="modal" data-target="#logIn">LogIn</button>
+                        <!--Log out button-->
+                        <button type="button" class="signupLogin btn btn-danger btn-md" id="logout">LogOut</button>
                         <!--thing that pops up-->
                         <div class="modal fade" id="logIn" role="dialog">
                             <div class="modal-dialog">    
@@ -816,7 +807,7 @@ if(isset($_POST['Submit']))
             $(document).ready(function(){
                 $('[data-toggle="popover"]').popover();   
             });
-    
+            
             function myFunction(elementID) {
                 switch(elementID){
                     case 'Room1':
@@ -856,7 +847,24 @@ if(isset($_POST['Submit']))
                         break;
                 }
             }
+            
+            function loginButtons()
+            {
+                var loginButton = document.getElementById('login');
+                var logoutButton = document.getElementById('logout');
+                loginButton.style.visibility = 'hidden';
+                logoutButton.style.visibility = 'visible';
+            }
         </script>
+        <?php
+        if(isset($_SESSION['userNumber'])) // uppon logged in
+        {
+            echo "<p>EI PUTKA MAINA</p>";
+            echo '<script type="text/javascript">',
+             'loginButtons();',
+             '</script>';
+        }
+        ?>
         <!-- end of Javascript-->
   </body>
 </html>

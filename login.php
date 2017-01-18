@@ -17,7 +17,7 @@ else
         $Row = mysqli_fetch_assoc($CheckingQuery);
         $_SESSION['userNumber'] = $Row['userNumber'];
         $_SESSION['userName'] = $Row['userName'];
-        echo "<span style='color:green'>You've succesfully logged in</span>" ;
+        // echo "<span style='color:green'>You've succesfully logged in</span>" ;
     }
 }
 ?>

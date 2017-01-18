@@ -1,6 +1,5 @@
 <?php
     session_start();
-
     if(isset($_POST['Submit'])) // upon login submit button press
     {
         $userName = stripslashes($_POST['userName']); // stripslashes for security
@@ -8,8 +7,7 @@
         require 'login.php';
         // $userNameSession = $_SESSION['userName'] = $userName; // use later
         // $userPwSession = $_SESSION['password'] = $userPw; // use later
-    }
-    
+    } 
 ?>
     <!DOCTYPE html> <!-- in order for the browsers to use the latest rendering standards. -->
     <html lang="en"> <!-- useful for search engines and screen readers -->
@@ -793,13 +791,12 @@
                     </p>
                 </div>
             </div>
-            <!--footer
-            <div class="row" id="footer">
-            <footer class="container-fluid text-center">
-              <p>Footer Text</p>
-            </footer>
-            </div>
-            -->
+             
+            <!--footer -->
+            <?php
+                // include 'footerSection.php';
+            ?>
+            <!-- footer end -->
         </div>
         <!-- Javascript -->
         <script>
@@ -859,7 +856,6 @@
         <?php
         if(isset($_SESSION['userNumber'])) // uppon logged in
         {
-            echo "<p>EI PUTKA MAINA</p>";
             echo '<script type="text/javascript">',
              'loginButtons();',
              '</script>';

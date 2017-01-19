@@ -1,6 +1,6 @@
 <?php
 include 'dbConnection.php';
-$CheckingString = "SELECT userNumber, userName FROM $UserTable WHERE userName='$userName' AND userPasswordSH='$userPw'";
+$CheckingString = "SELECT userNumber, userName FROM $UserTable WHERE userName='$userName' AND userPasswordSalt='".substr(md5($userPw), 0, 20)."'";
 $CheckingQuery = mysqli_query($DBConnect, $CheckingString) ;
 if(!$CheckingQuery)
 {

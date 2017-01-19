@@ -148,14 +148,17 @@
 
         <div class="row">
             <div class="col-sm-12 col-xs-12">
+                <?php
+                $date = date("Y-m-d");;
+                ?>
                 <table class="table">
                     <tr>
                       <td>Room name</td>
-                      <td>Monday<br>day 1</td> 
-                      <td>Tuesday<br>day 2</td>
-                      <td>Wednesday<br>day 3</td>
-                      <td>Thursday<br>day 4</td>
-                      <td>Friday<br>day 5</td>
+                      <td>Monday<br><?php echo date('Y-m-d'); ?></td> 
+                      <td>Tuesday<br><?php echo date('Y-m-d', strtotime($date. ' + 1 days')); ?></td>
+                      <td>Wednesday<br><?php echo date('Y-m-d', strtotime($date. ' + 2 days')); ?></td>
+                      <td>Thursday<br><?php echo date('Y-m-d', strtotime($date. ' + 3 days')); ?></td>
+                      <td>Friday<br><?php echo date('Y-m-d', strtotime($date. ' + 4 days')); ?></td>
                     </tr>
                     <tr>
                       <td>0800</td>
@@ -277,11 +280,11 @@
                 <table class="table">
                     <tr>
                       <td>Room name</td>
-                      <td>Monday<br>day 1</td> 
-                      <td>Tuesday<br>day 2</td>
-                      <td>Wednesday<br>day 3</td>
-                      <td>Thursday<br>day 4</td>
-                      <td>Friday<br>day 5</td>
+                      <td>Monday<br><?php echo date('Y-m-d'); ?></td> 
+                      <td>Tuesday<br><?php echo date('Y-m-d', strtotime($date. ' + 1 days')); ?></td>
+                      <td>Wednesday<br><?php echo date('Y-m-d', strtotime($date. ' + 2 days')); ?></td>
+                      <td>Thursday<br><?php echo date('Y-m-d', strtotime($date. ' + 3 days')); ?></td>
+                      <td>Friday<br><?php echo date('Y-m-d', strtotime($date. ' + 4 days')); ?></td>
                     </tr>
                     <tr>
                       <td>0800</td>
@@ -402,11 +405,11 @@
                 <table class="table">
                     <tr>
                       <td>Room name</td>
-                      <td>Monday<br>day 1</td> 
-                      <td>Tuesday<br>day 2</td>
-                      <td>Wednesday<br>day 3</td>
-                      <td>Thursday<br>day 4</td>
-                      <td>Friday<br>day 5</td>
+                      <td>Monday<br><?php echo date('Y-m-d'); ?></td> 
+                      <td>Tuesday<br><?php echo date('Y-m-d', strtotime($date. ' + 1 days')); ?></td>
+                      <td>Wednesday<br><?php echo date('Y-m-d', strtotime($date. ' + 2 days')); ?></td>
+                      <td>Thursday<br><?php echo date('Y-m-d', strtotime($date. ' + 3 days')); ?></td>
+                      <td>Friday<br><?php echo date('Y-m-d', strtotime($date. ' + 4 days')); ?></td>
                     </tr>
                     <tr>
                       <td>0800</td>
@@ -527,11 +530,11 @@
                 <table class="table">
                     <tr>
                       <td>Room name</td>
-                      <td>Monday<br>day 1</td> 
-                      <td>Tuesday<br>day 2</td>
-                      <td>Wednesday<br>day 3</td>
-                      <td>Thursday<br>day 4</td>
-                      <td>Friday<br>day 5</td>
+                      <td>Monday<br><?php echo date('Y-m-d'); ?></td> 
+                      <td>Tuesday<br><?php echo date('Y-m-d', strtotime($date. ' + 1 days')); ?></td>
+                      <td>Wednesday<br><?php echo date('Y-m-d', strtotime($date. ' + 2 days')); ?></td>
+                      <td>Thursday<br><?php echo date('Y-m-d', strtotime($date. ' + 3 days')); ?></td>
+                      <td>Friday<br><?php echo date('Y-m-d', strtotime($date. ' + 4 days')); ?></td>
                     </tr>
                     <tr>
                       <td>0800</td>
@@ -652,11 +655,11 @@
                 <table class="table">
                     <tr>
                       <td>Room name</td>
-                      <td>Monday<br>day 1</td> 
-                      <td>Tuesday<br>day 2</td>
-                      <td>Wednesday<br>day 3</td>
-                      <td>Thursday<br>day 4</td>
-                      <td>Friday<br>day 5</td>
+                      <td>Monday<br><?php echo date('Y-m-d'); ?></td> 
+                      <td>Tuesday<br><?php echo date('Y-m-d', strtotime($date. ' + 1 days')); ?></td>
+                      <td>Wednesday<br><?php echo date('Y-m-d', strtotime($date. ' + 2 days')); ?></td>
+                      <td>Thursday<br><?php echo date('Y-m-d', strtotime($date. ' + 3 days')); ?></td>
+                      <td>Friday<br><?php echo date('Y-m-d', strtotime($date. ' + 4 days')); ?></td>
                     </tr>
                     <tr>
                       <td>0800</td>

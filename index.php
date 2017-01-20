@@ -37,9 +37,9 @@
     This is where the xs grid fits in. Columns that use the col-xs-* classes will not stack vertically and continue to scale down on the smallest screens. -->
 
         <!--Navigation bar-->
-        <div id="nav-bar-container">
+        <div id="nav-bar-container" class="navBar"> <!-- navBar class to control the logo -->
             <div class="row" id="nav-bar-container">
-                <div class="col-sm-3 col-xs-3"><img src="Images/Logo3.png" class="img-responsive" alt="logo"></div>
+                <div class="col-sm-3 col-xs-3"><img src="Images/RVFinal.png" class="img-responsive" alt="logo"></div>
 
                 <div class="col-sm-5 col-xs-5"><p></p></div>
 

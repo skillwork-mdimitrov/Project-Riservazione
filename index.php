@@ -24,6 +24,12 @@
         logout();
         header('Location: '.$_SERVER['REQUEST_URI']); // refresh the page (so the login button becomes visible)
     }
+    
+    // If register user button is pressed
+    if(isset($_POST['registerUser']))
+    {   
+        require 'registerUser.php';
+    }
 ?>
 <!DOCTYPE html> <!-- in order for the browsers to use the latest rendering standards. -->
 <html lang="en"> <!-- useful for search engines and screen readers -->
@@ -38,12 +44,12 @@
 
         <!--Navigation bar-->
         <div id="nav-bar-container" class="navBar"> <!-- navBar class to control the logo -->
-            <div class="row" id="nav-bar-container">
+            <div class="row" id="nav-bar-container"> <!-- NAME THIS -->
                 <div class="col-sm-3 col-xs-3"><img src="Images/RVFinal.png" class="img-responsive" alt="logo"></div>
 
-                <div class="col-sm-5 col-xs-5"><p></p></div>
+                <div class="col-sm-5 col-xs-5"><p></p></div> <!-- NEEDS TO BE REMOVED and everything else pushed to the right? -->
 
-                <div class="sl col-sm-4 col-xs-4">
+                <div class="sl col-sm-4 col-xs-4"> <!-- NAME THIS -->
                     <!--Sign up button-->
                     <!--<button type="button" class="signupLogin btn btn-info btn-md" data-toggle="modal" data-target="#signUp">Sign Up</button>-->
                     <!--Thing that pops up-->
@@ -79,12 +85,7 @@
                     <!--Log in button-->
                     <button type="button" class="signupLogin btn btn-danger btn-md" id="login" data-toggle="modal" data-target="#logIn">Log in</button>
                     
-                    <!--Log out button-->
-                    <form action="#" method="POST">
-                        <input type="submit" value="Log out" name="LogOut" class="signupLogin btn btn-danger btn-md" id="logout"> 
-                    </form>
-                    
-                    <!--thing that pops up-->
+                    <!-- Log in pop up -->
                     <div class="modal fade" id="logIn" role="dialog">
                         <div class="modal-dialog">    
                             <div class="modal-content">
@@ -105,10 +106,48 @@
                                 <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
                               </div>
                             </div>
-
                       </div>
                     </div>
-                    <!--end of thing that pops up-->
+                    <!--End of log in pop up-->
+                    
+                    <!-- Register user button -->
+                    <form action="#" method="POST">
+                        <button type="button" class="signupLogin btn btn-danger btn-md" data-toggle="modal" data-target="#registerUsers">Register user</button>
+                    </form>
+                    
+                    <!-- Register user pop up -->
+                    <div class="modal fade" id="registerUsers" role="dialog">
+                        <div class="modal-dialog">    
+                            <div class="modal-content">
+                              <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                <h4 class="modal-title">Registration form</h4>
+                              </div>
+                              <div class="modal-body">
+                                <form action="#" method="POST">
+                                    Username:<br>
+                                    <input type="text" name="userName"><br>
+                                    Email address:<br>
+                                    <input type="text" name="userEmail"><br>
+                                    Password:<br>
+                                    <input type="password" name="userPassword"><br>
+                                    Picture:<br>
+                                    <input type="file" name="userPicture"><br>
+                                    <input type="submit" value="Submit" name="registerUser"> <!-- needs to be uppercase -->
+                                </form>    
+                              </div>
+                              <div class="modal-footer">
+                                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                              </div>
+                            </div>
+                      </div>
+                    </div>                   
+                    <!-- END of register user pop up -->
+                    
+                    <!--Log out button-->
+                    <form action="#" method="POST">
+                        <input type="submit" value="Log out" name="LogOut" class="signupLogin btn btn-danger btn-md" id="logout"> 
+                    </form>
                 </div> 
             </div>
         </div>

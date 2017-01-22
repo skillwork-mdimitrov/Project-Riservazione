@@ -45,8 +45,9 @@
         <!--Navigation bar-->
         <div id="nav-bar-container" class="navBar"> <!-- navBar class to control the logo -->
             <div class="row" id="nav-bar-container"> <!-- NAME THIS -->
-                <div class="col-sm-3 col-xs-3"><img src="Images/RVFinal.png" class="img-responsive" alt="logo"></div>
-
+                <div class="col-sm-3 col-xs-3"><img src="Images/RVFinal.png" class="img-responsive" alt="logo" onclick="window.location.reload();"></div> <!-- LOGO -->
+                <!-- Needs some tweaking, mouse pointer etc.. -->
+                
                 <div class="col-sm-5 col-xs-5"><p></p></div> <!-- NEEDS TO BE REMOVED and everything else pushed to the right? -->
 
                 <div class="sl col-sm-4 col-xs-4"> <!-- NAME THIS -->
@@ -159,7 +160,7 @@
                 <p>
                     <div id="nameRoom">Room :
                     <button type="button" class="btn btn-info" onclick="myFunction('Room1')" id="buttonButton">1</button>
-                <button type="button" class="btn btn-danger"  onclick="myFunction('Room2')" id="buttonButton">2</button>
+                    <button type="button" class="btn btn-danger"  onclick="myFunction('Room2')" id="buttonButton">2</button>
                     <button type="button" class="btn btn-info"  onclick="myFunction('Room3')" id="buttonButton">3</button>
                     <button type="button" class="btn btn-danger"  onclick="myFunction('Room4')" id="buttonButton">4</button>
                     <button type="button" class="btn btn-info"  onclick="myFunction('Room5')" id="buttonButton">5</button>
@@ -921,8 +922,7 @@
                 var logoutButton = document.getElementById('logout');
                 loginButton.style.visibility = 'visible';
                 logoutButton.style.visibility = 'hidden';
-            }
-            
+            }       
         </script>
         <!-- end of Javascript-->
         

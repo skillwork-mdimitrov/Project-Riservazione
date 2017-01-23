@@ -1,6 +1,6 @@
 <?php
 include 'dbConnection.php';
-$CheckingString = "SELECT userNumber, userName FROM $UserTable WHERE userName='$userName' AND userPasswordSalt='".substr(md5($userPw), 0, 20)."'";
+$CheckingString = "SELECT userNumber, userEmail FROM $UserTable WHERE userEmail='$userEmail' AND userPasswordSalt='".substr(md5($userPw), 0, 20)."'";
 $CheckingQuery = mysqli_query($DBConnect, $CheckingString) ;
 if(!$CheckingQuery)
 {
@@ -16,7 +16,7 @@ else
     {
         $Row = mysqli_fetch_assoc($CheckingQuery);
         $_SESSION['userNumber'] = $Row['userNumber'];
-        $_SESSION['userName'] = $Row['userName'];
+        $_SESSION['userEmail'] = $Row['userEmail'];
         // echo "<span style='color:green'>You've succesfully logged in</span>" ;
     }
 }

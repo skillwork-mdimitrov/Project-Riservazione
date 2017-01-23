@@ -151,6 +151,12 @@ td
     height: 75%;
 }
 
+/* applied to the logo */
+.clickable :hover
+{
+    cursor: pointer;
+}
+
 .whiteColor
 {
     color: white;

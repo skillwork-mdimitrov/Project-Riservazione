@@ -11,7 +11,7 @@
     
     if(isset($_POST['Submit'])) // upon login submit button press
     {
-        $userName = stripslashes($_POST['userName']); // stripslashes for security
+        $userEmail = stripslashes($_POST['email']); // stripslashes for security
         $userPw = stripslashes($_POST['password']); // stripslashes for security
         require 'login.php';
         // $userNameSession = $_SESSION['userName'] = $userName; // use later
@@ -30,6 +30,7 @@
     {   
         require 'registerUser.php';
     }
+    
 ?>
 <!DOCTYPE html> <!-- in order for the browsers to use the latest rendering standards. -->
 <html lang="en"> <!-- useful for search engines and screen readers -->
@@ -43,9 +44,9 @@
     This is where the xs grid fits in. Columns that use the col-xs-* classes will not stack vertically and continue to scale down on the smallest screens. -->
 
         <!--Navigation bar-->
-        <div> <!-- navBar class to control the logo -->
+        <div>
             <div class="row"> <!-- NAME THIS -->
-                <div class="col-sm-3 col-xs-3"><img src="Images/logo.png" class="logo img-responsive" alt="logo" onclick="window.location.reload();"></div> <!-- LOGO -->
+                <div class="clickable col-sm-3 col-xs-3"><img src="Images/logo.png" class="logo img-responsive" alt="logo" onclick="window.location.reload();"></div> <!-- LOGO -->
                 <!-- Needs some tweaking, mouse pointer etc.. -->
                 
                 <div class="col-sm-5 col-xs-5"><p></p></div> <!-- NEEDS TO BE REMOVED and everything else pushed to the right? -->
@@ -96,8 +97,8 @@
                               </div>
                               <div class="modal-body">
                                 <form action="#" method="POST">
-                                    Username:<br>
-                                    <input type="text" name="userName"><br>
+                                    Email address:<br>
+                                    <input type="text" name="email"><br>
                                     Password:<br>
                                     <input type="password" name="password"><br><br>
                                     <input type="Submit" value="Submit" name="Submit"> <!-- needs to be uppercase -->
@@ -154,7 +155,7 @@
         </div>
         <!-- Navigation bar END -->
 
-        <!--Room navigation bar (Contains the different rooms, the weeks)-->
+        <!--Room navigation bar (Contains the different rooms buttons, the weeks)-->
         <div class="row" id="buttons">
             <div class="col-sm-4 col-xs-4">
                 <p>

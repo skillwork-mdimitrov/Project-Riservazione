@@ -10,7 +10,6 @@
 *
 {
     margin: 0;
-    color: white;
 }
 
 div 
@@ -19,7 +18,7 @@ div
     border-top: 1px solid;
     border-left: 1px solid;
     border-right: 1px solid;*/
-    font-family: Agency FB, Georgia, serif;  /*several font names as a "fallback" system, to ensure maximum compatibility between browsers/operating systems */
+    font-family: Agency FB, Georgia, serif;  /* several font names as a "fallback" system, to ensure maximum compatibility between browsers/operating systems */
 }  
 
 body
@@ -31,20 +30,23 @@ body
     overflow-x: hidden; /* hides the horizontal scrollbar */
 }
 
-.fluid-container{
+.fluid-container
+{
     width: 99.2%;
 }
 
-#nameRoom{
+#nameRoom
+{
     font-size: 15pt;
 }
 
-.week{
+.week
+{
     display: inline;
-   
 }
 
-.week1{
+.week1
+{
     float:right;
     margin-right:15px;
 }
@@ -55,6 +57,7 @@ body
 
 .signupLogin
 {
+    color: black;
     float: right;
     text-align: right;
     margin-top: 20px;
@@ -146,5 +149,16 @@ td
     margin-left: 10px;
     width: 75%;
     height: 75%;
+}
+
+.whiteColor
+{
+    color: white;
+}
+
+/* Make the table content white colored */
+table
+{
+    color: white;
 }
 /* === BODY section end === */

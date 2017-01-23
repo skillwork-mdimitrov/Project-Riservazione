@@ -158,14 +158,14 @@
         <div class="row" id="buttons">
             <div class="col-sm-4 col-xs-4">
                 <p>
-                    <div id="nameRoom">Room :
+                    <div id="nameRoom" class="whiteColor">Room :
                     <button type="button" class="btn btn-info" onclick="myFunction('Room1')" id="buttonButton">1</button>
                     <button type="button" class="btn btn-danger"  onclick="myFunction('Room2')" id="buttonButton">2</button>
                     <button type="button" class="btn btn-info"  onclick="myFunction('Room3')" id="buttonButton">3</button>
                     <button type="button" class="btn btn-danger"  onclick="myFunction('Room4')" id="buttonButton">4</button>
                     <button type="button" class="btn btn-info"  onclick="myFunction('Room5')" id="buttonButton">5</button>
                     </div>
-                    </p>
+                </p>
             </div>
             <div class="col-sm-4 col-xs-4"><p></p></div>
             <div class="week col-sm-4 col-xs-4">
@@ -181,7 +181,7 @@
 
 
         <!--table 1-->
-        <div>
+        <div id="Room1" class="whiteColor">
         <div class="row" id="name">
             <div class="RoomName col-sm-12 col-xs-12"><p>Room 1</p></div>
         </div>
@@ -310,7 +310,7 @@
         </div>
 
         <!--table 2-->
-        <div style="display:none;">
+        <div id="Room2" style="display:none;" class="whiteColor">
         <div class="row" id="name">
             <div class="RoomName col-sm-12 col-xs-12"><p>Room 2</p></div>
         </div>
@@ -435,7 +435,7 @@
         </div>
         </div>
         <!--table 3-->
-        <div style="display:none;">
+        <div id="Room3" style="display:none;" class="whiteColor">
         <div class="row" id="name">
             <div class="RoomName col-sm-12 col-xs-12"><p>Room 3</p></div>
         </div>
@@ -560,7 +560,7 @@
         </div>
         </div>
         <!--table 4-->
-        <div style="display:none;">
+        <div id="Room4" style="display:none;" class="whiteColor">
         <div class="row">
             <div class="RoomName col-sm-12 col-xs-12" id="name"><p>Room 4</p></div>
         </div>
@@ -685,7 +685,7 @@
         </div>
         </div>
         <!--table 5-->
-        <div style="display:none;">
+        <div id="Room5" style="display:none;" class="whiteColor">
         <div class="row">
             <div class="RoomName col-sm-12 col-xs-12" id="name"><p>Room 5</p></div>
         </div>

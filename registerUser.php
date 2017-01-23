@@ -18,13 +18,14 @@ $row = mysqli_fetch_assoc($highestIDQuery); // fetch that row as an array
 $rowAsInt = implode($row, " "); // convert the array result to an integer
 $userID = $rowAsInt + 1; // userID = the latest userID + 1
 
-    // Different checks
+    // Different checks. Not so strict, administrator will be the only one with access to registration
     if (filter_var($userEmail, FILTER_VALIDATE_EMAIL) === false)
     {
         $errorCount++;
         // $invalidEmail++;
     }
-    if(strlen($userPw) <= 6)
+
+    if(empty($userPw) || strlen($userPw) <= 6)
     {
         $errorCount++;
         // $shortPW++;

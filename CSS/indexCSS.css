@@ -5,6 +5,14 @@
 /* === HEAD section ends === */
 
 /* === BODY section === */
+
+/* Targets everything */
+*
+{
+    margin: 0;
+    color: white;
+}
+
 div 
 {
    /* border-bottom: 1px solid;
@@ -14,15 +22,13 @@ div
     font-family: Agency FB, Georgia, serif;  /*several font names as a "fallback" system, to ensure maximum compatibility between browsers/operating systems */
 }  
 
-*
+body
 {
-    margin: 0;
-}
-body{
-    background-image: url(../images/back1.png);
+    background-image: url(../images/back1.png); 
     background-size: cover;  
     left: 0;
     right: 0;
+    overflow-x: hidden; /* hides the horizontal scrollbar */
 }
 
 .fluid-container{
@@ -30,28 +36,7 @@ body{
 }
 
 #nameRoom{
-    color: white;
     font-size: 15pt;
-}
-
-#Room1{
-   color: white;
-}
-
-#Room2{
-   color: white;
-}
-
-#Room3{
-   color: white;
-}
-
-#Room4{
-   color: white;
-}
-
-#Room5{
-   color: white;
 }
 
 .week{
@@ -116,11 +101,6 @@ td
     margin: 0 auto;
 }
 
-#nav-bar-container
-{
-    
-}
-
 #buttons
 {
     margin-left: 5px;
@@ -152,7 +132,6 @@ td
   left: 0;
   padding: 1rem;
   text-align: center;
-  color: white;
 }
 
 #buttonButton
@@ -161,8 +140,7 @@ td
     height: 50px;
 }
 
-/* Controlling the logo */
-.navBar img
+.logo
 {
     margin-top: 10px;
     margin-left: 10px;

@@ -43,9 +43,9 @@
     This is where the xs grid fits in. Columns that use the col-xs-* classes will not stack vertically and continue to scale down on the smallest screens. -->
 
         <!--Navigation bar-->
-        <div id="nav-bar-container" class="navBar"> <!-- navBar class to control the logo -->
-            <div class="row" id="nav-bar-container"> <!-- NAME THIS -->
-                <div class="col-sm-3 col-xs-3"><img src="Images/RVFinal.png" class="img-responsive" alt="logo" onclick="window.location.reload();"></div> <!-- LOGO -->
+        <div> <!-- navBar class to control the logo -->
+            <div class="row"> <!-- NAME THIS -->
+                <div class="col-sm-3 col-xs-3"><img src="Images/logo.png" class="logo img-responsive" alt="logo" onclick="window.location.reload();"></div> <!-- LOGO -->
                 <!-- Needs some tweaking, mouse pointer etc.. -->
                 
                 <div class="col-sm-5 col-xs-5"><p></p></div> <!-- NEEDS TO BE REMOVED and everything else pushed to the right? -->
@@ -129,7 +129,7 @@
                                     Username:<br>
                                     <input type="text" name="userName"><br>
                                     Email address:<br>
-                                    <input type="text" name="userEmail"><br>
+                                    <input type="email" name="userEmail"><br>
                                     Password:<br>
                                     <input type="password" name="userPassword"><br>
                                     Picture:<br>
@@ -181,7 +181,7 @@
 
 
         <!--table 1-->
-        <div id="Room1">
+        <div>
         <div class="row" id="name">
             <div class="RoomName col-sm-12 col-xs-12"><p>Room 1</p></div>
         </div>
@@ -310,7 +310,7 @@
         </div>
 
         <!--table 2-->
-        <div id="Room2" style="display:none;">
+        <div style="display:none;">
         <div class="row" id="name">
             <div class="RoomName col-sm-12 col-xs-12"><p>Room 2</p></div>
         </div>
@@ -435,7 +435,7 @@
         </div>
         </div>
         <!--table 3-->
-        <div id="Room3" style="display:none;">
+        <div style="display:none;">
         <div class="row" id="name">
             <div class="RoomName col-sm-12 col-xs-12"><p>Room 3</p></div>
         </div>
@@ -560,7 +560,7 @@
         </div>
         </div>
         <!--table 4-->
-        <div id="Room4" style="display:none;">
+        <div style="display:none;">
         <div class="row">
             <div class="RoomName col-sm-12 col-xs-12" id="name"><p>Room 4</p></div>
         </div>
@@ -685,7 +685,7 @@
         </div>
         </div>
         <!--table 5-->
-        <div id="Room5" style="display:none;">
+        <div style="display:none;">
         <div class="row">
             <div class="RoomName col-sm-12 col-xs-12" id="name"><p>Room 5</p></div>
         </div>

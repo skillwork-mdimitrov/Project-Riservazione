@@ -62,7 +62,7 @@ $userID = $rowAsInt + 1; // userID = the latest userID + 1
         }
         else
         {
-            echo "<p><span style=color:green;>Successfully registered user</span></p>";
+            echo '<script type="text/javascript">alert("Succefully registered user");</script>';
         }
     }
     else

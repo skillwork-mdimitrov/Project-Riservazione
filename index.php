@@ -1,5 +1,6 @@
 <?php
     session_start();
+    $adminAccess = 0; // only if an admin logs in, he can be granted access
     
     // PHP functions area 
     function logout()

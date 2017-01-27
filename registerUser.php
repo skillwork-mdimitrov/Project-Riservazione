@@ -1,6 +1,7 @@
 <?php
 include 'dbConnection.php';
 // $userName = stripslashes($_POST['userName']); // No username needed for registration
+$adminAccess = 1; // only admins can access this file
 $userEmail = stripslashes($_POST['userEmail']);
 $userPw = stripslashes($_POST['userPassword']);
 $userPicTEST = "sample text"; // need fix

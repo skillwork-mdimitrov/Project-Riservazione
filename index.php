@@ -15,8 +15,7 @@
         $userEmail = stripslashes($_POST['email']); // stripslashes for security
         $userPw = stripslashes($_POST['password']); // stripslashes for security
         require 'login.php';
-        // $userNameSession = $_SESSION['userName'] = $userName; // use later
-        // $userPwSession = $_SESSION['password'] = $userPw; // use later
+        $userNameSession = $_SESSION['userEmail'];
     } 
     
     // If logout button is pressed
@@ -27,7 +26,7 @@
     }
     
     // If register user button is pressed
-    if(isset($_POST['registerUser'])) // add and there is a session
+    if(isset($_POST['registerUser']))
     {   
         require 'registerUser.php';
     }
@@ -134,7 +133,7 @@
                                     <input type="password" name="userPassword"><br>
                                     Picture:<br>
                                     <input type="file" name="userPicture"><br>
-                                    <input type="submit" value="Submit" name="registerUser"> <!-- needs to be uppercase -->
+                                    <input type="submit" value="Submit" name="registerUser"> 
                                 </form>    
                               </div>
                               <div class="modal-footer">
@@ -149,7 +148,41 @@
                     <form action="#" method="POST">
                         <input type="submit" value="Log out" name="LogOut" class="signupLogin btn btn-danger btn-md" id="logout"> 
                     </form>
-                </div> 
+                    
+                    <!-- My profile button -->
+                    <button type="button" class="signupLogin btn btn-danger btn-md" id="myProfileButton" data-toggle="modal" data-target="#myProfile">My profile</button>
+                    
+                    <!-- My profile button pop up -->
+                    <div class="modal fade" id="myProfile" role="dialog">
+                        <div class="modal-dialog">    
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                  <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                  <h4 class="modal-title">My profile</h4>
+                                </div>
+                                <div class="modal-body">
+                                    <p>User email:
+                                      <?php 
+                                      if(isset($_SESSION['userEmail']))
+                                      {
+                                          echo $userNameSession;
+                                      }
+                                      else
+                                      {
+                                          echo "Unknown";
+                                      }
+                                      ?>
+                                    </p>
+                                </div>
+                                <div class="modal-footer">
+                                  <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>   
+                    <!-- My profile pop up END -->
+                    
+                </div> <!-- END of NAME THIS -->
             </div>
         </div>
         <!-- Navigation bar END -->
@@ -820,40 +853,39 @@
             <div class="col-sm-4 col-xs-4">
 
                 <p>
-
-                    <!--button-->
-                    <button type="button" class="booking btn btn-success btn-md" data-toggle="modal" data-target="#booking">Booking</button>
-                    <!--thing that pops up-->
-                    <div class="modal fade" id="booking" role="dialog">
-                        <div class="modal-dialog">    
-                            <div class="modal-content">
-                              <div class="modal-header">
-                                <button type="button" class="close" data-dismiss="modal">&times;</button>
-                                <h4 class="modal-title">Booking</h4>
-                              </div>
-                              <div class="modal-body">
-                                <p>
-                                <p>Enter the Room number and then the date and time to book the room.</p>
-                                <form action="index.php">
-                                    Room :<br>
-                                    <input type="text" name="roomName"><br>
-                                    Date :<br>
-                                    <input type="text" name="date"><br>
-                                    Time :<br>
-                                    <input type="text" name="time"><br>
-                                    <input type="submit" value="Submit" name="bookRoom">
-                                </form>
-                                </p>
-                              </div>
-                              <div class="modal-footer">
-                                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                              </div>
-                            </div>
-
-                      </div>
+                <!--Booking button-->
+                <button type="button" class="booking btn btn-success btn-md" data-toggle="modal" data-target="#booking">Booking</button>
+                <!--Booking button pop up-->
+                <div class="modal fade" id="booking" role="dialog">
+                    <div class="modal-dialog">    
+                        <div class="modal-content">
+                          <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                            <h4 class="modal-title">Booking</h4>
+                          </div>
+                          <div class="modal-body">
+                            <p>
+                            <p>Enter the Room number and then the date and time to book the room.</p>
+                            <form action="#">
+                                Room :<br>
+                                <input type="text" name="roomName"><br>
+                                Date :<br>
+                                <input type="text" name="date"><br>
+                                Time :<br>
+                                <input type="text" name="time"><br>
+                                <input type="submit" value="Submit" name="bookRoom">
+                            </form>
+                            </p>
+                          </div>
+                          <div class="modal-footer">
+                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                          </div>
+                        </div>
+                  </div>
                 </p>
+                </div>
+                <!-- Booking button pop up END -->
             </div>
-        </div>
 
         <!--footer -->
         <?php
@@ -908,20 +940,26 @@
                 }
             }
             
-            function hideLoginButton()
+            /* Being logged in */
+            function hideLoginButton() 
             {
                 var loginButton = document.getElementById('login');
                 var logoutButton = document.getElementById('logout');
+                var myProfileButton = document.getElementById('myProfileButton');
                 loginButton.style.visibility = 'hidden';
                 logoutButton.style.visibility = 'visible';
+                myProfileButton.style.visibility = 'visible';
             }
             
+            /* Being logged out */
             function showLoginButton()
             {
                 var loginButton = document.getElementById('login');
                 var logoutButton = document.getElementById('logout');
+                var myProfileButton = document.getElementById('myProfileButton');
                 loginButton.style.visibility = 'visible';
                 logoutButton.style.visibility = 'hidden';
+                myProfileButton.style.visibility = 'hidden';
             }       
             
             function hideRegistration()
@@ -940,13 +978,15 @@
         
         <!-- Area for php scripts that NEED the javascript functions first -->       
         <?php
-        if(isset($_SESSION['userNumber'])) // uppon logged in
+        // uppon logged in
+        if(isset($_SESSION['userNumber'])) 
         {
             echo '<script type="text/javascript">',
              'hideLoginButton();',
              '</script>';
         }
-        else // when logged out
+        // when logged out
+        else 
         {
             echo '<script type="text/javascript">',
             'showLoginButton();',
@@ -954,16 +994,16 @@
         }
         
         /* If the user logged in is admin, show the registration button, else hide that button */
-        if($adminAccess > 0)
-        {
-            echo '<script type="text/javascript">',
-            'showRegistration();',
-            '</script>';
-        }
         if($adminAccess == 0)
         {
             echo '<script type="text/javascript">',
             'hideRegistration();',
+            '</script>';
+        }
+        if($adminAccess > 0)
+        {
+            echo '<script type="text/javascript">',
+            'showRegistration();',
             '</script>';
         }
         

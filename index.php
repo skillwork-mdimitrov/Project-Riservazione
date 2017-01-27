@@ -26,7 +26,7 @@
     }
     
     // If register user button is pressed
-    if(isset($_POST['registerUser']))
+    if(isset($_POST['registerUser'])) // add and there is a session
     {   
         require 'registerUser.php';
     }
@@ -114,7 +114,7 @@
                     
                     <!-- Register user button -->
                     <form action="#" method="POST">
-                        <button type="button" class="signupLogin btn btn-danger btn-md" data-toggle="modal" data-target="#registerUsers">Register user</button>
+                        <button type="button" class="signupLogin btn btn-danger btn-md" id="registration" data-toggle="modal" data-target="#registerUsers">Register user</button>
                     </form>
                     
                     <!-- Register user pop up -->
@@ -126,9 +126,7 @@
                                 <h4 class="modal-title">Registration form</h4>
                               </div>
                               <div class="modal-body">
-                                <form action="#" method="POST">
-                                    Username:<br>
-                                    <input type="text" name="userName"><br>
+                                <form action="#" method="POST">                              
                                     Email address:<br>
                                     <input type="email" name="userEmail"><br>
                                     Password:<br>
@@ -924,6 +922,18 @@
                 loginButton.style.visibility = 'visible';
                 logoutButton.style.visibility = 'hidden';
             }       
+            
+            function hideRegistration()
+            {
+                var registerButton = document.getElementById('registration');
+                registerButton.style.visibility = 'hidden';
+            }
+            
+            function showRegistration()
+            {
+                var registerButton = document.getElementById('registration');
+                registerButton.style.visibility = 'visible';
+            }
         </script>
         <!-- end of Javascript-->
         
@@ -941,6 +951,21 @@
             'showLoginButton();',
             '</script>';
         }
+        
+        /* If the user logged in is admin, show the registration button, else hide that button */
+        if($adminAccess > 0)
+        {
+            echo '<script type="text/javascript">',
+            'showRegistration();',
+            '</script>';
+        }
+        if($adminAccess == 0)
+        {
+            echo '<script type="text/javascript">',
+            'hideRegistration();',
+            '</script>';
+        }
+        
         ?>
         
   </body>

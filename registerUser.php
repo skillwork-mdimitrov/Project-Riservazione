@@ -10,7 +10,7 @@ $userPwMD = md5(stripslashes($userPw));
 // Different errors
 $errorCount = 0;
 $invalidEmail = 0;
-$shortPW = 0;
+$invalidPW = 0;
 
 $checkUserExists = "SELECT COUNT(userEmail) FROM $UserTable WHERE userEmail='$userEmail'";
 $checkUserExistsQuery = mysqli_query($DBConnect, $checkUserExists) ;
@@ -24,7 +24,8 @@ $checkUserExistsQuery = mysqli_query($DBConnect, $checkUserExists) ;
             if($userRow[0] > 0)
             {
                 $errorCount++ ;
-                echo "<p style=color:red;>The email address you entered already exist.</p>" ;
+                // echo "<p style=color:red;>The email address you entered already exist.</p>" ;
+                echo '<script type="text/javascript">alert("The email address you entered already exist.");</script>';
             }
      }   
 
@@ -43,10 +44,10 @@ $userID = $rowAsInt + 1; // userID = the latest userID + 1
         $invalidEmail++;
     }
 
-    if(empty($userPw) || strlen($userPw) <= 6)
+    if(strlen($userPw) <= 6 || empty($userPw) == true)
     {
         $errorCount++;
-        $shortPW++;
+        $invalidPW++;
     }
     
 
@@ -69,12 +70,14 @@ $userID = $rowAsInt + 1; // userID = the latest userID + 1
     {
         if($invalidEmail > 0)
         {
-            echo "<p><span style=color:red;>Invalid email address</span></p>";
+            echo '<script type="text/javascript">alert("Invalid email address");</script>';
+            // echo "<p><span style=color:red;>Invalid email address</span></p>";
         }
         
-        elseif($shortPW > 0)
+        elseif($invalidPW > 0)
         {
-            echo "<p><span style=color:red;>Password too short. Needs to be more than 6 characters</span></p>";
+            echo '<script type="text/javascript">alert("Password too short or empty. Needs to be more than 6 characters");</script>';
+            // echo "<p><span style=color:red;>Password too short. Needs to be more than 6 characters</span></p>";
         }
     }
 ?>

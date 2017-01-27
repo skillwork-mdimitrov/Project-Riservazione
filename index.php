@@ -15,10 +15,6 @@
         $userEmail = stripslashes($_POST['email']); // stripslashes for security
         $userPw = stripslashes($_POST['password']); // stripslashes for security
         require 'login.php';
-        if(isset($_SESSION['userEmail']))
-        {
-            $userNameSession = $_SESSION['userEmail'];
-        }
     } 
     
     // If logout button is pressed
@@ -168,7 +164,7 @@
                                       <?php 
                                       if(isset($_SESSION['userEmail']))
                                       {
-                                          echo $userNameSession;
+                                          echo $_SESSION['userEmail'];
                                       }
                                       else
                                       {

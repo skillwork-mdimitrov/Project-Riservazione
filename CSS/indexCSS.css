@@ -37,7 +37,7 @@ body
 
 #nameRoom
 {
-    font-size: 15pt;
+    
 }
 
 .week
@@ -167,4 +167,13 @@ table
 {
     color: white;
 }
+
+/* cosmetics */
+#roomText
+{
+    font-size: 25px;
+    position: relative;
+    top: 18px;
+}
+
 /* === BODY section end === */

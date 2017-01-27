@@ -190,7 +190,7 @@
         <div class="row" id="buttons">
             <div class="col-sm-4 col-xs-4">
                 <p>
-                    <div id="nameRoom" class="whiteColor">Room :
+                <div class="whiteColor"><span id="roomText">Room: </span>
                     <button type="button" class="btn btn-info" onclick="myFunction('Room1')" id="buttonButton">1</button>
                     <button type="button" class="btn btn-danger"  onclick="myFunction('Room2')" id="buttonButton">2</button>
                     <button type="button" class="btn btn-info"  onclick="myFunction('Room3')" id="buttonButton">3</button>

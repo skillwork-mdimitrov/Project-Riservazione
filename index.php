@@ -45,12 +45,14 @@
         <!--Navigation bar-->
         <div>
             <div class="row"> <!-- NAME THIS -->
-                <div class="clickable col-sm-3 col-xs-3"><img src="Images/logo.png" class="logo img-responsive" alt="logo" onclick="window.location.reload();"></div> <!-- LOGO -->
-                <!-- Needs some tweaking, mouse pointer etc.. -->
+                <!-- LOGO -->
+                <div class="col-sm-3 col-xs-3"><img src="Images/logo.png" class="logo clickable img-responsive" alt="logo" onclick="window.location.reload();"></div> 
                 
-                <div class="col-sm-5 col-xs-5"><p></p></div> <!-- NEEDS TO BE REMOVED and everything else pushed to the right? -->
+                <!-- NEEDS TO BE REMOVED and everything else pushed to the right? -->
+                <div class="col-sm-5 col-xs-5"><p></p></div> 
 
-                <div class="sl col-sm-4 col-xs-4"> <!-- NAME THIS -->
+                <!-- Button holder. Holds the user buttons. Login, logout, register user, my profile -->
+                <div class="sl col-sm-4 col-xs-4"> 
                     <!--Sign up button-->
                     <!--<button type="button" class="signupLogin btn btn-info btn-md" data-toggle="modal" data-target="#signUp">Sign Up</button>-->
                     <!--Thing that pops up-->
@@ -135,6 +137,7 @@
                                       {
                                           echo $_SESSION['userEmail'];
                                       }
+                                      // else is currently unreachable, but just in case
                                       else
                                       {
                                           echo "Unknown";
@@ -183,8 +186,10 @@
                     </div>                   
                     <!-- END of register user pop up -->           
                     
-                </div> <!-- END of NAME THIS -->
+                </div> 
+                <!-- Button holder -->
             </div>
+            <!-- Div class Row END -->
         </div>
         <!-- Navigation bar END -->
 

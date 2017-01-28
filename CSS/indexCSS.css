@@ -1,8 +1,11 @@
 /* === HEAD section === */
+
+/* Ensuring the website looks as expected on Windows 8 */
 @-ms-viewport{
   width: device-width;
-} /* Ensuring the website looks as expected on Windows 8 */
-/* === HEAD section ends === */
+} 
+
+/* === HEAD section END === */
 
 /* === BODY section === */
 
@@ -70,7 +73,6 @@ button
     height: 40px;
 }
 
-
 .RoomName
 {
     text-align: center;
@@ -95,8 +97,6 @@ td
     border: 3px solid black;
     text-align: center;
 }
-
-
 
 #calendar
 {
@@ -143,6 +143,7 @@ td
     height: 50px;
 }
 
+/* Logo image */
 .logo
 {
     margin-top: 10px;
@@ -151,12 +152,13 @@ td
     height: 75%;
 }
 
-/* applied to the logo */
-.clickable :hover
+/* Hovering over elements with clickable class will change the mouse cursor to pointer */
+.clickable:hover
 {
     cursor: pointer;
 }
 
+/* to be applied by any element that needs to be of color white */
 .whiteColor
 {
     color: white;
@@ -168,12 +170,18 @@ table
     color: white;
 }
 
-/* cosmetics */
 #roomText
 {
     font-size: 25px;
     position: relative;
     top: 18px;
+}
+
+/* Logout button */
+#logout
+{
+    width: 100px;
+    height: 40px
 }
 
 /* === BODY section end === */

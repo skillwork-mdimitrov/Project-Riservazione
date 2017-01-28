@@ -83,8 +83,8 @@
                     </div>-->
                     <!--End of thing that pops up-->
 
-                    <!--Log in button-->
-                    <button type="button" class="signupLogin btn btn-danger btn-md" id="login" data-toggle="modal" data-target="#logIn">Log in</button>
+                    <!--Log in button, initially hidden-->
+                    <button type="button" class="signupLogin btn btn-danger btn-md" id="login" data-toggle="modal" data-target="#logIn" style="display:none">Log in</button>
                     
                     <!-- Log in pop up -->
                     <div class="modal fade" id="logIn" role="dialog">
@@ -111,45 +111,14 @@
                     </div>
                     <!--End of log in pop up-->
                     
-                    <!-- Register user button -->
+                    <!--Log out button, initially hidden-->
                     <form action="#" method="POST">
-                        <button type="button" class="signupLogin btn btn-danger btn-md" id="registration" data-toggle="modal" data-target="#registerUsers">Register user</button>
+                        <input type="submit" value="Log out" name="LogOut" class="signupLogin btn btn-danger btn-md" id="logout" style="display:none"> 
                     </form>
                     
-                    <!-- Register user pop up -->
-                    <div class="modal fade" id="registerUsers" role="dialog">
-                        <div class="modal-dialog">    
-                            <div class="modal-content">
-                              <div class="modal-header">
-                                <button type="button" class="close" data-dismiss="modal">&times;</button>
-                                <h4 class="modal-title">Registration form</h4>
-                              </div>
-                              <div class="modal-body">
-                                <form action="#" method="POST">                              
-                                    Email address:<br>
-                                    <input type="email" name="userEmail"><br>
-                                    Password:<br>
-                                    <input type="password" name="userPassword"><br>
-                                    Picture:<br>
-                                    <input type="file" name="userPicture"><br>
-                                    <input type="submit" value="Submit" name="registerUser"> 
-                                </form>    
-                              </div>
-                              <div class="modal-footer">
-                                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                              </div>
-                            </div>
-                      </div>
-                    </div>                   
-                    <!-- END of register user pop up -->
-                    
-                    <!--Log out button-->
-                    <form action="#" method="POST">
-                        <input type="submit" value="Log out" name="LogOut" class="signupLogin btn btn-danger btn-md" id="logout"> 
-                    </form>
-                    
-                    <!-- My profile button -->
-                    <button type="button" class="signupLogin btn btn-danger btn-md" id="myProfileButton" data-toggle="modal" data-target="#myProfile">My profile</button>
+                    <!-- My profile button, initially hidden -->
+                    <button type="button" class="signupLogin btn btn-danger btn-md" id="myProfileButton" data-toggle="modal" 
+                    data-target="#myProfile" style="display:none">My profile</button>
                     
                     <!-- My profile button pop up -->
                     <div class="modal fade" id="myProfile" role="dialog">
@@ -180,6 +149,39 @@
                         </div>
                     </div>   
                     <!-- My profile pop up END -->
+                    
+                    <!-- Register user button, initially hidden -->
+                    <form action="#" method="POST">
+                        <button type="button" class="signupLogin btn btn-danger btn-md" id="registration" data-toggle="modal"
+                        data-target="#registerUsers" style="display:none">Register user</button>
+                    </form>
+                    
+                    <!-- Register user pop up -->
+                    <div class="modal fade" id="registerUsers" role="dialog">
+                        <div class="modal-dialog">    
+                            <div class="modal-content">
+                              <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                <h4 class="modal-title">Registration form</h4>
+                              </div>
+                              <div class="modal-body">
+                                <form action="#" method="POST">                              
+                                    Email address:<br>
+                                    <input type="email" name="userEmail"><br>
+                                    Password:<br>
+                                    <input type="password" name="userPassword"><br>
+                                    Picture:<br>
+                                    <input type="file" name="userPicture"><br>
+                                    <input type="submit" value="Submit" name="registerUser"> 
+                                </form>    
+                              </div>
+                              <div class="modal-footer">
+                                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                              </div>
+                            </div>
+                      </div>
+                    </div>                   
+                    <!-- END of register user pop up -->           
                     
                 </div> <!-- END of NAME THIS -->
             </div>
@@ -937,75 +939,68 @@
                         document.getElementById('Room5').style.display = 'block';
                         break;
                 }
-            }
-            
-            /* Being logged in */
-            function hideLoginButton() 
+            }            
+            // If user is not logged in, show him the Login button
+            function showLogin()
             {
                 var loginButton = document.getElementById('login');
-                var logoutButton = document.getElementById('logout');
-                var myProfileButton = document.getElementById('myProfileButton');
-                loginButton.style.visibility = 'hidden';
-                logoutButton.style.visibility = 'visible';
-                myProfileButton.style.visibility = 'visible';
+                loginButton.style = "block";
             }
             
-            /* Being logged out */
-            function showLoginButton()
+            // If the user is logged in, show him My profile button
+            function showProfile()
             {
-                var loginButton = document.getElementById('login');
-                var logoutButton = document.getElementById('logout');
                 var myProfileButton = document.getElementById('myProfileButton');
-                loginButton.style.visibility = 'visible';
-                logoutButton.style.visibility = 'hidden';
-                myProfileButton.style.visibility = 'hidden';
-            }       
-            
-            function hideRegistration()
-            {
-                var registerButton = document.getElementById('registration');
-                registerButton.style.visibility = 'hidden';
+                myProfileButton.style = "block";
             }
             
+            // If user is logged in, show him the Logout button
+            function showLogout()
+            {
+                var logoutButton = document.getElementById('logout');
+                logoutButton.style = "block";
+            }         
+            
+            // If the user is logged in and is admin, show him the register user button
             function showRegistration()
             {
                 var registerButton = document.getElementById('registration');
-                registerButton.style.visibility = 'visible';
+                registerButton.style = "block";
             }
         </script>
         <!-- end of Javascript-->
         
         <!-- Area for php scripts that NEED the javascript functions first -->       
         <?php
-        // uppon logged in
-        if(isset($_SESSION['userNumber'])) 
+        
+        // If there is no session, show the user the login button
+        if(!isset($_SESSION['userNumber']))
         {
             echo '<script type="text/javascript">',
-             'hideLoginButton();',
-             '</script>';
+            'showLogin();',
+            '</script>';
         }
-        // when logged out
-        else 
+        // If there is session, the user is logged in, show him the logout and my profile buttons
+        else
         {
+            // call the show logout button javascript function
             echo '<script type="text/javascript">',
-            'showLoginButton();',
+            'showLogout();',
+            '</script>';
+            
+            // call the show profile button javascript function
+            echo '<script type="text/javascript">',
+            'showProfile();',
             '</script>';
         }
         
-        /* If the user logged in is admin, show the registration button, else hide that button */
-        if($adminAccess == 0)
-        {
-            echo '<script type="text/javascript">',
-            'hideRegistration();',
-            '</script>';
-        }
-        if($adminAccess > 0)
+        // If there is a session and the user logged in, is admin, show him the registration button
+        if(isset($_SESSION['userNumber']) && $adminAccess > 0)
         {
             echo '<script type="text/javascript">',
             'showRegistration();',
             '</script>';
         }
-        
         ?>
         
   </body>

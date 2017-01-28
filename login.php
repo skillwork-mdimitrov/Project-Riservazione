@@ -28,7 +28,7 @@ else
                         WHERE userEmail = 'admin@stenden.com')"; // change the user email or add a new one with OR userEmail = for adding new admins
     $adminCheckQuery = mysqli_query($DBConnect, $adminCheckString);
     $adminRow = mysqli_fetch_assoc($adminCheckQuery);
-    $adminRowToInt = implode($adminRow, " "); // extract the userNumber from the array
+    $adminRowToInt = implode($adminRow, " "); // extract the userNumber from the array. Delimeter space
     if(isset($_SESSION['userNumber']) && $_SESSION['userNumber'] == $adminRowToInt)
     {
         $adminAccess = 1;

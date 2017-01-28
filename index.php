@@ -48,7 +48,7 @@
                 <!-- LOGO -->
                 <div class="col-sm-3 col-xs-3"><img src="Images/logo.png" class="logo clickable img-responsive" alt="logo" onclick="window.location.reload();"></div> 
                 
-                <!-- NEEDS TO BE REMOVED and everything else pushed to the right? -->
+                <!-- Middle container, currently empty -->
                 <div class="col-sm-5 col-xs-5"><p></p></div> 
 
                 <!-- Button holder. Holds the user buttons. Login, logout, register user, my profile -->
@@ -215,9 +215,6 @@
             </div>
         </div>
         <!-- Room navigation bar END -->
-
-        <!-- Public google calendar embedded -->
-
 
         <!--table 1-->
         <div id="Room1" class="whiteColor">
@@ -847,7 +844,7 @@
                 </table>
             </div>
         </div>
-       <!--
+       <!-- TO BE REMOVED
         <div id="calendar">
         <iframe src="https://calendar.google.com/calendar/embed?showPrint=0&amp;height=600&amp;wkst=1&amp;bgcolor=%23ffffff&amp;src=3m5vmovfngbf3f47r65gn60jag%40group.calendar.google.com&amp;color=%238D6F47&amp;ctz=Europe%2FAmsterdam"
         style="border:solid 1px #777" width="800" height="600" frameborder="0" scrolling="no"></iframe>
@@ -888,7 +885,6 @@
                           </div>
                         </div>
                   </div>
-                </p>
                 </div>
                 <!-- Booking button pop up END -->
             </div>
@@ -973,7 +969,7 @@
                 registerButton.style = "block";
             }
         </script>
-        <!-- end of Javascript-->
+        <!-- END of Javascript-->
         
         <!-- Area for php scripts that NEED the javascript functions first -->       
         <?php
@@ -1006,7 +1002,6 @@
             'showRegistration();',
             '</script>';
         }
-        ?>
-        
+        ?>      
   </body>
 </html>

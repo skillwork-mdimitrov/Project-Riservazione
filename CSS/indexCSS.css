@@ -1,65 +1,55 @@
 /* === HEAD section === */
+
+/* Ensuring the website looks as expected on Windows 8 */
 @-ms-viewport{
   width: device-width;
-} /* Ensuring the website looks as expected on Windows 8 */
-/* === HEAD section ends === */
+} 
+
+/* === HEAD section END === */
 
 /* === BODY section === */
+
+/* Targets everything */
+*
+{
+    margin: 0;
+}
+
 div 
 {
    /* border-bottom: 1px solid;
     border-top: 1px solid;
     border-left: 1px solid;
     border-right: 1px solid;*/
-    font-family: Agency FB, Georgia, serif;  /*several font names as a "fallback" system, to ensure maximum compatibility between browsers/operating systems */
+    font-family: Agency FB, Georgia, serif;  /* several font names as a "fallback" system, to ensure maximum compatibility between browsers/operating systems */
 }  
 
-*
+body
 {
-    margin: 0;
-}
-body{
-    background-image: url(../images/back1.png);
+    background-image: url(../images/back1.png); 
     background-size: cover;  
     left: 0;
     right: 0;
+    overflow-x: hidden; /* hides the horizontal scrollbar */
 }
 
-.fluid-container{
+.fluid-container
+{
     width: 99.2%;
 }
 
-#nameRoom{
-    color: white;
-    font-size: 15pt;
+#nameRoom
+{
+    
 }
 
-#Room1{
-   color: white;
-}
-
-#Room2{
-   color: white;
-}
-
-#Room3{
-   color: white;
-}
-
-#Room4{
-   color: white;
-}
-
-#Room5{
-   color: white;
-}
-
-.week{
+.week
+{
     display: inline;
-   
 }
 
-.week1{
+.week1
+{
     float:right;
     margin-right:15px;
 }
@@ -70,6 +60,7 @@ body{
 
 .signupLogin
 {
+    color: black;
     float: right;
     text-align: right;
     margin-top: 20px;
@@ -81,7 +72,6 @@ button
     width: 100px;
     height: 40px;
 }
-
 
 .RoomName
 {
@@ -108,17 +98,10 @@ td
     text-align: center;
 }
 
-
-
 #calendar
 {
     width: 50%;
     margin: 0 auto;
-}
-
-#nav-bar-container
-{
-    
 }
 
 #buttons
@@ -152,7 +135,6 @@ td
   left: 0;
   padding: 1rem;
   text-align: center;
-  color: white;
 }
 
 #buttonButton
@@ -160,4 +142,46 @@ td
     width: 50px;
     height: 50px;
 }
+
+/* Logo image */
+.logo
+{
+    margin-top: 10px;
+    margin-left: 10px;
+    width: 75%;
+    height: 75%;
+}
+
+/* Hovering over elements with clickable class will change the mouse cursor to pointer */
+.clickable:hover
+{
+    cursor: pointer;
+}
+
+/* to be applied by any element that needs to be of color white */
+.whiteColor
+{
+    color: white;
+}
+
+/* Make the table content white colored */
+table
+{
+    color: white;
+}
+
+#roomText
+{
+    font-size: 25px;
+    position: relative;
+    top: 18px;
+}
+
+/* Logout button */
+#logout
+{
+    width: 100px;
+    height: 40px
+}
+
 /* === BODY section end === */

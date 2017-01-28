@@ -1,11 +1,16 @@
 <?php
-$DBName = 'riservatzione' ;
+// Database connection
 $DBConnect = mysqli_connect("localhost", "root", "") ;
+
+// Database variables
+$DBName = 'riservatzione' ;
 $ReservTable = 'reservation' ;
 $RoomTable = 'room' ;
 $UserTable = 'user';
 $UReservTable = 'userreservation' ;
 $URoleTable = 'userrole' ;
+
+// Check connection
 if(!$DBConnect)
 {
     echo "<p>There was an error while connecting to the server. " . mysqli_error($DBConnect) . "</p>" ;

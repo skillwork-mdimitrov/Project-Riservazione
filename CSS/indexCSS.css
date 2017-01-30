@@ -92,7 +92,7 @@ button
     margin-top: -10px;
 }
 
-td 
+td, tr
 {
     border: 3px solid black;
     text-align: center;
@@ -115,7 +115,7 @@ td
 }
 
 .table{
-     position: absolute;
+     width: 100%;
      right: 0px;
      left: 0px;
      border: 2px solid black;
@@ -123,7 +123,6 @@ td
 
 .booking{
     
-    margin-top:600px;
     right: 0;
     float: right;
 }
@@ -137,7 +136,31 @@ td
   text-align: center;
 }
 
-#buttonButton
+#buttonButton1
+{
+    width: 50px;
+    height: 50px;
+}
+
+#buttonButton2
+{
+    width: 50px;
+    height: 50px;
+}
+
+#buttonButton3
+{
+    width: 50px;
+    height: 50px;
+}
+
+#buttonButton4
+{
+    width: 50px;
+    height: 50px;
+}
+
+#buttonButton5
 {
     width: 50px;
     height: 50px;

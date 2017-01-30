@@ -35,7 +35,7 @@
     $sql1 = "SELECT dateIn, timeIn, timeOut FROM reservation";
     $array[][] = [[]];
     $r = 0;
-    $result = mysqli_query($DBConnect, $sql1) or die("Say something!!!");
+    $result = mysqli_query($DBConnect, $sql1);//  or die("Say something!!!");
     if(($row = mysqli_num_rows($result)) > 0)
     {
         while($res = mysqli_fetch_assoc($result))
@@ -47,8 +47,6 @@
         }
     }
 ?>
-<!-- test 1-->
-<!-- test 2 -->
 <!DOCTYPE html> <!-- in order for the browsers to use the latest rendering standards. -->
 <html lang="en"> <!-- useful for search engines and screen readers -->
 <?php
@@ -154,9 +152,9 @@
                                       <?php 
                                       if(isset($_SESSION['userEmail']))
                                       {
-                                          echo $_SESSION['userEmail'];
+                                          echo $_SESSION['userEmail']; // displays the user email
                                       }
-                                      else
+                                      else 
                                       {
                                           echo "<p>Unknown</p>";
                                       }
@@ -211,13 +209,13 @@
                                     Password:<br>
                                     <input type="password" name="userPassword"><br>
                                     Student number:<br>
-                                    <input type="text" name="studentNumber" placeholder="If applicable"><br>
+                                    <input type="number" name="studentNumber" placeholder="If applicable"><br>
                                     Picture:<br>
                                     <input type="file" name="userPicture"><br>
                                     User type:<br>
-                                    <input type="radio" name="userType" value="Student" checked="checked" id="student">Student<br>
-                                    <input type="radio" name="userType" value="Teacher" id="teacher"> Teacher<br>
-                                    <input type="radio" name="userType" value="Admin" id="admin"> Admin<br><br>
+                                    <input type="radio" name="userType" value="Student" checked="checked"> Student<br>
+                                    <input type="radio" name="userType" value="Teacher"> Teacher<br>
+                                    <input type="radio" name="userType" value="Admin"> Admin<br><br>
                                     <input type="submit" value="Submit" name="registerUser"> 
                                 </form>    
                               </div>

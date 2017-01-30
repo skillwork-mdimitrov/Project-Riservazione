@@ -6,6 +6,7 @@ $userEmail = stripslashes($_POST['userEmail']);
 $userPw = stripslashes($_POST['userPassword']);
 $userPicTEST = "sample text"; // need fix
 $userPwMD = md5(stripslashes($userPw));
+$userType = ($_POST['userType']);
 
 // Different errors
 $errorCount = 0;
@@ -52,9 +53,16 @@ $userID = $rowAsInt + 1; // userID = the latest userID + 1
     
 
     if($errorCount == 0)  
-    {    
+    {   
+        $roleIDString = "SELECT roleID
+                        FROM userrole
+                        WHERE roleName = '$userType'
+                        LIMIT 1"; // select the ID of the role that the user specified. For example userType was student, *selects 3*
+        $roleIDQuery = mysqli_query($DBConnect, $roleIDString); // execute the query
+        $roleIDrow = mysqli_fetch_assoc($roleIDQuery); // fetch that row as an array
+        $roleIDAsInt = implode($roleIDrow, " "); // convert the array to an integer
         $InsertingString = "INSERT INTO $UserTable (userNumber, userEmail, userPasswordSalt, roleID)"
-                . "VALUES ('$userID', '$userEmail', '$userPwMD', '4')" ; // Different categories?
+                . "VALUES ('$userID', '$userEmail', '$userPwMD', '$roleIDAsInt')" ;
         $InsertingQuery = mysqli_query($DBConnect, $InsertingString) ;
 
         if(!$InsertingQuery)

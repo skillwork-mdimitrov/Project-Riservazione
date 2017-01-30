@@ -35,7 +35,7 @@
     $sql1 = "SELECT dateIn, timeIn, timeOut FROM reservation";
     $array[][] = [[]];
     $r = 0;
-    $result = mysqli_query($DBConnect, $sql1);//  or die("Say something!!!");
+    $result = mysqli_query($DBConnect, $sql1);// or die("Say something!!!");
     if(($row = mysqli_num_rows($result)) > 0)
     {
         while($res = mysqli_fetch_assoc($result))
@@ -179,6 +179,13 @@
                                         }
                                         ?>
                                     </p>
+                                    <?php 
+                                    /* if the user logged in, happens to be a student (different than 0 student number) display his student number */
+                                    if($_SESSION['studentNumber'] != 0)
+                                    {
+                                        echo "<p>My student number: " . $_SESSION['studentNumber'] . "</p>";
+                                    }
+                                    ?>
                                 </div>
                                 <div class="modal-footer">
                                   <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>

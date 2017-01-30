@@ -1,7 +1,7 @@
 <?php
 include 'dbConnection.php';
 $adminAccess = 0; // everyone is treated as normal user, unless he's granted admin access
-$CheckingString = "SELECT userNumber, userEmail, roleID FROM $UserTable WHERE userEmail='$userEmail' AND userPasswordSalt='".substr(md5($userPw), 0, 20)."'";
+$CheckingString = "SELECT userNumber, studentNumber, userEmail, roleID FROM $UserTable WHERE userEmail='$userEmail' AND userPasswordSalt='".substr(md5($userPw), 0, 20)."'";
 $CheckingQuery = mysqli_query($DBConnect, $CheckingString) ;
 if(!$CheckingQuery)
 {
@@ -15,10 +15,12 @@ else
     } 
     else
     {
+        /* Select in an array all the relevant information about the user that is currently logging and store it in sessions */
         $Row = mysqli_fetch_assoc($CheckingQuery);
         $_SESSION['userNumber'] = $Row['userNumber'];
         $_SESSION['userEmail'] = $Row['userEmail'];
         $_SESSION['roleID'] = $Row['roleID'];
+        $_SESSION['studentNumber'] = $Row['studentNumber'];
     }
     /* Check if the user that just logged in, has an admin email. If true give that user permissions. */
     $adminCheckString = "SELECT userNumber

@@ -1,6 +1,6 @@
 <?php
 // Database connection
-$conn = mysqli_connect("localhost", "root", "","riservatzione") ;
+$DBConnect = mysqli_connect("localhost", "root", "") ;
 
 // Database variables
 $DBName = 'riservatzione' ;
@@ -11,14 +11,14 @@ $UReservTable = 'userreservation' ;
 $URoleTable = 'userrole' ;
 
 // Check connection
-if(!$conn)
+if(!$DBConnect)
 {
-    echo "<p>There was an error while connecting to the server. " . mysqli_error($conn) . "</p>" ;
+    echo "<p>There was an error while connecting to the server. " . mysqli_error($DBConnect) . "</p>" ;
 }
-$SelectDB = mysqli_select_db($conn, $DBName) ;
+$SelectDB = mysqli_select_db($DBConnect, $DBName) ;
 if(!$SelectDB)
 {
-    echo "<p>There was an error while selecting the database. " . mysqli_error($conn) . "</p>";
+    echo "<p>There was an error while selecting the database. " . mysqli_error($DBConnect) . "</p>";
 }
 ?>
 

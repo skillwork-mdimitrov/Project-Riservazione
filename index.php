@@ -35,7 +35,7 @@
     $sql1 = "SELECT dateIn, timeIn, timeOut FROM reservation";
     $array[][] = [[]];
     $r = 0;
-    $result = mysqli_query($conn, $sql1) or die("Say something!!!");
+    $result = mysqli_query($DBConnect, $sql1) or die("Say something!!!");
     if(($row = mysqli_num_rows($result)) > 0)
     {
         while($res = mysqli_fetch_assoc($result))
@@ -647,7 +647,7 @@
                         $c = $c.":00:00";
                     }
                     $sql = "INSERT INTO `reservation`(`reservationNumber`, `dateIn`, `timeIn`, `timeOut`, `dateOut`, `roomNumber`) VALUES (7,'{$days[$a]}','{$b}','{$c}','{$days[$a]}','$d')";
-                    mysqli_query($conn, $sql) or die("Something happend: ".mysqli_error($conn));
+                    mysqli_query($DBConnect, $sql) or die("Something happend: ".mysqli_error($DBConnect));
                     
                 }
             ?>

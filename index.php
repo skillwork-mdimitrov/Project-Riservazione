@@ -30,6 +30,22 @@
         require 'registerUser.php';
     }
     
+    require "dbConnection.php";
+    
+    $sql1 = "SELECT dateIn, timeIn, timeOut FROM reservation";
+    $array[][] = [[]];
+    $r = 0;
+    $result = mysqli_query($conn, $sql1) or die("Say something!!!");
+    if(($row = mysqli_num_rows($result)) > 0)
+    {
+        while($res = mysqli_fetch_assoc($result))
+        {
+            $array[$r]['timeIn'] = $res['timeIn'];
+            $array[$r]['timeOut'] = $res['timeOut'];
+            $array[$r]['dateIn'] = $res['dateIn'];
+            $r++;
+        }
+    }
 ?>
 <!-- test 1-->
 <!-- test 2 -->
@@ -225,13 +241,12 @@
                 {
                     $date1['wday'] = 7;
                 }
-                echo "Today is: ".$date1['weekday']." and is the: ".$date1['wday']."th of the week";
         ?>
         <!-- Room navigation bar END -->
         <!--table 5-->
         <div id="Room5" style="display:none;" class="whiteColor">
         <div class="row">
-            <div class="RoomName col-sm-12 col-xs-12" id="name"><p id="name1">Room 5</p></div>
+            <div class="RoomName col-sm-12 col-xs-12" id="name"><p id="name1">Room 1</p></div>
         </div>
 
         <div class="row">
@@ -258,10 +273,10 @@
                       }else if($date1['wday'] < 2)
                       {
                          echo date('Y-m-d', strtotime($date. ' + 1 days'));    
-                         $days[1] = "".date("Y-m-d");
+                         $days[1] = "".date('Y-m-d', strtotime($date. ' + 1 days'));
                       }else{
                          echo date('Y-m-d', strtotime($date. ' - '.$date1['wday'].' days'.'+ 2 days'));
-                         $days[1] = "".date("Y-m-d");
+                         $days[1] = "".date('Y-m-d', strtotime($date. ' - '.$date1['wday'].' days'.'+ 2 days'));
                       }                         
                       ?></td>
                       <td>Wednesday<br><?php 
@@ -439,11 +454,17 @@
                                 <h4 class="modal-title">Registration form</h4>
                               </div>
                               <div class="modal-body">
-                                <form action="#" method="POST">                              
+                                <form action="#" method="POST">       
+                                    <div id="contentForm">
                                     <p> Are you sure that you want to book this????</p>
                                     
-                                    <input type="submit" value="YES"/>
+                                    <input type="submit" name="button123" value="YES"/>
                                     <input type="submit" value="NO"/>
+                                    <input type="hidden" value="" name="dateIn" id="dateIn"/>
+                                    <input type="hidden" value="" name="timeIn" id="timeIn"/>
+                                    <input type="hidden" value="" name="timeOut" id="timeOut"/>
+                                    <input type="hidden" value="" name="roomNumber" id="roomNumber"/>
+                                    </div>
                                 </form>    
                               </div>
                               <div class="modal-footer">
@@ -511,37 +532,101 @@
             }
             
             function read(some){
-                
                 if(document.getElementById(some).style.backgroundColor == "darkgreen")
                        document.getElementById(some).style.backgroundColor = "transparent";
                     else
                        document.getElementById(some).style.backgroundColor = "darkgreen";    
             }
-                       
+                 
+                 
+            function checkDaysChecked(){
+                var sw = true;
+                var days = [0,0,0,0,0];
+                var x = document.getElementById("mytable").getElementsByTagName("td");
+                for(var i = 1; i <= 13; i++)
+                {   
+                    var k = (7*i)-(i-1);
+                    for(var j = 0; j <= 4; j++)
+                    {
+                        if(x[k+j].style.backgroundColor == "darkgreen")
+                        {
+                            days[j]=1;
+                        }
+                    }
+                }
+                
+                for(var p = 0; p < 4 && sw; p++)
+                {
+                    if(days[p] == days[p + 1] && days[p] == 1){
+                        sw = false;
+                        return sw;
+                    }
+                }
+                return sw;
+            } 
+            
+            
+            
             function getSomeColor()
             { 
+                
                 var nameOfRoom = document.getElementById("name1").innerHTML;
+                document.getElementById("roomNumber").value = nameOfRoom;
+                var dateOfBooking = "Fuck you";
+                var date = <?php echo json_encode($days); ?>;
+                var dateOut = 0;
                 var x = document.getElementById("mytable").getElementsByTagName("td");
+                if(checkDaysChecked()){
                 for(var i = 1; i <= 13; i++)
                 {
                     var k = (7*i)-(i-1);
                     for(var j = 0; j <= 4; j++)
                     {
                          if(x[k+j].style.backgroundColor == "darkgreen"){
-                            x[k+j].innerHTML = "Colum: "+(j+1)+" Row: "+ i;
-                            document.getElementById("proc").innerHTML = "Colum: "+(j+1)+" Row: "+ i;
+                           // x[k+j].innerHTML = "Colum: "+(j+1)+" Row: "+ i;
+                            if(dateOut == 0)
+                            document.getElementById("dateIn").value = j;
+                           
+                            if(dateOut == 0){
+                             document.getElementById("timeIn").value = i+7;
+                         }
+                            dateOut = i+7;
                          }
                     }
                 }
-               
+               document.getElementById("timeOut").value = dateOut;
+                 }else{
+                     alert("You can only choose one day!");
+                     document.getElementById("contentForm").style.display = "none";
+                  }
             }
         </script>
         
         <div id="shit">
             <?php
-                if(isset($_POST["button231"]))
+                if(isset($_POST["button123"]))
                 {
-                    echo "Show some shit to Chen!";
+                    $a = $_POST['dateIn'];
+                    $b = $_POST['timeIn'];
+                    $c = $_POST['timeOut'];
+                    $d = $_POST['roomNumber'];
+                    echo $d;
+                    if(strlen($b) == 1)
+                    {
+                        $b = "0".$b.":00:00";
+                    }else{
+                        $b = $b.":00:00";
+                    }
+                    
+                     if(strlen($c) == 1)
+                    {
+                        $c = "0".$c.":00:00";
+                    }else{
+                        $c = $c.":00:00";
+                    }
+                    $sql = "INSERT INTO `reservation`(`reservationNumber`, `dateIn`, `timeIn`, `timeOut`, `dateOut`, `roomNumber`) VALUES (7,'{$days[$a]}','{$b}','{$c}','{$days[$a]}','$d')";
+                    mysqli_query($conn, $sql) or die("Something happend: ".mysqli_error($conn));
+                    
                 }
             ?>
         </div>

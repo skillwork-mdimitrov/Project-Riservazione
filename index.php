@@ -175,7 +175,7 @@
                     <!-- My profile pop up END -->
                     
                     <!-- Register user button, initially hidden -->
-                    <form action="#" method="POST">
+                    <form action="#" method="POST" name="registrationForm">
                         <button type="button" class="signupLogin btn btn-danger btn-md" id="registration" data-toggle="modal"
                         data-target="#registerUsers" style="display:none">Register user</button>
                     </form>
@@ -194,12 +194,14 @@
                                     <input type="email" name="userEmail"><br>
                                     Password:<br>
                                     <input type="password" name="userPassword"><br>
+                                    Student number:<br>
+                                    <input type="text" name="studentNumber" placeholder="If applicable"><br>
                                     Picture:<br>
                                     <input type="file" name="userPicture"><br>
                                     User type:<br>
-                                    <input type="radio" name="userType" value="Student" checked="checked"> Student<br>
-                                    <input type="radio" name="userType" value="Teacher"> Teacher<br>
-                                    <input type="radio" name="userType" value="Admin"> Admin<br><br>
+                                    <input type="radio" name="userType" value="Student" checked="checked" id="student">Student<br>
+                                    <input type="radio" name="userType" value="Teacher" id="teacher"> Teacher<br>
+                                    <input type="radio" name="userType" value="Admin" id="admin"> Admin<br><br>
                                     <input type="submit" value="Submit" name="registerUser"> 
                                 </form>    
                               </div>

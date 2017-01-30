@@ -6,7 +6,7 @@ $userEmail = stripslashes($_POST['userEmail']);
 $userPw = stripslashes($_POST['userPassword']);
 $userPicTEST = "sample text"; // need fix
 $userPwMD = md5(stripslashes($userPw));
-$userType = ($_POST['userType']);
+$userType = ($_POST['userType']); // depending on the selected radio button, save the user type in a variable. Eg. student, admin
 
 // Different errors
 $errorCount = 0;
@@ -29,14 +29,6 @@ $checkUserExistsQuery = mysqli_query($DBConnect, $checkUserExists) ;
                 echo '<script type="text/javascript">alert("The email address you entered already exist.");</script>';
             }
      }   
-
-$highestID = "SELECT MAX(userNumber)
-              FROM user
-              LIMIT 1"; // gets the latest userID number
-$highestIDQuery = mysqli_query($DBConnect, $highestID); // execute the select statement
-$row = mysqli_fetch_assoc($highestIDQuery); // fetch that row as an array
-$rowAsInt = implode($row, " "); // convert the array result to an integer
-$userID = $rowAsInt + 1; // userID = the latest userID + 1
 
     // Different checks. Not so strict, administrator will be the only one with access to registration
     if (filter_var($userEmail, FILTER_VALIDATE_EMAIL) === false)
@@ -62,7 +54,7 @@ $userID = $rowAsInt + 1; // userID = the latest userID + 1
         $roleIDrow = mysqli_fetch_assoc($roleIDQuery); // fetch that row as an array
         $roleIDAsInt = implode($roleIDrow, " "); // convert the array to an integer
         $InsertingString = "INSERT INTO $UserTable (userNumber, userEmail, userPasswordSalt, roleID)"
-                . "VALUES ('$userID', '$userEmail', '$userPwMD', '$roleIDAsInt')" ;
+                . "VALUES (' ', '$userEmail', '$userPwMD', '$roleIDAsInt')" ; // userNumber empty, because of auto-incremented database field
         $InsertingQuery = mysqli_query($DBConnect, $InsertingString) ;
 
         if(!$InsertingQuery)

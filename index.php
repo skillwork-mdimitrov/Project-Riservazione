@@ -116,6 +116,7 @@
                     <!--Log out button, initially hidden-->
                     <form action="#" method="POST">
                         <input type="submit" value="Log out" name="LogOut" class="signupLogin btn btn-danger btn-md" id="logout" style="display:none"> 
+                        
                     </form>
                     
                     <!-- My profile button, initially hidden -->
@@ -198,11 +199,11 @@
             <div class="col-sm-4 col-xs-4">
                 <p>
                 <div class="whiteColor"><span id="roomText">Room: </span>
-                    <button type="button" class="btn btn-info" onclick="myFunction('Room1')" id="buttonButton">1</button>
-                    <button type="button" class="btn btn-danger"  onclick="myFunction('Room2')" id="buttonButton">2</button>
-                    <button type="button" class="btn btn-info"  onclick="myFunction('Room3')" id="buttonButton">3</button>
-                    <button type="button" class="btn btn-danger"  onclick="myFunction('Room4')" id="buttonButton">4</button>
-                    <button type="button" class="btn btn-info"  onclick="myFunction('Room5')" id="buttonButton">5</button>
+                    <button type="button" class="btn btn-info" onclick="myFunction('buttonButton1')" id="buttonButton1">1</button>
+                    <button type="button" class="btn btn-danger"  onclick="myFunction('buttonButton2')" id="buttonButton2">2</button>
+                    <button type="button" class="btn btn-info"  onclick="myFunction('buttonButton3')" id="buttonButton3">3</button>
+                    <button type="button" class="btn btn-danger"  onclick="myFunction('buttonButton4')" id="buttonButton4">4</button>
+                    <button type="button" class="btn btn-info"  onclick="myFunction('buttonButton5')" id="buttonButton5">5</button>
                     </div>
                 </p>
             </div>
@@ -214,632 +215,199 @@
                 </p>
             </div>
         </div>
+        <?php
+                $days[] = [""];
+                $date = date("Y-m-d");
+                $date1 = getdate();
+                if($date1['wday'] == 0)
+                {
+                    $date1['wday'] = 7;
+                }
+                echo "Today is: ".$date1['weekday']." and is the: ".$date1['wday']."th of the week";
+        ?>
         <!-- Room navigation bar END -->
-
-        <!--table 1-->
-        <div id="Room1" class="whiteColor">
-        <div class="row" id="name">
-            <div class="RoomName col-sm-12 col-xs-12"><p>Room 1</p></div>
-        </div>
-
-        <div class="row">
-            <div class="col-sm-12 col-xs-12">
-                <?php
-                $date = date("Y-m-d");;
-                ?>
-                <table class="table">
-                    <tr>
-                      <td>Room name</td>
-                      <td>Monday<br><?php echo date('Y-m-d'); ?></td> 
-                      <td>Tuesday<br><?php echo date('Y-m-d', strtotime($date. ' + 1 days')); ?></td>
-                      <td>Wednesday<br><?php echo date('Y-m-d', strtotime($date. ' + 2 days')); ?></td>
-                      <td>Thursday<br><?php echo date('Y-m-d', strtotime($date. ' + 3 days')); ?></td>
-                      <td>Friday<br><?php echo date('Y-m-d', strtotime($date. ' + 4 days')); ?></td>
-                    </tr>
-                    <tr>
-                      <td>0800</td>
-                      <td></td> 
-                      <td></td>
-                      <td></td>
-                      <td></td> 
-                      <td></td>
-                    </tr>
-                    <tr>
-                      <td>0900</td>
-                      <td></td> 
-                      <td></td>
-                      <td></td>
-                      <td></td> 
-                      <td></td>
-                    </tr>
-                    <tr>
-                      <td>1000</td>
-                      <td></td> 
-                      <td></td>
-                      <td></td>
-                      <td></td> 
-                      <td></td>
-                    </tr>
-                    <tr>
-                      <td>1100</td>
-                      <td></td> 
-                      <td></td>
-                      <td></td>
-                      <td></td> 
-                      <td></td>
-                    </tr>
-                    <tr>
-                      <td>1200</td>
-                      <td></td> 
-                      <td></td>
-                      <td></td>
-                      <td></td> 
-                      <td></td>
-                    </tr>
-                    <tr>
-                      <td>1300</td>
-                      <td></td> 
-                      <td></td>
-                      <td></td>
-                      <td></td> 
-                      <td></td>
-                    </tr>
-                    <tr>
-                      <td>1400</td>
-                      <td></td> 
-                      <td></td>
-                      <td></td>
-                      <td></td> 
-                      <td></td>
-                    </tr>
-                    <tr>
-                      <td>1500</td>
-                      <td></td> 
-                      <td></td>
-                      <td></td>
-                      <td></td> 
-                      <td></td>
-                    </tr>
-                    <tr>
-                      <td>1600</td>
-                      <td></td> 
-                      <td></td>
-                      <td></td>
-                      <td></td> 
-                      <td></td>
-                    </tr>
-                    <tr>
-                      <td>1700</td>
-                      <td></td> 
-                      <td></td>
-                      <td></td>
-                      <td></td> 
-                      <td></td>
-                    </tr>
-                    <tr>
-                      <td>1800</td>
-                      <td></td> 
-                      <td></td>
-                      <td></td>
-                      <td></td> 
-                      <td></td>
-                    </tr>
-                    <tr>
-                      <td>1900</td>
-                      <td></td> 
-                      <td></td>
-                      <td></td>
-                      <td></td> 
-                      <td></td>
-                    </tr>
-                    <tr>
-                      <td>2000</td>
-                      <td></td> 
-                      <td></td>
-                      <td></td>
-                      <td></td> 
-                      <td></td>
-                    </tr>
-                </table>
-            </div>
-        </div>
-        </div>
-
-        <!--table 2-->
-        <div id="Room2" style="display:none;" class="whiteColor">
-        <div class="row" id="name">
-            <div class="RoomName col-sm-12 col-xs-12"><p>Room 2</p></div>
-        </div>
-
-        <div class="row">
-            <div class="col-sm-12 col-xs-12">
-                <table class="table">
-                    <tr>
-                      <td>Room name</td>
-                      <td>Monday<br><?php echo date('Y-m-d'); ?></td> 
-                      <td>Tuesday<br><?php echo date('Y-m-d', strtotime($date. ' + 1 days')); ?></td>
-                      <td>Wednesday<br><?php echo date('Y-m-d', strtotime($date. ' + 2 days')); ?></td>
-                      <td>Thursday<br><?php echo date('Y-m-d', strtotime($date. ' + 3 days')); ?></td>
-                      <td>Friday<br><?php echo date('Y-m-d', strtotime($date. ' + 4 days')); ?></td>
-                    </tr>
-                    <tr>
-                      <td>0800</td>
-                      <td></td> 
-                      <td></td>
-                      <td></td>
-                      <td></td> 
-                      <td></td>
-                    </tr>
-                    <tr>
-                      <td>0900</td>
-                      <td></td> 
-                      <td></td>
-                      <td></td>
-                      <td></td> 
-                      <td></td>
-                    </tr>
-                    <tr>
-                      <td>1000</td>
-                      <td></td> 
-                      <td></td>
-                      <td></td>
-                      <td></td> 
-                      <td></td>
-                    </tr>
-                    <tr>
-                      <td>1100</td>
-                      <td></td> 
-                      <td></td>
-                      <td></td>
-                      <td></td> 
-                      <td></td>
-                    </tr>
-                    <tr>
-                      <td>1200</td>
-                      <td></td> 
-                      <td></td>
-                      <td></td>
-                      <td></td> 
-                      <td></td>
-                    </tr>
-                    <tr>
-                      <td>1300</td>
-                      <td></td> 
-                      <td></td>
-                      <td></td>
-                      <td></td> 
-                      <td></td>
-                    </tr>
-                    <tr>
-                      <td>1400</td>
-                      <td></td> 
-                      <td></td>
-                      <td></td>
-                      <td></td> 
-                      <td></td>
-                    </tr>
-                    <tr>
-                      <td>1500</td>
-                      <td></td> 
-                      <td></td>
-                      <td></td>
-                      <td></td> 
-                      <td></td>
-                    </tr>
-                    <tr>
-                      <td>1600</td>
-                      <td></td> 
-                      <td></td>
-                      <td></td>
-                      <td></td> 
-                      <td></td>
-                    </tr>
-                    <tr>
-                      <td>1700</td>
-                      <td></td> 
-                      <td></td>
-                      <td></td>
-                      <td></td> 
-                      <td></td>
-                    </tr>
-                    <tr>
-                      <td>1800</td>
-                      <td></td> 
-                      <td></td>
-                      <td></td>
-                      <td></td> 
-                      <td></td>
-                    </tr>
-                    <tr>
-                      <td>1900</td>
-                      <td></td> 
-                      <td></td>
-                      <td></td>
-                      <td></td> 
-                      <td></td>
-                    </tr>
-                    <tr>
-                      <td>2000</td>
-                      <td></td> 
-                      <td></td>
-                      <td></td>
-                      <td></td> 
-                      <td></td>
-                    </tr>
-                </table>
-            </div>
-        </div>
-        </div>
-        <!--table 3-->
-        <div id="Room3" style="display:none;" class="whiteColor">
-        <div class="row" id="name">
-            <div class="RoomName col-sm-12 col-xs-12"><p>Room 3</p></div>
-        </div>
-
-        <div class="row">
-            <div class="col-sm-12 col-xs-12">
-                <table class="table">
-                    <tr>
-                      <td>Room name</td>
-                      <td>Monday<br><?php echo date('Y-m-d'); ?></td> 
-                      <td>Tuesday<br><?php echo date('Y-m-d', strtotime($date. ' + 1 days')); ?></td>
-                      <td>Wednesday<br><?php echo date('Y-m-d', strtotime($date. ' + 2 days')); ?></td>
-                      <td>Thursday<br><?php echo date('Y-m-d', strtotime($date. ' + 3 days')); ?></td>
-                      <td>Friday<br><?php echo date('Y-m-d', strtotime($date. ' + 4 days')); ?></td>
-                    </tr>
-                    <tr>
-                      <td>0800</td>
-                      <td></td> 
-                      <td></td>
-                      <td></td>
-                      <td></td> 
-                      <td></td>
-                    </tr>
-                    <tr>
-                      <td>0900</td>
-                      <td></td> 
-                      <td></td>
-                      <td></td>
-                      <td></td> 
-                      <td></td>
-                    </tr>
-                    <tr>
-                      <td>1000</td>
-                      <td></td> 
-                      <td></td>
-                      <td></td>
-                      <td></td> 
-                      <td></td>
-                    </tr>
-                    <tr>
-                      <td>1100</td>
-                      <td></td> 
-                      <td></td>
-                      <td></td>
-                      <td></td> 
-                      <td></td>
-                    </tr>
-                    <tr>
-                      <td>1200</td>
-                      <td></td> 
-                      <td></td>
-                      <td></td>
-                      <td></td> 
-                      <td></td>
-                    </tr>
-                    <tr>
-                      <td>1300</td>
-                      <td></td> 
-                      <td></td>
-                      <td></td>
-                      <td></td> 
-                      <td></td>
-                    </tr>
-                    <tr>
-                      <td>1400</td>
-                      <td></td> 
-                      <td></td>
-                      <td></td>
-                      <td></td> 
-                      <td></td>
-                    </tr>
-                    <tr>
-                      <td>1500</td>
-                      <td></td> 
-                      <td></td>
-                      <td></td>
-                      <td></td> 
-                      <td></td>
-                    </tr>
-                    <tr>
-                      <td>1600</td>
-                      <td></td> 
-                      <td></td>
-                      <td></td>
-                      <td></td> 
-                      <td></td>
-                    </tr>
-                    <tr>
-                      <td>1700</td>
-                      <td></td> 
-                      <td></td>
-                      <td></td>
-                      <td></td> 
-                      <td></td>
-                    </tr>
-                    <tr>
-                      <td>1800</td>
-                      <td></td> 
-                      <td></td>
-                      <td></td>
-                      <td></td> 
-                      <td></td>
-                    </tr>
-                    <tr>
-                      <td>1900</td>
-                      <td></td> 
-                      <td></td>
-                      <td></td>
-                      <td></td> 
-                      <td></td>
-                    </tr>
-                    <tr>
-                      <td>2000</td>
-                      <td></td> 
-                      <td></td>
-                      <td></td>
-                      <td></td> 
-                      <td></td>
-                    </tr>
-                </table>
-            </div>
-        </div>
-        </div>
-        <!--table 4-->
-        <div id="Room4" style="display:none;" class="whiteColor">
-        <div class="row">
-            <div class="RoomName col-sm-12 col-xs-12" id="name"><p>Room 4</p></div>
-        </div>
-
-        <div class="row">
-            <div class="col-sm-12 col-xs-12">
-                <table class="table">
-                    <tr>
-                      <td>Room name</td>
-                      <td>Monday<br><?php echo date('Y-m-d'); ?></td> 
-                      <td>Tuesday<br><?php echo date('Y-m-d', strtotime($date. ' + 1 days')); ?></td>
-                      <td>Wednesday<br><?php echo date('Y-m-d', strtotime($date. ' + 2 days')); ?></td>
-                      <td>Thursday<br><?php echo date('Y-m-d', strtotime($date. ' + 3 days')); ?></td>
-                      <td>Friday<br><?php echo date('Y-m-d', strtotime($date. ' + 4 days')); ?></td>
-                    </tr>
-                    <tr>
-                      <td>0800</td>
-                      <td></td> 
-                      <td></td>
-                      <td></td>
-                      <td></td> 
-                      <td></td>
-                    </tr>
-                    <tr>
-                      <td>0900</td>
-                      <td></td> 
-                      <td></td>
-                      <td></td>
-                      <td></td> 
-                      <td></td>
-                    </tr>
-                    <tr>
-                      <td>1000</td>
-                      <td></td> 
-                      <td></td>
-                      <td></td>
-                      <td></td> 
-                      <td></td>
-                    </tr>
-                    <tr>
-                      <td>1100</td>
-                      <td></td> 
-                      <td></td>
-                      <td></td>
-                      <td></td> 
-                      <td></td>
-                    </tr>
-                    <tr>
-                      <td>1200</td>
-                      <td></td> 
-                      <td></td>
-                      <td></td>
-                      <td></td> 
-                      <td></td>
-                    </tr>
-                    <tr>
-                      <td>1300</td>
-                      <td></td> 
-                      <td></td>
-                      <td></td>
-                      <td></td> 
-                      <td></td>
-                    </tr>
-                    <tr>
-                      <td>1400</td>
-                      <td></td> 
-                      <td></td>
-                      <td></td>
-                      <td></td> 
-                      <td></td>
-                    </tr>
-                    <tr>
-                      <td>1500</td>
-                      <td></td> 
-                      <td></td>
-                      <td></td>
-                      <td></td> 
-                      <td></td>
-                    </tr>
-                    <tr>
-                      <td>1600</td>
-                      <td></td> 
-                      <td></td>
-                      <td></td>
-                      <td></td> 
-                      <td></td>
-                    </tr>
-                    <tr>
-                      <td>1700</td>
-                      <td></td> 
-                      <td></td>
-                      <td></td>
-                      <td></td> 
-                      <td></td>
-                    </tr>
-                    <tr>
-                      <td>1800</td>
-                      <td></td> 
-                      <td></td>
-                      <td></td>
-                      <td></td> 
-                      <td></td>
-                    </tr>
-                    <tr>
-                      <td>1900</td>
-                      <td></td> 
-                      <td></td>
-                      <td></td>
-                      <td></td> 
-                      <td></td>
-                    </tr>
-                    <tr>
-                      <td>2000</td>
-                      <td></td> 
-                      <td></td>
-                      <td></td>
-                      <td></td> 
-                      <td></td>
-                    </tr>
-                </table>
-            </div>
-        </div>
-        </div>
         <!--table 5-->
         <div id="Room5" style="display:none;" class="whiteColor">
         <div class="row">
-            <div class="RoomName col-sm-12 col-xs-12" id="name"><p>Room 5</p></div>
+            <div class="RoomName col-sm-12 col-xs-12" id="name"><p id="name1">Room 5</p></div>
         </div>
 
         <div class="row">
             <div class="col-sm-12 col-xs-12">
-                <table class="table">
+                <table class="table" id="mytable">
                     <tr>
                       <td>Room name</td>
-                      <td>Monday<br><?php echo date('Y-m-d'); ?></td> 
-                      <td>Tuesday<br><?php echo date('Y-m-d', strtotime($date. ' + 1 days')); ?></td>
-                      <td>Wednesday<br><?php echo date('Y-m-d', strtotime($date. ' + 2 days')); ?></td>
-                      <td>Thursday<br><?php echo date('Y-m-d', strtotime($date. ' + 3 days')); ?></td>
-                      <td>Friday<br><?php echo date('Y-m-d', strtotime($date. ' + 4 days')); ?></td>
+                      <td>Monday<br><?php 
+                      if($date1['wday'] == 1)
+                      {
+                           echo date('Y-m-d'); 
+                           $days[0] = "".date("Y-m-d");
+                      }
+                     else {
+                          echo date('Y-m-d', strtotime($date. ' - '.($date1['wday'] - 1).' days'));
+                          $days[0] = "".date('Y-m-d', strtotime($date. ' - '.$date1['wday'].' days'.'+ 1 days'));
+                     }
+                      ?></td> 
+                      <td>Tuesday<br><?php 
+                       if($date1['wday'] == 2)
+                      {
+                           echo date('Y-m-d'); 
+                           $days[1] = "".date("Y-m-d");
+                      }else if($date1['wday'] < 2)
+                      {
+                         echo date('Y-m-d', strtotime($date. ' + 1 days'));    
+                         $days[1] = "".date("Y-m-d");
+                      }else{
+                         echo date('Y-m-d', strtotime($date. ' - '.$date1['wday'].' days'.'+ 2 days'));
+                         $days[1] = "".date("Y-m-d");
+                      }                         
+                      ?></td>
+                      <td>Wednesday<br><?php 
+                       if($date1['wday'] == 3)
+                      {
+                           echo date('Y-m-d'); 
+                           $days[2] = "".date("Y-m-d");
+                      }else if($date1['wday'] < 3)
+                      {
+                         echo date('Y-m-d', strtotime($date. ' + 2 days')); 
+                         $days[2] = "".date('Y-m-d', strtotime($date. ' + 2 days'));
+                      }else{
+                         echo date('Y-m-d', strtotime($date. ' - '.$date1['wday'].' days'.'+ 3 days'));  
+                         $days[2] = "".strtotime($date. ' - '.$date1['wday'].' days'.'+ 3 days');
+                      }   
+                      ?></td>
+                      <td>Thursday<br><?php 
+                       if($date1['wday'] == 4)
+                      {
+                           echo date('Y-m-d');
+                           $days[3] = "".date("Y-m-d");
+                      }else if($date1['wday'] < 4)
+                      {
+                         echo date('Y-m-d', strtotime($date. ' + 3 days')); 
+                         $days[3] = "".date('Y-m-d', strtotime($date. ' + 3 days'));
+                      }else{
+                         echo date('Y-m-d', strtotime($date. ' - '.$date1['wday'].' days'.'+ 4 days'));  
+                         $days[3] = "".date('Y-m-d', strtotime($date. ' - '.$date1['wday'].' days'.'+ 4 days'));
+                      }   
+                      ?></td>
+                      <td>Friday<br><?php 
+                       if($date1['wday'] == 5)
+                      {
+                           echo date('Y-m-d'); 
+                           $days[4] = "".date("Y-m-d");
+                      }else if($date1['wday'] < 5)
+                      {
+                         echo date('Y-m-d', strtotime($date. ' + 4 days'));   
+                         $days[4] = "".date('Y-m-d', strtotime($date. ' + 4 days'));
+                      }else{
+                         echo date('Y-m-d', strtotime($date. ' - '.$date1['wday'].' days'.'+ 5 days'));  
+                         $days[4] = "".date('Y-m-d', strtotime($date. ' - '.$date1['wday'].' days'.'+ 5 days'));
+                      }    
+                      ?></td>
                     </tr>
                     <tr>
-                      <td>0800</td>
-                      <td></td> 
-                      <td></td>
-                      <td></td>
-                      <td></td> 
-                      <td></td>
+                      <td>08:00</td>
+                      <td id="cell1" onclick="read('cell1')"></td> 
+                      <td id="cell2" onclick="read('cell2')"></td>
+                      <td id="cell3" onclick="read('cell3')"></td>
+                      <td id="cell4" onclick="read('cell4')"></td> 
+                      <td id="cell5" onclick="read('cell5')"></td>
                     </tr>
                     <tr>
-                      <td>0900</td>
-                      <td></td> 
-                      <td></td>
-                      <td></td>
-                      <td></td> 
-                      <td></td>
+                      <td>09:00</td>
+                      <td id="cell6" onclick="read('cell6')"></td> 
+                      <td id="cell7" onclick="read('cell7')"></td>
+                      <td id="cell8" onclick="read('cell8')"></td>
+                      <td id="cell9" onclick="read('cell9')"></td> 
+                      <td id="cell10" onclick="read('cell10')"></td>
                     </tr>
                     <tr>
-                      <td>1000</td>
-                      <td></td> 
-                      <td></td>
-                      <td></td>
-                      <td></td> 
-                      <td></td>
+                      <td>10:00</td>
+                      <td id="cell11" onclick="read('cell11')"></td> 
+                      <td id="cell12" onclick="read('cell12')"></td>
+                      <td id="cell13" onclick="read('cell13')"></td>
+                      <td id="cell14" onclick="read('cell14')"></td> 
+                      <td id="cell15" onclick="read('cell15')"></td>
                     </tr>
                     <tr>
-                      <td>1100</td>
-                      <td></td> 
-                      <td></td>
-                      <td></td>
-                      <td></td> 
-                      <td></td>
+                      <td>11:00</td>
+                      <td id="cell16" onclick="read('cell16')"></td> 
+                      <td id="cell17" onclick="read('cell17')"></td>
+                      <td id="cell18" onclick="read('cell18')"></td>
+                      <td id="cell19" onclick="read('cell19')"></td> 
+                      <td id="cell20" onclick="read('cell20')"></td>
                     </tr>
                     <tr>
-                      <td>1200</td>
-                      <td></td> 
-                      <td></td>
-                      <td></td>
-                      <td></td> 
-                      <td></td>
+                      <td>12:00</td>
+                      <td id="cell21" onclick="read('cell21')"></td>
+                      <td id="cell22" onclick="read('cell22')"></td>
+                      <td id="cell23" onclick="read('cell23')"></td> 
+                      <td id="cell24" onclick="read('cell24')"></td>
+                      <td id="cell25" onclick="read('cell25')"></td>
                     </tr>
                     <tr>
-                      <td>1300</td>
-                      <td></td> 
-                      <td></td>
-                      <td></td>
-                      <td></td> 
-                      <td></td>
+                      <td>13:00</td>
+                      <td id="cell26" onclick="read('cell26')"></td> 
+                      <td id="cell27" onclick="read('cell27')"></td>
+                      <td id="cell28" onclick="read('cell28')"></td>
+                      <td id="cell29" onclick="read('cell29')"></td> 
+                      <td id="cell30" onclick="read('cell30')"></td>
                     </tr>
                     <tr>
-                      <td>1400</td>
-                      <td></td> 
-                      <td></td>
-                      <td></td>
-                      <td></td> 
-                      <td></td>
+                      <td>14:00</td>
+                      <td id="cell31" onclick="read('cell31')"></td> 
+                      <td id="cell32" onclick="read('cell32')"></td>
+                      <td id="cell33" onclick="read('cell33')"></td>
+                      <td id="cell34" onclick="read('cell34')"></td> 
+                      <td id="cell35" onclick="read('cell35')"></td>
                     </tr>
                     <tr>
-                      <td>1500</td>
-                      <td></td> 
-                      <td></td>
-                      <td></td>
-                      <td></td> 
-                      <td></td>
+                      <td>15:00</td>
+                      <td id="cell36" onclick="read('cell36')"></td> 
+                      <td id="cell37" onclick="read('cell37')"></td>
+                      <td id="cell38" onclick="read('cell38')"></td>
+                      <td id="cell39" onclick="read('cell39')"></td> 
+                      <td id="cell40" onclick="read('cell40')"></td>
                     </tr>
                     <tr>
-                      <td>1600</td>
-                      <td></td> 
-                      <td></td>
-                      <td></td>
-                      <td></td> 
-                      <td></td>
+                      <td>16:00</td>
+                      <td id="cell41" onclick="read('cell41')"></td> 
+                      <td id="cell42" onclick="read('cell42')"></td>
+                      <td id="cell43" onclick="read('cell43')"></td>
+                      <td id="cell44" onclick="read('cell44')"></td> 
+                      <td id="cell45" onclick="read('cell45')"></td>
                     </tr>
                     <tr>
-                      <td>1700</td>
-                      <td></td> 
-                      <td></td>
-                      <td></td>
-                      <td></td> 
-                      <td></td>
+                      <td>17:00</td>
+                      <td id="cell46" onclick="read('cell46')"></td> 
+                      <td id="cell47" onclick="read('cell47')"></td>
+                      <td id="cell48" onclick="read('cell48')"></td>
+                      <td id="cell49" onclick="read('cell49')"></td> 
+                      <td id="cell50" onclick="read('cell50')"></td>
                     </tr>
                     <tr>
-                      <td>1800</td>
-                      <td></td> 
-                      <td></td>
-                      <td></td>
-                      <td></td> 
-                      <td></td>
+                      <td>18:00</td>
+                      <td id="cell51" onclick="read('cell51')"></td> 
+                      <td id="cell52" onclick="read('cell52')"></td>
+                      <td id="cell53" onclick="read('cell53')"></td>
+                      <td id="cell54" onclick="read('cell54')"></td> 
+                      <td id="cell55" onclick="read('cell55')"></td>
                     </tr>
                     <tr>
-                      <td>1900</td>
-                      <td></td> 
-                      <td></td>
-                      <td></td>
-                      <td></td> 
-                      <td></td>
+                      <td>19:00</td>
+                      <td id="cell56" onclick="read('cell56')"></td> 
+                      <td id="cell57" onclick="read('cell57')"></td>
+                      <td id="cell58" onclick="read('cell58')"></td>
+                      <td id="cell59" onclick="read('cell59')"></td> 
+                      <td id="cell60" onclick="read('cell60')"></td>
                     </tr>
                     <tr>
-                      <td>2000</td>
-                      <td></td> 
-                      <td></td>
-                      <td></td>
-                      <td></td> 
-                      <td></td>
+                      <td>20:00</td>
+                      <td id="cell61" onclick="read('cell61')"></td> 
+                      <td id="cell62" onclick="read('cell62')"></td>
+                      <td id="cell63" onclick="read('cell63')"></td>
+                      <td id="cell64" onclick="read('cell64')"></td> 
+                      <td id="cell65" onclick="read('cell65')"></td>
                     </tr>
                 </table>
             </div>
@@ -857,87 +425,58 @@
 
                 <p>
                 <!--Booking button-->
-                <button type="button" class="booking btn btn-success btn-md" data-toggle="modal" data-target="#booking">Booking</button>
+                <button type="submit" class="booking btn btn-success btn-md"  data-toggle="modal"
+                        data-target="#booking"  onclick="getSomeColor()" value="Booking">Booking</button>
+                    <input type="hidden" value="something" name="pptppt" id="proc"/>
                 <!--Booking button pop up-->
                 <div class="modal fade" id="booking" role="dialog">
-                    <div class="modal-dialog">    
-                        <div class="modal-content">
-                          <div class="modal-header">
-                            <button type="button" class="close" data-dismiss="modal">&times;</button>
-                            <h4 class="modal-title">Booking</h4>
-                          </div>
-                          <div class="modal-body">
-                            <p>
-                            <p>Enter the Room number and then the date and time to book the room.</p>
-                            <form action="#">
-                                Room :<br>
-                                <input type="text" name="roomName"><br>
-                                Date :<br>
-                                <input type="text" name="date"><br>
-                                Time :<br>
-                                <input type="text" name="time"><br>
-                                <input type="submit" value="Submit" name="bookRoom">
-                            </form>
-                            </p>
-                          </div>
-                          <div class="modal-footer">
-                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                          </div>
-                        </div>
-                  </div>
-                </div>
+                        <div class="modal-dialog">    
+                            <div class="modal-content">
+                              <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                <h4 class="modal-title">Registration form</h4>
+                              </div>
+                              <div class="modal-body">
+                                <form action="#" method="POST">                              
+                                    <p> Are you sure that you want to book this????</p>
+                                    
+                                    <input type="submit" value="YES"/>
+                                    <input type="submit" value="NO"/>
+                                </form>    
+                              </div>
+                              <div class="modal-footer">
+                                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                              </div>
+                            </div>
+                      </div>
+                    </div>                   
                 <!-- Booking button pop up END -->
             </div>
 
         <!--footer -->
-        <?php
-            // include 'footerSection.php';
-        ?>
+       
         <!-- footer end -->
     </div>
         <!-- Javascript -->
         <script>
-            
-            $(document).ready(function(){
-                $('[data-toggle="popover"]').popover();   
-            });
-            
+               
+            document.getElementById('Room5').style.display = 'block';
             function myFunction(elementID) {
                 switch(elementID){
-                    case 'Room1':
-                        document.getElementById('Room1').style.display = 'block';
-                        document.getElementById('Room2').style.display = 'none';
-                        document.getElementById('Room3').style.display = 'none';
-                        document.getElementById('Room4').style.display = 'none';
-                        document.getElementById('Room5').style.display = 'none';
+                    case 'buttonButton1':
+                        document.getElementById('name1').innerHTML = 'Room 1';
                         break;
-                    case 'Room2':
-                        document.getElementById('Room1').style.display = 'none';
-                        document.getElementById('Room2').style.display = 'block';
-                        document.getElementById('Room3').style.display = 'none';
-                        document.getElementById('Room4').style.display = 'none';
-                        document.getElementById('Room5').style.display = 'none';
+                    case 'buttonButton2':
+                        document.getElementById('name1').innerHTML = 'Room 2';
                         break;
-                    case 'Room3':
-                        document.getElementById('Room1').style.display = 'none';
-                        document.getElementById('Room2').style.display = 'none';
-                        document.getElementById('Room3').style.display = 'block';
-                        document.getElementById('Room4').style.display = 'none';
-                        document.getElementById('Room5').style.display = 'none';
+                    case 'buttonButton3':
+                        document.getElementById('name1').innerHTML = 'Room 3';
                         break;
-                    case 'Room4':
-                        document.getElementById('Room1').style.display = 'none';
-                        document.getElementById('Room2').style.display = 'none';
-                        document.getElementById('Room3').style.display = 'none';
-                        document.getElementById('Room4').style.display = 'block';
-                        document.getElementById('Room5').style.display = 'none';
+                    case 'buttonButton4':
+                        document.getElementById('name1').innerHTML = 'Room 4';
                         break;
-                    case 'Room5':
-                        document.getElementById('Room1').style.display = 'none';
-                        document.getElementById('Room2').style.display = 'none';
-                        document.getElementById('Room3').style.display = 'none';
-                        document.getElementById('Room4').style.display = 'none';
-                        document.getElementById('Room5').style.display = 'block';
+                    case 'buttonButton5':
+                        document.getElementById('name1').innerHTML = 'Room 5';
                         break;
                 }
             }            
@@ -968,7 +507,42 @@
                 var registerButton = document.getElementById('registration');
                 registerButton.style = "block";
             }
+            
+            function read(some){
+                
+                if(document.getElementById(some).style.backgroundColor == "darkgreen")
+                       document.getElementById(some).style.backgroundColor = "transparent";
+                    else
+                       document.getElementById(some).style.backgroundColor = "darkgreen";    
+            }
+                       
+            function getSomeColor()
+            { 
+                var nameOfRoom = document.getElementById("name1").innerHTML;
+                var x = document.getElementById("mytable").getElementsByTagName("td");
+                for(var i = 1; i <= 13; i++)
+                {
+                    var k = (7*i)-(i-1);
+                    for(var j = 0; j <= 4; j++)
+                    {
+                         if(x[k+j].style.backgroundColor == "darkgreen"){
+                            x[k+j].innerHTML = "Colum: "+(j+1)+" Row: "+ i;
+                            document.getElementById("proc").innerHTML = "Colum: "+(j+1)+" Row: "+ i;
+                         }
+                    }
+                }
+               
+            }
         </script>
+        
+        <div id="shit">
+            <?php
+                if(isset($_POST["button231"]))
+                {
+                    echo "Show some shit to Chen!";
+                }
+            ?>
+        </div>
         <!-- END of Javascript-->
         
         <!-- Area for php scripts that NEED the javascript functions first -->       

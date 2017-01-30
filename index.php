@@ -134,18 +134,36 @@
                                   <h4 class="modal-title">My profile</h4>
                                 </div>
                                 <div class="modal-body">
-                                    <p>User email:
+                                    <p>My email:
                                       <?php 
                                       if(isset($_SESSION['userEmail']))
                                       {
                                           echo $_SESSION['userEmail'];
                                       }
-                                      // else is currently unreachable, but just in case
                                       else
                                       {
-                                          echo "Unknown";
+                                          echo "<p>Unknown</p>";
                                       }
                                       ?>
+                                    </p>
+                                    <p>My role:
+                                        <?php
+                                        if(isset($_SESSION['roleID']))
+                                        {
+                                            $roleIDSession = $_SESSION['roleID']; // store the session's role id in a variable
+                                            $roleNameSelect =   "SELECT roleName
+                                                                FROM userrole
+                                                                WHERE roleID = '$roleIDSession'"; // select the role name of the current session
+                                            $roleNameQuery = mysqli_query($DBConnect, $roleNameSelect); // execute the selecting query
+                                            $roleNameRow = mysqli_fetch_assoc($roleNameQuery); // // fetch that row as an array
+                                            $roleNameAsString = implode($roleNameRow, " "); // convert the array to String
+                                            echo $roleNameAsString; // display what the user role is
+                                        }
+                                        else
+                                        {
+                                            echo "<p>Undefined role</p>";
+                                        }
+                                        ?>
                                     </p>
                                 </div>
                                 <div class="modal-footer">
@@ -178,6 +196,10 @@
                                     <input type="password" name="userPassword"><br>
                                     Picture:<br>
                                     <input type="file" name="userPicture"><br>
+                                    User type:<br>
+                                    <input type="radio" name="userType" value="Student" checked="checked"> Student<br>
+                                    <input type="radio" name="userType" value="Teacher"> Teacher<br>
+                                    <input type="radio" name="userType" value="Admin"> Admin<br><br>
                                     <input type="submit" value="Submit" name="registerUser"> 
                                 </form>    
                               </div>

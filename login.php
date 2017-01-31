@@ -1,7 +1,7 @@
 <?php
-include 'dbConnection.php';
+include 'dbConnV2.php';
 $adminAccess = 0; // everyone is treated as normal user, unless he's granted admin access
-$CheckingString = "SELECT userNumber, studentNumber, userEmail, roleID FROM $UserTable WHERE userEmail='$userEmail' AND userPasswordSalt='".substr(md5($userPw), 0, 20)."'";
+$CheckingString = "SELECT userNumber, studentNumber, userEmail, roleID FROM $UserTable WHERE userEmail='$userEmail' AND userPasswordHash='".substr(md5($userPw), 0, 30)."'";
 $CheckingQuery = mysqli_query($DBConnect, $CheckingString) ;
 if(!$CheckingQuery)
 {

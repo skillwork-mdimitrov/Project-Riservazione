@@ -14,7 +14,7 @@
     {
         $userEmail = stripslashes($_POST['email']); // stripslashes for security
         $userPw = stripslashes($_POST['password']); // stripslashes for security
-        require 'login.php';
+        require 'login.php'; // Login requires by itself dbConnection. dbConnection is included in index, indirectly.
     } 
     
     // If logout button is pressed

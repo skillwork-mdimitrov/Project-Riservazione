@@ -331,16 +331,8 @@
                 ?>
                 </p>
             </div>
-            <div class="col-sm-4 col-xs-4"><p></p></div>
-            <div class="week col-sm-4 col-xs-4">
-                <p>
-                    <button type="button" class="week1 btn btn-danger" >week before</button> 
-                    <button type="button" class="week1 btn btn-info">week after</button>
-                </p>
-            </div>
-        </div>
-        <?php
-                $days[] = [""];
+              <?php
+                $days[] = array();
                 $order[] = array(); 
                 $hours[] = array( );
                 $hours["08:00:00"] = 1;
@@ -363,6 +355,39 @@
                     $date1['wday'] = 7;
                 }
         ?>
+            <?php
+                if(!isset($_POST["wBefore"]))
+                {
+                   $before = 0;
+                }else{
+                    $before = $_POST["wBefore"];
+                    if(isset($_POST['after']))
+                    {
+                        $before = $before + 7;
+                    }
+                    
+                     if(isset($_POST['before']) && $before > 0)
+                    {
+                        $before = $before - 7;
+                    }
+                }
+               $date = date('Y-m-d', strtotime($date. ' + '.$before.' days'));
+               $_SESSION["yourDate"] = $days;
+               ?>
+            <div class="col-sm-4 col-xs-4"><p></p></div>
+            <div class="week col-sm-4 col-xs-4">
+                <p>
+                    <form action="#" method="POST">
+                        <input type="submit" class="week1 btn btn-info" name="after" value="Week after"/>
+                        <input type="submit" class="week1 btn btn-danger" name="before" value="Week before"/>
+                        <input type="hidden" value="<?php echo $before; ?>" name="wBefore"/>
+                    </form>
+                </p>
+            </div>
+        </div>
+        
+      
+        
         <!-- Room navigation bar END -->
         <!--table 5-->
         <div id="Room5" style="display:none;" class="whiteColor">
@@ -382,7 +407,8 @@
                       <td>Monday<br><?php 
                       if($date1['wday'] == 1)
                       {
-                           echo date('Y-m-d'); 
+                           echo $date;
+                           //echo date('Y-m-d'); 
                            $days[0] = "".date("Y-m-d");
                            $order[$days[0]] = 7;
                       }
@@ -394,15 +420,11 @@
                       ?></td> 
                       <td>Tuesday<br><?php 
                        if($date1['wday'] == 2)
-                      {
-                           echo date('Y-m-d'); 
+                      { 
+                           echo $date;
+                           //echo date('Y-m-d'); 
                            $days[1] = "".date("Y-m-d");
                            $order[$days[1]] = 8;
-                      }else if($date1['wday'] < 2)
-                      {
-                         echo date('Y-m-d', strtotime($date. ' + 1 days'));    
-                         $days[1] = "".date('Y-m-d', strtotime($date. ' + 1 days'));
-                         $order[$days[1]] = 8;
                       }else{
                          echo date('Y-m-d', strtotime($date. ' - '.$date1['wday'].' days'.'+ 2 days'));
                          $days[1] = "".date('Y-m-d', strtotime($date. ' - '.$date1['wday'].' days'.'+ 2 days'));
@@ -412,48 +434,37 @@
                       <td>Wednesday<br><?php 
                        if($date1['wday'] == 3)
                       {
-                           echo date('Y-m-d'); 
+                            echo $date;
+                           //echo date('Y-m-d');  
                            $days[2] = "".date("Y-m-d");
                            $order[$days[2]] = 9;
-                      }else if($date1['wday'] < 3)
-                      {
-                         echo date('Y-m-d', strtotime($date. ' + 2 days')); 
-                         $days[2] = "".date('Y-m-d', strtotime($date. ' + 2 days'));
-                         $order[$days[2]] = 9;
-                      }else{
+                       }else{
                          echo date('Y-m-d', strtotime($date. ' - '.$date1['wday'].' days'.'+ 3 days'));  
-                         $days[2] = "".strtotime($date. ' - '.$date1['wday'].' days'.'+ 3 days');
+                         $days[2] = "".date('Y-m-d', strtotime($date. ' - '.$date1['wday'].' days'.'+ 3 days'));  
                          $order[$days[2]] = 9;
                       }   
                       ?></td>
                       <td>Thursday<br><?php 
                        if($date1['wday'] == 4)
                       {
-                           echo date('Y-m-d');
+                            echo $date;
+                           //echo date('Y-m-d'); 
                            $days[3] = "".date("Y-m-d");
                            $order[$days[3]] = 10;
-                      }else if($date1['wday'] < 4)
-                      {
-                         echo date('Y-m-d', strtotime($date. ' + 3 days')); 
-                         $days[3] = "".date('Y-m-d', strtotime($date. ' + 3 days'));
-                         $order[$days[3]] = 10;
                       }else{
                          echo date('Y-m-d', strtotime($date. ' - '.$date1['wday'].' days'.'+ 4 days'));  
                          $days[3] = "".date('Y-m-d', strtotime($date. ' - '.$date1['wday'].' days'.'+ 4 days'));
                          $order[$days[3]] = 10;
+                          
                       }   
                       ?></td>
                       <td>Friday<br><?php 
                        if($date1['wday'] == 5)
                       {
-                           echo date('Y-m-d'); 
+                            echo $date;
+                           //echo date('Y-m-d');  
                            $days[4] = "".date("Y-m-d");
                            $order[$days[4]] = 11;
-                      }else if($date1['wday'] < 5)
-                      {
-                         echo date('Y-m-d', strtotime($date. ' + 4 days'));   
-                         $days[4] = "".date('Y-m-d', strtotime($date. ' + 4 days'));
-                         $order[$days[4]] = 11;
                       }else{
                          echo date('Y-m-d', strtotime($date. ' - '.$date1['wday'].' days'.'+ 5 days'));  
                          $days[4] = "".date('Y-m-d', strtotime($date. ' - '.$date1['wday'].' days'.'+ 5 days'));
@@ -695,10 +706,14 @@
                     {
                         s = ((7*o)-(o-1))+ (q - 7);
                         x[s].style.backgroundColor = "red";
-                        x[s].innerHTML = array[p]['userName']
-                       // document.writeln("Some shit: " + q + " o " + o + "result: " + ((q*o)-(o-1)) );
+                        x[s].innerHTML = array[p]['userName'];
                     }
                  }
+            }
+            
+            function weekAfter()
+            {
+                
             }
             
             function tableRefresh(){
@@ -740,7 +755,6 @@
                 
                 var nameOfRoom = document.getElementById("name1").innerHTML;
                 document.getElementById("roomNumber").value = nameOfRoom;
-                var dateOfBooking = "Fuck you";
                 var date = <?php echo json_encode($days); ?>;
                 var dateOut = 0;
                 var x = document.getElementById("mytable").getElementsByTagName("td");
@@ -774,12 +788,15 @@
         <div id="shit">
             <?php
                 if(isset($_POST["button123"]))
-                {        
+                { 
                     $a = $_POST['dateIn'];
                     $b = $_POST['timeIn'];
                     $c = $_POST['timeOut'];
-                    if(!empty($_SESSION["roomNr"]))
+                    echo $days[$a];
+                    if(!empty($_SESSION["roomNr"])){
                       $d = $_SESSION["roomNr"];
+                    $_SESSION["roomNr"] = 1;
+                    }
                   else {
                     $d = 1;
                   }
@@ -805,11 +822,6 @@
                     $sql = "INSERT INTO `userreservation`(`userNumber`, `reservationNumber`) VALUES ({$_SESSION['userNumber']},{$resNumber})";
                     mysqli_query($DBConnect, $sql) or die("Something happend: ".mysqli_error($DBConnect));
                      
-                }
-                
-                if(isset($_POST["button123"]))
-                {        
-                    header('Location: '.$_SERVER['REQUEST_URI']);
                 }
             ?>
         </div>

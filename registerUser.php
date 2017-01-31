@@ -71,11 +71,12 @@ $checkUserExistsQuery = mysqli_query($DBConnect, $checkUserExists) ;
         $roleIDAsInt = implode($roleIDrow, " "); // convert the array to an integer
         
         /* Extracts the user name from the user email. Eg. john.jonshon@student.stenden.com will have john johnson as his user name */
-        $splitEmail = explode ("@", $userEmail); // split the email provided in the parts before and after the @. Eg. [0]john.johnson [1]student.stenden.com
+        $splitEmail = explode ("@", $userEmail); // split the email provided in the parts before and after the @. 
+        // Eg. john.jonshon@student.stenden.com will become [0]john.johnson [1]student.stenden.com
         $splitName = explode(".", $splitEmail[0]); // split the front of the name. Eg [0]john.johnson will become [0]john [1]johnson
         $userFirstName = ucfirst($splitName[0]); // the user first name. First character upper case. Eg [0]John
         /* Check if the admin provided dot separated first and last name */
-        // If yes, capture and save the last name in a variable
+        // If true, capture and save the last name in a variable
         if(isset($splitName[1]))
         {
             $userLastName = ucfirst($splitName[1]); // the user last name. First character upper case. Eg [1]Johnson
@@ -118,6 +119,7 @@ $checkUserExistsQuery = mysqli_query($DBConnect, $checkUserExists) ;
             echo '<script type="text/javascript">alert("Password too short or empty. Needs to be more than 6 characters");</script>';
             // echo "<p><span style=color:red;>Password too short. Needs to be more than 6 characters</span></p>";
         }
+        /* if a student is about to be registered, but no student name provided */
         elseif($emptyStudentNumber > 0)
         {
             echo '<script type="text/javascript">alert("Please provide a student number");</script>';

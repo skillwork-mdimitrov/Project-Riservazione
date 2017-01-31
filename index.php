@@ -154,11 +154,25 @@
                                       {
                                           echo $_SESSION['userEmail']; // displays the user email
                                       }
+                                      // in case session is lost
                                       else 
                                       {
-                                          echo "<p>Unknown</p>";
+                                          echo "<p>Unknown</p>"; 
                                       }
                                       ?>
+                                    </p>
+                                    <p>My username:
+                                        <?php
+                                        if(isset($_SESSION['userName']))
+                                        {
+                                            echo $_SESSION['userName']; // displays the user name
+                                        }
+                                        // in case session is lost
+                                        else
+                                        {
+                                            echo "<p>Unnamed</p>";
+                                        }
+                                        ?>
                                     </p>
                                     <p>My role:
                                         <?php

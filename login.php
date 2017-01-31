@@ -1,7 +1,7 @@
 <?php
 include 'dbConnV2.php';
 $adminAccess = 0; // everyone is treated as normal user, unless he's granted admin access
-$CheckingString = "SELECT userNumber, studentNumber, userEmail, roleID FROM $UserTable WHERE userEmail='$userEmail' AND userPasswordHash='".substr(md5($userPw), 0, 30)."'";
+$CheckingString = "SELECT userNumber, studentNumber, userName, userEmail, roleID FROM $UserTable WHERE userEmail='$userEmail' AND userPasswordHash='".substr(md5($userPw), 0, 30)."'";
 $CheckingQuery = mysqli_query($DBConnect, $CheckingString) ;
 if(!$CheckingQuery)
 {
@@ -18,6 +18,7 @@ else
         /* Select in an array all the relevant information about the user that is currently logging and store it in sessions */
         $Row = mysqli_fetch_assoc($CheckingQuery);
         $_SESSION['userNumber'] = $Row['userNumber'];
+        $_SESSION['userName'] = $Row['userName'];
         $_SESSION['userEmail'] = $Row['userEmail'];
         $_SESSION['roleID'] = $Row['roleID'];
         $_SESSION['studentNumber'] = $Row['studentNumber'];

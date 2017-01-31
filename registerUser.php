@@ -13,6 +13,7 @@ $userType = ($_POST['userType']); // depending on the selected radio button, sav
 $errorCount = 0;
 $invalidEmail = 0;
 $invalidPW = 0;
+$emptyStudentNumber = 0;
 
 $checkUserExists = "SELECT COUNT(userEmail) FROM $UserTable WHERE userEmail='$userEmail'";
 $checkUserExistsQuery = mysqli_query($DBConnect, $checkUserExists) ;
@@ -46,7 +47,18 @@ $checkUserExistsQuery = mysqli_query($DBConnect, $checkUserExists) ;
         $invalidPW++;
     }
     
-
+    /* If the user is student, set his student number to a variable that will be inserted in the database */
+    if($_POST['userType'] == 'Student')
+    {
+        $studentNumber = $_POST['studentNumber'];
+        /* If the user is student and the field was forgotten empty, report and block the problem */
+        if($_POST['userType'] == 'Student' && $studentNumber == 0)
+        {
+            $errorCount++;
+            $emptyStudentNumber++;
+        }
+    }
+    
     if($errorCount == 0)  
     {
         /* Gets the role of the current user */
@@ -58,15 +70,26 @@ $checkUserExistsQuery = mysqli_query($DBConnect, $checkUserExists) ;
         $roleIDrow = mysqli_fetch_assoc($roleIDQuery); // fetch that row as an array
         $roleIDAsInt = implode($roleIDrow, " "); // convert the array to an integer
         
-        /* If the user is student, set his student number to a variable that will be inserted in the database */
-        if($_POST['userType'] == 'Student')
+        /* Extracts the user name from the user email. Eg. john.jonshon@student.stenden.com will have john johnson as his user name */
+        $splitEmail = explode ("@", $userEmail); // split the email provided in the parts before and after the @. Eg. [0]john.johnson [1]student.stenden.com
+        $splitName = explode(".", $splitEmail[0]); // split the front of the name. Eg [0]john.johnson will become [0]john [1]johnson
+        $userFirstName = ucfirst($splitName[0]); // the user first name. First character upper case. Eg [0]John
+        /* Check if the admin provided dot separated first and last name */
+        // If yes, capture and save the last name in a variable
+        if(isset($splitName[1]))
         {
-            $studentNumber = $_POST['studentNumber'];
+            $userLastName = ucfirst($splitName[1]); // the user last name. First character upper case. Eg [1]Johnson
         }
+        // If not, make the last name empty
+        else
+        {
+            $userLastName = " ";
+        }
+        $userName = $userFirstName . " " . $userLastName; // Combines the first and last name and saves them in a variable. Eg John Johnson
         
         /* Inserts the information about the user in the database */
-        $InsertingString = "INSERT INTO $UserTable (userNumber, studentNumber, userEmail, userPasswordSalt, roleID)"
-                . "VALUES (' ', '$studentNumber', '$userEmail', '$userPwMD', '$roleIDAsInt')" ; // userNumber empty, because of auto-incremented database field
+        $InsertingString = "INSERT INTO $UserTable (userNumber, studentNumber, userName, userEmail, userPasswordSalt, roleID)"
+                . "VALUES (' ', '$studentNumber', '$userName', '$userEmail', '$userPwMD', '$roleIDAsInt')" ; // userNumber empty, because of auto-incremented database field
         $InsertingQuery = mysqli_query($DBConnect, $InsertingString) ;
         
         /* If the insertion fails */
@@ -81,7 +104,7 @@ $checkUserExistsQuery = mysqli_query($DBConnect, $checkUserExists) ;
         }
     }
     else
-    {
+    {     
         /* if there was an issue with the email */
         if($invalidEmail > 0)
         {
@@ -94,6 +117,10 @@ $checkUserExistsQuery = mysqli_query($DBConnect, $checkUserExists) ;
         {
             echo '<script type="text/javascript">alert("Password too short or empty. Needs to be more than 6 characters");</script>';
             // echo "<p><span style=color:red;>Password too short. Needs to be more than 6 characters</span></p>";
+        }
+        elseif($emptyStudentNumber > 0)
+        {
+            echo '<script type="text/javascript">alert("Please provide a student number");</script>';
         }
         
     }

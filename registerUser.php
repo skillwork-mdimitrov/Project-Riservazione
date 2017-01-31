@@ -1,5 +1,5 @@
 <?php
-include 'dbConnection.php';
+include 'dbConnV2.php';
 // $userName = stripslashes($_POST['userName']); // No username needed for registration
 $adminAccess = 1; // only admins can access this file
 $studentNumber = 0; // default value
@@ -89,7 +89,7 @@ $checkUserExistsQuery = mysqli_query($DBConnect, $checkUserExists) ;
         $userName = $userFirstName . " " . $userLastName; // Combines the first and last name and saves them in a variable. Eg John Johnson
         
         /* Inserts the information about the user in the database */
-        $InsertingString = "INSERT INTO $UserTable (userNumber, studentNumber, userName, userEmail, userPasswordSalt, roleID)"
+        $InsertingString = "INSERT INTO $UserTable (userNumber, studentNumber, userName, userEmail, userPasswordHash, roleID)"
                 . "VALUES (' ', '$studentNumber', '$userName', '$userEmail', '$userPwMD', '$roleIDAsInt')" ; // userNumber empty, because of auto-incremented database field
         $InsertingQuery = mysqli_query($DBConnect, $InsertingString) ;
         

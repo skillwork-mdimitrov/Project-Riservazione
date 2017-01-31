@@ -14,7 +14,7 @@
     {
         $userEmail = stripslashes($_POST['email']); // stripslashes for security
         $userPw = stripslashes($_POST['password']); // stripslashes for security
-        require 'login.php';
+        require 'login.php'; // Login requires by itself dbConnection. dbConnection is included in index, indirectly.
     } 
     
     // If logout button is pressed
@@ -31,28 +31,15 @@
     }
     
     require "dbConnection.php";
-    
-    $sql1 = "SELECT date, timeIn, timeOut FROM reservation";
-    $array[][] = [[]];
-    $r = 0;
-    $result = mysqli_query($DBConnect, $sql1);// or die("Say something!!!".mysqli_error($DBConnect));
-    if(($row = mysqli_num_rows($result)) > 0)
-    {
-        while($res = mysqli_fetch_assoc($result))
-        {
-            $array[$r]['timeIn'] = $res['timeIn'];
-            $array[$r]['timeOut'] = $res['timeOut'];
-            $array[$r]['date'] = $res['date'];
-            $r++;
-        }
-    }
+  
 ?>
+
 <!DOCTYPE html> <!-- in order for the browsers to use the latest rendering standards. -->
 <html lang="en"> <!-- useful for search engines and screen readers -->
 <?php
     include 'headSection.php';
 ?>
-<body>
+    <body onload="displayData()">
     <div class="fluid-container"> <!-- WRAPPER. The bootstrap grid used below requires such container. 
     The xs(phone), sm(tablets), md(desktop) and lg(lager desktop) grids(Example: class="col-sm-3 col-xs-3") 
     will all "stack" vertically on screens/viewports less tdan 768 pixels. 
@@ -154,11 +141,25 @@
                                       {
                                           echo $_SESSION['userEmail']; // displays the user email
                                       }
+                                      // in case session is lost
                                       else 
                                       {
-                                          echo "<p>Unknown</p>";
+                                          echo "<p>Unknown</p>"; 
                                       }
                                       ?>
+                                    </p>
+                                    <p>My username:
+                                        <?php
+                                        if(isset($_SESSION['userName']))
+                                        {
+                                            echo $_SESSION['userName']; // displays the user name
+                                        }
+                                        // in case session is lost
+                                        else
+                                        {
+                                            echo "<p>Unnamed</p>";
+                                        }
+                                        ?>
                                     </p>
                                     <p>My role:
                                         <?php
@@ -194,13 +195,26 @@
                         </div>
                     </div>   
                     <!-- My profile pop up END -->
-                    
+                     
                     <!-- Register user button, initially hidden -->
                     <form action="#" method="POST" name="registrationForm">
                         <button type="button" class="signupLogin btn btn-danger btn-md" id="registration" data-toggle="modal"
                         data-target="#registerUsers" style="display:none">Register user</button>
+                        <!--  *
+                        *
+                        *
+                        *
+                        * 
+                        *
+                        
+                        * 
+                        *
+                        * -->
                     </form>
+                    <?php
                     
+                   
+                ?>
                     <!-- Register user pop up -->
                     <div class="modal fade" id="registerUsers" role="dialog">
                         <div class="modal-dialog">    
@@ -245,13 +259,76 @@
         <div class="row" id="buttons">
             <div class="col-sm-4 col-xs-4">
                 <p>
-                <div class="whiteColor"><span id="roomText">Room: </span>
-                    <button type="button" class="btn btn-info" onclick="myFunction('buttonButton1')" id="buttonButton1">1</button>
-                    <button type="button" class="btn btn-danger"  onclick="myFunction('buttonButton2')" id="buttonButton2">2</button>
-                    <button type="button" class="btn btn-info"  onclick="myFunction('buttonButton3')" id="buttonButton3">3</button>
-                    <button type="button" class="btn btn-danger"  onclick="myFunction('buttonButton4')" id="buttonButton4">4</button>
-                    <button type="button" class="btn btn-info"  onclick="myFunction('buttonButton5')" id="buttonButton5">5</button>
-                    </div>
+                <div class="whiteColor">
+                    <form action="#" method="POST">
+                        <input type="submit" class="btn btn-info" onclick="myFunction('buttonButton1')" id="buttonButton1" name="buttonButton1" value="1"/>
+                        <input type="submit" class="btn btn-danger"  onclick="myFunction('buttonButton2')" id="buttonButton2" name="buttonButton2" value="2"/>
+                        <input type="submit" class="btn btn-info"  onclick="myFunction('buttonButton3')" id="buttonButton3" name="buttonButton3" value="3"/>
+                        <input type="submit" class="btn btn-danger"  onclick="myFunction('buttonButton4')" id="buttonButton4" name="buttonButton4" value="4"/>
+                        <input type="submit" class="btn btn-info"  onclick="myFunction('buttonButton5')" id="buttonButton5" name="buttonButton5" value="5"/>
+                    </form>
+                </div>
+                <?php
+                 $roomNr = 1;
+                 if(isset($_POST['buttonButton1']) || isset($_POST['buttonButton2']) || isset($_POST['buttonButton3']) || isset($_POST['buttonButton4']) || isset($_POST['buttonButton5']) )
+                 {
+                     if(isset($_POST['buttonButton1']))
+                    {
+                        $roomNr = $_POST['buttonButton1'];
+                    }
+                    if(isset($_POST['buttonButton2']))
+                    {
+                         $roomNr = $_POST['buttonButton2'];
+                    }
+                    if(isset($_POST['buttonButton3']))
+                    {
+                         $roomNr = $_POST['buttonButton3'];
+                    }
+                    if(isset($_POST['buttonButton4']))
+                    {
+                        $roomNr = $_POST['buttonButton4'];
+                    }
+                    if(isset($_POST['buttonButton5']))
+                    {
+                        $roomNr = $_POST['buttonButton5'];
+                    }
+                    $_SESSION['roomNr'] = $roomNr;
+                    $sql1 = "SELECT reservation.date,reservation.roomNumber, reservation.timeIn, reservation.timeOut, user.userName FROM reservation,user,userreservation WHERE userreservation.userNumber = user.userNumber and userreservation.reservationNumber = reservation.reservationNumber and reservation.roomNumber = {$_SESSION['roomNr']}";
+                    
+                    $array[][] = [[]];
+                    $r = 0;
+                    $result = mysqli_query($DBConnect, $sql1);// or die("Say something!!!".mysqli_error($DBConnect));
+                    if(($row = mysqli_num_rows($result)) > 0)
+                    {
+                        while($res = mysqli_fetch_assoc($result))
+                        {
+                            $array[$r]['timeIn'] = $res['timeIn'];
+                            $array[$r]['timeOut'] = $res['timeOut'];
+                            $array[$r]['date'] = $res['date'];
+                            $array[$r]['userName'] = $res['userName'];
+                            $array[$r]['roomNumber'] = $res['roomNumber'];
+                            $r++;
+                        }
+                    }
+                 }else{
+                       $sql1 = "SELECT reservation.date,reservation.roomNumber, reservation.timeIn, reservation.timeOut, user.userName FROM reservation,user,userreservation WHERE userreservation.userNumber = user.userNumber and userreservation.reservationNumber = reservation.reservationNumber and reservation.roomNumber = 1";
+                    $array[][] = [[]];
+                    $r = 0;
+                    $result = mysqli_query($DBConnect, $sql1);// or die("Say something!!!".mysqli_error($DBConnect));
+                    if(($row = mysqli_num_rows($result)) > 0)
+                    {
+                        while($res = mysqli_fetch_assoc($result))
+                        {
+                            $array[$r]['timeIn'] = $res['timeIn'];
+                            $array[$r]['timeOut'] = $res['timeOut'];
+                            $array[$r]['date'] = $res['date'];
+                            $array[$r]['userName'] = $res['userName'];
+                            $array[$r]['roomNumber'] = $res['roomNumber'];
+                            $r++;
+                        }
+                    }
+                 }
+                ?>
                 </p>
             </div>
             <div class="col-sm-4 col-xs-4"><p></p></div>
@@ -264,6 +341,21 @@
         </div>
         <?php
                 $days[] = [""];
+                $order[] = array(); 
+                $hours[] = array( );
+                $hours["08:00:00"] = 1;
+                $hours["09:00:00"] = 2;
+                $hours["10:00:00"] = 3;
+                $hours["11:00:00"] = 4;
+                $hours["12:00:00"] = 5;
+                $hours["13:00:00"] = 6;
+                $hours["14:00:00"] = 7;
+                $hours["15:00:00"] = 8;
+                $hours["16:00:00"] = 9;
+                $hours["17:00:00"] = 10;
+                $hours["18:00:00"] = 11;
+                $hours["19:00:00"] = 12;
+                $hours["20:00:00"] = 13;
                 $date = date("Y-m-d");
                 $date1 = getdate();
                 if($date1['wday'] == 0)
@@ -276,14 +368,15 @@
         <div id="Room5" style="display:none;" class="whiteColor">
         <div class="row">
             <div class="RoomName col-sm-12 col-xs-12" id="name">
-                <p>Room <label id="name1">1 </label></p>
+                <p>Room <label id="name1"><?php echo $roomNr;
+                ?></label></p>
                 
             </div>
         </div>
 
         <div class="row">
             <div class="col-sm-12 col-xs-12">
-                <table class="table" id="mytable">
+                <table class="table" id="mytable" onload="refresh()">
                     <tr>
                       <td>Room name</td>
                       <td>Monday<br><?php 
@@ -291,10 +384,12 @@
                       {
                            echo date('Y-m-d'); 
                            $days[0] = "".date("Y-m-d");
+                           $order[$days[0]] = 7;
                       }
                      else {
                           echo date('Y-m-d', strtotime($date. ' - '.($date1['wday'] - 1).' days'));
-                          $days[0] = "".date('Y-m-d', strtotime($date. ' - '.$date1['wday'].' days'.'+ 1 days'));
+                          $days[0] = "".date('Y-m-d', strtotime($date. ' - '.$date1['wday'].' days'.'+ 1 days')); 
+                          $order[$days[0]] = 7;
                      }
                       ?></td> 
                       <td>Tuesday<br><?php 
@@ -302,13 +397,16 @@
                       {
                            echo date('Y-m-d'); 
                            $days[1] = "".date("Y-m-d");
+                           $order[$days[1]] = 8;
                       }else if($date1['wday'] < 2)
                       {
                          echo date('Y-m-d', strtotime($date. ' + 1 days'));    
                          $days[1] = "".date('Y-m-d', strtotime($date. ' + 1 days'));
+                         $order[$days[1]] = 8;
                       }else{
                          echo date('Y-m-d', strtotime($date. ' - '.$date1['wday'].' days'.'+ 2 days'));
                          $days[1] = "".date('Y-m-d', strtotime($date. ' - '.$date1['wday'].' days'.'+ 2 days'));
+                         $order[$days[1]] = 8;
                       }                         
                       ?></td>
                       <td>Wednesday<br><?php 
@@ -316,13 +414,16 @@
                       {
                            echo date('Y-m-d'); 
                            $days[2] = "".date("Y-m-d");
+                           $order[$days[2]] = 9;
                       }else if($date1['wday'] < 3)
                       {
                          echo date('Y-m-d', strtotime($date. ' + 2 days')); 
                          $days[2] = "".date('Y-m-d', strtotime($date. ' + 2 days'));
+                         $order[$days[2]] = 9;
                       }else{
                          echo date('Y-m-d', strtotime($date. ' - '.$date1['wday'].' days'.'+ 3 days'));  
                          $days[2] = "".strtotime($date. ' - '.$date1['wday'].' days'.'+ 3 days');
+                         $order[$days[2]] = 9;
                       }   
                       ?></td>
                       <td>Thursday<br><?php 
@@ -330,13 +431,16 @@
                       {
                            echo date('Y-m-d');
                            $days[3] = "".date("Y-m-d");
+                           $order[$days[3]] = 10;
                       }else if($date1['wday'] < 4)
                       {
                          echo date('Y-m-d', strtotime($date. ' + 3 days')); 
                          $days[3] = "".date('Y-m-d', strtotime($date. ' + 3 days'));
+                         $order[$days[3]] = 10;
                       }else{
                          echo date('Y-m-d', strtotime($date. ' - '.$date1['wday'].' days'.'+ 4 days'));  
                          $days[3] = "".date('Y-m-d', strtotime($date. ' - '.$date1['wday'].' days'.'+ 4 days'));
+                         $order[$days[3]] = 10;
                       }   
                       ?></td>
                       <td>Friday<br><?php 
@@ -344,13 +448,16 @@
                       {
                            echo date('Y-m-d'); 
                            $days[4] = "".date("Y-m-d");
+                           $order[$days[4]] = 11;
                       }else if($date1['wday'] < 5)
                       {
                          echo date('Y-m-d', strtotime($date. ' + 4 days'));   
                          $days[4] = "".date('Y-m-d', strtotime($date. ' + 4 days'));
+                         $order[$days[4]] = 11;
                       }else{
                          echo date('Y-m-d', strtotime($date. ' - '.$date1['wday'].' days'.'+ 5 days'));  
                          $days[4] = "".date('Y-m-d', strtotime($date. ' - '.$date1['wday'].' days'.'+ 5 days'));
+                         $order[$days[4]] = 11;
                       }    
                       ?></td>
                     </tr>
@@ -484,8 +591,8 @@
                                 <form action="#" method="POST">       
                                     <div id="contentForm">
                                     <p> Are you sure that you want to book this????</p>
-                                    
-                                    <input type="submit" name="button123" value="YES"/>
+                                   
+                                    <input type="submit" name="button123" value="YES" onclick=""/>
                                     <input type="submit" value="NO"/>
                                     <input type="hidden" value="" name="dateIn" id="dateIn"/>
                                     <input type="hidden" value="" name="timeIn" id="timeIn"/>
@@ -509,7 +616,10 @@
     </div>
         <!-- Javascript -->
         <script>
-               
+            function refresh(){
+                
+               setTimeout(function () {window.location.reload()}, 200);
+            }
             document.getElementById('Room5').style.display = 'block';
             function myFunction(elementID) {
                 switch(elementID){
@@ -559,12 +669,43 @@
             }
             
             function read(some){
+                if(document.getElementById(some).style.backgroundColor != "red")
                 if(document.getElementById(some).style.backgroundColor == "darkgreen")
                        document.getElementById(some).style.backgroundColor = "transparent";
                     else
                        document.getElementById(some).style.backgroundColor = "darkgreen";    
             }
+            
+            function displayData()
+            {
+                 var array = <?php echo json_encode($array); ?>;
+                 var size =  <?php echo json_encode($r); ?>;
+                 var date =  <?php echo json_encode($date); ?>;
+                 var order = <?php echo json_encode($order);?>;
+                 var hours = <?php echo json_encode($hours);?>;
                  
+                 var x = document.getElementById("mytable").getElementsByTagName("td");
+                 for(var p = 0; p < size; p++)
+                 {
+                     
+                    q = order[array[p]['date']];
+                    w = hours[array[p]['timeIn']];
+                    e = hours[array[p]['timeOut']];
+                    for(o = w; o <= e; o++)
+                    {
+                        s = ((7*o)-(o-1))+ (q - 7);
+                        x[s].style.backgroundColor = "red";
+                        x[s].innerHTML = array[p]['userName']
+                       // document.writeln("Some shit: " + q + " o " + o + "result: " + ((q*o)-(o-1)) );
+                    }
+                 }
+            }
+            
+            function tableRefresh(){
+                 setInterval(function() {
+                  window.location.reload();
+                }, 200); 
+            }
                  
             function checkDaysChecked(){
                 var sw = true;
@@ -604,6 +745,7 @@
                 var dateOut = 0;
                 var x = document.getElementById("mytable").getElementsByTagName("td");
                 if(checkDaysChecked()){
+                     document.getElementById("contentForm").style.display = "block";
                 for(var i = 1; i <= 13; i++)
                 {
                     var k = (7*i)-(i-1);
@@ -632,12 +774,15 @@
         <div id="shit">
             <?php
                 if(isset($_POST["button123"]))
-                {
+                {        
                     $a = $_POST['dateIn'];
                     $b = $_POST['timeIn'];
                     $c = $_POST['timeOut'];
-                    $d = $_POST['roomNumber'];
-                    echo $d;
+                    if(!empty($_SESSION["roomNr"]))
+                      $d = $_SESSION["roomNr"];
+                  else {
+                    $d = 1;
+                  }
                     if(strlen($b) == 1)
                     {
                         $b = "0".$b.":00:00";
@@ -659,6 +804,12 @@
                     $resNumber = $res['reservationNumber'];
                     $sql = "INSERT INTO `userreservation`(`userNumber`, `reservationNumber`) VALUES ({$_SESSION['userNumber']},{$resNumber})";
                     mysqli_query($DBConnect, $sql) or die("Something happend: ".mysqli_error($DBConnect));
+                     
+                }
+                
+                if(isset($_POST["button123"]))
+                {        
+                    header('Location: '.$_SERVER['REQUEST_URI']);
                 }
             ?>
         </div>

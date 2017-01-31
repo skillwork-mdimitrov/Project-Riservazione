@@ -32,17 +32,17 @@
     
     require "dbConnection.php";
     
-    $sql1 = "SELECT dateIn, timeIn, timeOut FROM reservation";
+    $sql1 = "SELECT date, timeIn, timeOut FROM reservation";
     $array[][] = [[]];
     $r = 0;
-    $result = mysqli_query($DBConnect, $sql1);// or die("Say something!!!");
+    $result = mysqli_query($DBConnect, $sql1);// or die("Say something!!!".mysqli_error($DBConnect));
     if(($row = mysqli_num_rows($result)) > 0)
     {
         while($res = mysqli_fetch_assoc($result))
         {
             $array[$r]['timeIn'] = $res['timeIn'];
             $array[$r]['timeOut'] = $res['timeOut'];
-            $array[$r]['dateIn'] = $res['dateIn'];
+            $array[$r]['date'] = $res['date'];
             $r++;
         }
     }
@@ -275,7 +275,10 @@
         <!--table 5-->
         <div id="Room5" style="display:none;" class="whiteColor">
         <div class="row">
-            <div class="RoomName col-sm-12 col-xs-12" id="name"><p id="name1">Room 1</p></div>
+            <div class="RoomName col-sm-12 col-xs-12" id="name">
+                <p>Room <label id="name1">1 </label></p>
+                
+            </div>
         </div>
 
         <div class="row">
@@ -458,12 +461,7 @@
                 </table>
             </div>
         </div>
-       <!-- TO BE REMOVED
-        <div id="calendar">
-        <iframe src="https://calendar.google.com/calendar/embed?showPrint=0&amp;height=600&amp;wkst=1&amp;bgcolor=%23ffffff&amp;src=3m5vmovfngbf3f47r65gn60jag%40group.calendar.google.com&amp;color=%238D6F47&amp;ctz=Europe%2FAmsterdam"
-        style="border:solid 1px #777" width="800" height="600" frameborder="0" scrolling="no"></iframe>
-        </div>
-       -->
+            
         </div> 
          <div class="row">
             <div class="col-sm-8 col-xs-8"><p></p></div>
@@ -516,19 +514,19 @@
             function myFunction(elementID) {
                 switch(elementID){
                     case 'buttonButton1':
-                        document.getElementById('name1').innerHTML = 'Room 1';
+                        document.getElementById('name1').innerHTML = '1';
                         break;
                     case 'buttonButton2':
-                        document.getElementById('name1').innerHTML = 'Room 2';
+                        document.getElementById('name1').innerHTML = '2';
                         break;
                     case 'buttonButton3':
-                        document.getElementById('name1').innerHTML = 'Room 3';
+                        document.getElementById('name1').innerHTML = '3';
                         break;
                     case 'buttonButton4':
-                        document.getElementById('name1').innerHTML = 'Room 4';
+                        document.getElementById('name1').innerHTML = '4';
                         break;
                     case 'buttonButton5':
-                        document.getElementById('name1').innerHTML = 'Room 5';
+                        document.getElementById('name1').innerHTML = '5';
                         break;
                 }
             }            
@@ -653,9 +651,14 @@
                     }else{
                         $c = $c.":00:00";
                     }
-                    $sql = "INSERT INTO `reservation`(`reservationNumber`, `dateIn`, `timeIn`, `timeOut`, `dateOut`, `roomNumber`) VALUES (7,'{$days[$a]}','{$b}','{$c}','{$days[$a]}','$d')";
+                    $sql = "INSERT INTO `reservation`(`date`, `timeIn`, `timeOut`, `roomNumber`) VALUES ('{$days[$a]}','{$b}','{$c}','$d')";
                     mysqli_query($DBConnect, $sql) or die("Something happend: ".mysqli_error($DBConnect));
-                    
+                    $sql = "SELECT reservationNumber FROM reservation ORDER BY reservationNumber DESC LIMIT 1";
+                    $result = mysqli_query($DBConnect, $sql);
+                    $res = mysqli_fetch_assoc($result);
+                    $resNumber = $res['reservationNumber'];
+                    $sql = "INSERT INTO `userreservation`(`userNumber`, `reservationNumber`) VALUES ({$_SESSION['userNumber']},{$resNumber})";
+                    mysqli_query($DBConnect, $sql) or die("Something happend: ".mysqli_error($DBConnect));
                 }
             ?>
         </div>

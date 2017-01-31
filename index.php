@@ -56,37 +56,7 @@
 
                 <!-- Button holder. Holds the user buttons. Login, logout, register user, my profile -->
                 <div class="sl col-sm-4 col-xs-4"> 
-                    <!--Sign up button-->
-                    <!--<button type="button" class="signupLogin btn btn-info btn-md" data-toggle="modal" data-target="#signUp">Sign Up</button>-->
-                    <!--Thing that pops up-->
-                    <!--
-                    <div class="modal fade" id="signUp" role="dialog">
-                        <div class="modal-dialog">    
-                            <div class="modal-content">
-                              <div class="modal-header">
-                                <button type="button" class="close" data-dismiss="modal">&times;</button>
-                                <h4 class="modal-title">Sign Up</h4>
-                              </div>
-                              <div class="modal-body">
-                                <p>
-                                <form action="index.php">
-                                    Username:<br>
-                                    <input type="text" name="username"><br>
-                                    Password:<br>
-                                    <input type="password" name="password"><br>
-                                    Re-enter password:<br>
-                                    <input type="password" name="repassword"><br><br>
-                                    <input type="submit" value="Submit">
-                                </form>
-                                </p>
-                              </div>
-                              <div class="modal-footer">
-                                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                              </div>
-                            </div>
-                        </div>
-                    </div>-->
-                    <!--End of thing that pops up-->
+                    
 
                     <!--Log in button, initially hidden-->
                     <button type="button" class="signupLogin btn btn-danger btn-md" id="login" data-toggle="modal" data-target="#logIn" style="display:none">Log in</button>

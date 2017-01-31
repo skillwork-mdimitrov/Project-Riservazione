@@ -33,7 +33,7 @@
     require "dbConnection.php";
   
 ?>
-
+<!-- HEY STONE -->
 <!DOCTYPE html> <!-- in order for the browsers to use the latest rendering standards. -->
 <html lang="en"> <!-- useful for search engines and screen readers -->
 <?php

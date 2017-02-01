@@ -318,7 +318,14 @@
                 $hours["18:00:00"] = 11;
                 $hours["19:00:00"] = 12;
                 $hours["20:00:00"] = 13;
-                $date = date("Y-m-d");
+                $date = 0;
+                $date1 = date("Y-m-d");
+                if(!isset($_SESSION['date']))
+                {
+                 $date = date("Y-m-d");   
+                }else{
+                    $date = $_SESSION['date'];
+                }
                 $date1 = getdate();
                 if($date1['wday'] == 0)
                 {
@@ -336,13 +343,13 @@
                         $before = $before + 7;
                     }
                     
-                     if(isset($_POST['before']) && $before > 0)
+                     if(isset($_POST['before']))
                     {
                         $before = $before - 7;
                     }
                 }
                $date = date('Y-m-d', strtotime($date. ' + '.$before.' days'));
-               $_SESSION["yourDate"] = $days;
+              
                ?>
             <div class="col-sm-4 col-xs-4"><p></p></div>
             <div class="week col-sm-4 col-xs-4">
@@ -370,8 +377,8 @@
         </div>
 
         <div class="row">
-            <div class="col-sm-12 col-xs-12">
-                <table class="table" id="mytable" onload="refresh()">
+            <div class="col-sm-12 col-xs-12" id="tableDiv" >
+                <table class="table" id="mytable">
                     <tr>
                       <td>Room name</td>
                       <td>Monday<br><?php 
@@ -393,7 +400,7 @@
                       { 
                            echo $date;
                            //echo date('Y-m-d'); 
-                           $days[1] = "".date("Y-m-d");
+                           $days[1] = $date;
                            $order[$days[1]] = 8;
                       }else{
                          echo date('Y-m-d', strtotime($date. ' - '.$date1['wday'].' days'.'+ 2 days'));
@@ -406,7 +413,7 @@
                       {
                             echo $date;
                            //echo date('Y-m-d');  
-                           $days[2] = "".date("Y-m-d");
+                           $days[2] = $date;
                            $order[$days[2]] = 9;
                        }else{
                          echo date('Y-m-d', strtotime($date. ' - '.$date1['wday'].' days'.'+ 3 days'));  
@@ -419,7 +426,7 @@
                       {
                             echo $date;
                            //echo date('Y-m-d'); 
-                           $days[3] = "".date("Y-m-d");
+                           $days[3] = $date;
                            $order[$days[3]] = 10;
                       }else{
                          echo date('Y-m-d', strtotime($date. ' - '.$date1['wday'].' days'.'+ 4 days'));  
@@ -433,7 +440,7 @@
                       {
                             echo $date;
                            //echo date('Y-m-d');  
-                           $days[4] = "".date("Y-m-d");
+                           $days[4] = $date;
                            $order[$days[4]] = 11;
                       }else{
                          echo date('Y-m-d', strtotime($date. ' - '.$date1['wday'].' days'.'+ 5 days'));  
@@ -597,10 +604,8 @@
     </div>
         <!-- Javascript -->
         <script>
-            function refresh(){
-                
-               setTimeout(function () {window.location.reload()}, 200);
-            }
+              
+             
             document.getElementById('Room5').style.display = 'block';
             function myFunction(elementID) {
                 switch(elementID){
@@ -661,7 +666,7 @@
             {
                  var array = <?php echo json_encode($array); ?>;
                  var size =  <?php echo json_encode($r); ?>;
-                 var date =  <?php echo json_encode($date); ?>;
+                 var days =  <?php echo json_encode($days); ?>;
                  var order = <?php echo json_encode($order);?>;
                  var hours = <?php echo json_encode($hours);?>;
                  
@@ -672,18 +677,20 @@
                     q = order[array[p]['date']];
                     w = hours[array[p]['timeIn']];
                     e = hours[array[p]['timeOut']];
-                    for(o = w; o <= e; o++)
+                    sw = 0;
+                    for(t = 7; t <= 11 && sw == 0; t++)
+                    {
+                          if(q == t)
+                                sw = 1;
+                    }
+                    
+                    for(o = w; o <= e && sw == 1; o++)
                     {
                         s = ((7*o)-(o-1))+ (q - 7);
                         x[s].style.backgroundColor = "red";
                         x[s].innerHTML = array[p]['userName'];
                     }
                  }
-            }
-            
-            function weekAfter()
-            {
-                
             }
             
             function tableRefresh(){
@@ -757,12 +764,22 @@
         
         <div id="shit">
             <?php
-                if(isset($_POST["button123"]))
+                  if(isset($_POST['after']) || isset($_POST['before'])){
+                      $_SESSION["yourDate"] = $days;
+                      $_SESSION["date"] = $date;
+                  }
+                  
+                  if(!isset($_SESSION["yourDate"]) || empty($_SESSION["yourDate"]))
+                  {
+                     $_SESSION["yourDate"] = $days;
+                  }
+                 if(isset($_POST["button123"]))
                 { 
+                  if(isset($_SESSION["userNumber"]))
+                 {
                     $a = $_POST['dateIn'];
                     $b = $_POST['timeIn'];
                     $c = $_POST['timeOut'];
-                    echo $days[$a];
                     if(!empty($_SESSION["roomNr"])){
                       $d = $_SESSION["roomNr"];
                     $_SESSION["roomNr"] = 1;
@@ -770,6 +787,7 @@
                   else {
                     $d = 1;
                   }
+                  echo $_SESSION["yourDate"][$a];
                     if(strlen($b) == 1)
                     {
                         $b = "0".$b.":00:00";
@@ -783,7 +801,7 @@
                     }else{
                         $c = $c.":00:00";
                     }
-                    $sql = "INSERT INTO `reservation`(`date`, `timeIn`, `timeOut`, `roomNumber`) VALUES ('{$days[$a]}','{$b}','{$c}','$d')";
+                    $sql = "INSERT INTO `reservation`(`date`, `timeIn`, `timeOut`, `roomNumber`) VALUES ('{$_SESSION['yourDate'][$a]}','{$b}','{$c}','{$d}')";
                     mysqli_query($DBConnect, $sql) or die("Something happend: ".mysqli_error($DBConnect));
                     $sql = "SELECT reservationNumber FROM reservation ORDER BY reservationNumber DESC LIMIT 1";
                     $result = mysqli_query($DBConnect, $sql);
@@ -791,8 +809,12 @@
                     $resNumber = $res['reservationNumber'];
                     $sql = "INSERT INTO `userreservation`(`userNumber`, `reservationNumber`) VALUES ({$_SESSION['userNumber']},{$resNumber})";
                     mysqli_query($DBConnect, $sql) or die("Something happend: ".mysqli_error($DBConnect));
-                     
-                }
+                    }else{
+                        echo "<script> alert('You need to login, for reserving a room!!!'); </script>";
+                    }
+                    $_SESSION['yourDate']="";
+               }
+             
             ?>
         </div>
         <!-- END of Javascript-->

@@ -320,12 +320,10 @@
                 $hours["20:00:00"] = 13;
                 $date = 0;
                 $date1 = date("Y-m-d");
-                if(!isset($_SESSION['date']))
-                {
-                 $date = date("Y-m-d");   
-                }else{
-                    $date = $_SESSION['date'];
-                }
+                if(isset($_SESSION['date']))
+                     $date = $_SESSION['date'];
+                else
+                    $date = date("Y-m-d");
                 $date1 = getdate();
                 if($date1['wday'] == 0)
                 {
@@ -340,30 +338,42 @@
                     $before = $_POST["wBefore"];
                     if(isset($_POST['after']))
                     {
-                        $before = $before + 7;
+                        $date = date('Y-m-d', strtotime($date. ' + 7 days'));
+                        $before++;
                     }
                     
-                     if(isset($_POST['before']))
+                     if(isset($_POST['before']) && $before > 0)
                     {
-                        $before = $before - 7;
+                       $date = date('Y-m-d', strtotime($date. ' - 7 days'));
+                       $before--;
                     }
                 }
-               $date = date('Y-m-d', strtotime($date. ' + '.$before.' days'));
+               
               
                ?>
             <div class="col-sm-4 col-xs-4"><p></p></div>
             <div class="week col-sm-4 col-xs-4">
                 <p>
                     <form action="#" method="POST">
-                        <input type="submit" class="week1 btn btn-info" name="after" value="Week after"/>
-                        <input type="submit" class="week1 btn btn-danger" name="before" value="Week before"/>
+                        <input type="submit" class="week1 btn btn-danger" name="after" value="Week after"/>
+                        <input type="submit" class="week1 btn btn-info" name="before" value="Week before"/>
+                        <input type="submit" class="week1 btn btn-danger" name="currentWeek" value="Current week"/>
                         <input type="hidden" value="<?php echo $before; ?>" name="wBefore"/>
                     </form>
                 </p>
             </div>
         </div>
         
-      
+       <?php
+        if(isset($_POST['currentWeek']))
+          {
+                    $_SESSION['date'] = date("Y-m-d");
+                    $date = $_SESSION['date'];
+                    $before = 0;
+           }
+                
+                
+       ?>
         
         <!-- Room navigation bar END -->
         <!--table 5-->
@@ -722,6 +732,13 @@
                         return sw;
                     }
                 }
+                var l = 0;
+                for(var p = 0; p < 4 && sw; p++)
+                {
+                    l += days[p];
+                }
+                if(l == 0)
+                      return false;
                 return sw;
             } 
             
@@ -756,7 +773,7 @@
                 }
                document.getElementById("timeOut").value = dateOut;
                  }else{
-                     alert("You can only choose one day!");
+                     alert("Please select a field, you can't have empty!");
                      document.getElementById("contentForm").style.display = "none";
                   }
             }

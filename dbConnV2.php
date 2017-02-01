@@ -1,6 +1,6 @@
 <?php
 // Database connection
-$DBConnect = mysqli_connect("localhost", "root", "") ;
+$DBConnect = mysqli_connect("localhost", "root", "gds9pegngc9a9") ;
 
 // Database variables
 $DBName = 'riservatzione' ;

@@ -63,7 +63,7 @@ $checkUserExistsQuery = mysqli_query($DBConnect, $checkUserExists) ;
     {
         /* Gets the role of the current user */
         $roleIDString = "SELECT roleID
-                        FROM userrole
+                        FROM $URoleTable
                         WHERE roleName = '$userType'
                         LIMIT 1"; // select the ID of the role that the user specified. For example userType was student, *selects 3*
         $roleIDQuery = mysqli_query($DBConnect, $roleIDString); // execute the query

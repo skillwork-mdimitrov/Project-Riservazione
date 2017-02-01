@@ -3,12 +3,12 @@
 $DBConnect = mysqli_connect("localhost", "root", "") ;
 
 // Database variables
-$DBName = 'riservatzione' ;
+$DBName = 'reservationSystem' ;
 $ReservTable = 'reservation' ;
 $RoomTable = 'room' ;
 $UserTable = 'user';
-$UReservTable = 'userreservation' ;
-$URoleTable = 'userrole' ;
+$UReservTable = 'userReservation' ;
+$URoleTable = 'userRole' ;
 
 // Check connection
 if(!$DBConnect)

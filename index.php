@@ -331,9 +331,13 @@
                 }
         ?>
             <?php
+                
                 if(!isset($_POST["wBefore"]))
                 {
-                   $before = 0;
+                    if(!isset($_SESSION["before"]))
+                            $before = 0;
+                       else
+                           $before = $_SESSION["before"];
                 }else{
                     $before = $_POST["wBefore"];
                     if(isset($_POST['after']))
@@ -725,19 +729,13 @@
                     }
                 }
                 
-                for(var p = 0; p < 4 && sw; p++)
-                {
-                    if(days[p] == days[p + 1] && days[p] == 1){
-                        sw = false;
-                        return sw;
-                    }
-                }
+                
                 var l = 0;
-                for(var p = 0; p < 4 && sw; p++)
+                for(var p = 0; p <= 4; p++)
                 {
                     l += days[p];
                 }
-                if(l == 0)
+                if(l == 0 || l > 1)
                       return false;
                 return sw;
             } 
@@ -773,7 +771,7 @@
                 }
                document.getElementById("timeOut").value = dateOut;
                  }else{
-                     alert("Please select a field, you can't have empty!");
+                     alert("Please select a field, you can't have empty!! You can't check more than one column!!");
                      document.getElementById("contentForm").style.display = "none";
                   }
             }
@@ -781,7 +779,8 @@
         
         <div id="shit">
             <?php
-                  if(isset($_POST['after']) || isset($_POST['before'])){
+                 $_SESSION["before"] = $before;
+                  if(isset($_POST['after']) || isset($_POST['before']) || isset($_POST["currentWeek"])){
                       $_SESSION["yourDate"] = $days;
                       $_SESSION["date"] = $date;
                   }

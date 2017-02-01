@@ -355,6 +355,7 @@
                
               
                ?>
+            <!--weeks buttons-->
             <div class="col-sm-4 col-xs-4"><p></p></div>
             <div class="week col-sm-4 col-xs-4">
                 <p>
@@ -380,10 +381,11 @@
        ?>
         
         <!-- Room navigation bar END -->
-        <!--table 5-->
+        <!--table to display data-->
         <div id="Room5" style="display:none;" class="whiteColor">
         <div class="row">
             <div class="RoomName col-sm-12 col-xs-12" id="name">
+                <!--displays the room name-->
                 <p>Room <label id="name1"><?php echo $roomNr;
                 ?></label></p>
                 
@@ -392,6 +394,7 @@
 
         <div class="row">
             <div class="col-sm-12 col-xs-12" id="tableDiv" >
+                <!--displays the date-->
                 <table class="table" id="mytable">
                     <tr>
                       <td>Room name</td>
@@ -461,7 +464,9 @@
                          $days[4] = "".date('Y-m-d', strtotime($date. ' - '.$date1['wday'].' days'.'+ 5 days'));
                          $order[$days[4]] = 11;
                       }    
-                      ?></td>
+                      ?>
+                          <!--the table-->
+                      </td>
                     </tr>
                     <tr>
                       <td>08:00</td>
@@ -587,7 +592,7 @@
                             <div class="modal-content">
                               <div class="modal-header">
                                 <button type="button" class="close" data-dismiss="modal">&times;</button>
-                                <h4 class="modal-title">Registration form</h4>
+                                <h4 class="modal-title">Booking's</h4>
                               </div>
                               <div class="modal-body">
                                 <form action="#" method="POST">       
@@ -619,7 +624,7 @@
         <!-- Javascript -->
         <script>
               
-             
+             //displaying the room when you enter the website
             document.getElementById('Room5').style.display = 'block';
             function myFunction(elementID) {
                 switch(elementID){
@@ -668,6 +673,7 @@
                 registerButton.style = "block";
             }
             
+            //giving the cells color
             function read(some){
                 if(document.getElementById(some).style.backgroundColor != "red")
                 if(document.getElementById(some).style.backgroundColor == "darkgreen")
@@ -676,6 +682,7 @@
                        document.getElementById(some).style.backgroundColor = "darkgreen";    
             }
             
+            //displays the user that booked the room on the cell in red
             function displayData()
             {
                  var array = <?php echo json_encode($array); ?>;
@@ -712,7 +719,8 @@
                   window.location.reload();
                 }, 200); 
             }
-                 
+            
+            //checking if you have selected more then one day
             function checkDaysChecked(){
                 var sw = true;
                 var days = [0,0,0,0,0];
@@ -741,7 +749,7 @@
             } 
             
             
-            
+            //getting the date and time of the cell selected
             function getSomeColor()
             { 
                 
@@ -777,7 +785,8 @@
             }
         </script>
         
-        <div id="shit">
+        <!--push data to the database(e.g. the date, time,user etc...)-->
+        <div>
             <?php
                  $_SESSION["before"] = $before;
                   if(isset($_POST['after']) || isset($_POST['before']) || isset($_POST["currentWeek"])){

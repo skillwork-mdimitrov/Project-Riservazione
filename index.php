@@ -1,5 +1,5 @@
 <?php
-    session_start();
+    session_start(); 
     $adminAccess = 0; // only if an admin logs in, he can be granted access
     
     // PHP functions area 
@@ -30,10 +30,15 @@
         require 'registerUser.php';
     }
     
-    require "dbConnection.php";
+    // If the booking button is pressed, refresh the page
+    if(isset($_POST['button123']))
+    {
+        header('Location: '.$_SERVER['REQUEST_URI']); // so that the booking is instantly visible
+    }
+    
+    require "dbConnV2.php";
   
 ?>
-<!-- HEY STONE -->
 <!DOCTYPE html> <!-- in order for the browsers to use the latest rendering standards. -->
 <html lang="en"> <!-- useful for search engines and screen readers -->
 <?php
@@ -137,7 +142,7 @@
                                         {
                                             $roleIDSession = $_SESSION['roleID']; // store the session's role id in a variable
                                             $roleNameSelect =   "SELECT roleName
-                                                                FROM userrole
+                                                                FROM userRole
                                                                 WHERE roleID = '$roleIDSession'"; // select the role name of the current session
                                             $roleNameQuery = mysqli_query($DBConnect, $roleNameSelect); // execute the selecting query
                                             $roleNameRow = mysqli_fetch_assoc($roleNameQuery); // // fetch that row as an array
@@ -170,21 +175,8 @@
                     <form action="#" method="POST" name="registrationForm">
                         <button type="button" class="signupLogin btn btn-danger btn-md" id="registration" data-toggle="modal"
                         data-target="#registerUsers" style="display:none">Register user</button>
-                        <!--  *
-                        *
-                        *
-                        *
-                        * 
-                        *
                         
-                        * 
-                        *
-                        * -->
                     </form>
-                    <?php
-                    
-                   
-                ?>
                     <!-- Register user pop up -->
                     <div class="modal fade" id="registerUsers" role="dialog">
                         <div class="modal-dialog">    
@@ -196,17 +188,16 @@
                               <div class="modal-body">
                                 <form action="#" method="POST">                              
                                     Email address:<br>
-                                    <input type="email" name="userEmail"><br>
+                                    <input type="text" name="userEmail"><span id="emailDomain"> @student.stenden.com</span>
+                                    <br>
                                     Password:<br>
                                     <input type="password" name="userPassword"><br>
                                     Student number:<br>
                                     <input type="number" name="studentNumber" placeholder="If applicable"><br>
-                                    Picture:<br>
-                                    <input type="file" name="userPicture"><br>
                                     User type:<br>
-                                    <input type="radio" name="userType" value="Student" checked="checked"> Student<br>
-                                    <input type="radio" name="userType" value="Teacher"> Teacher<br>
-                                    <input type="radio" name="userType" value="Admin"> Admin<br><br>
+                                    <input type="radio" name="userType" value="Student" checked="checked" onclick="radioButtonChange(this)"> Student<br>
+                                    <input type="radio" name="userType" value="Teacher" onclick="radioButtonChange(this)"> Teacher<br>
+                                    <input type="radio" name="userType" value="Admin" onclick="radioButtonChange(this)"> Admin<br><br>
                                     <input type="submit" value="Submit" name="registerUser"> 
                                 </form>    
                               </div>
@@ -231,6 +222,7 @@
                 <p>
                 <div class="whiteColor">
                     <form action="#" method="POST">
+                        <!-- Room buttons 1 to 5 -->
                         <input type="submit" class="btn btn-info" onclick="myFunction('buttonButton1')" id="buttonButton1" name="buttonButton1" value="1"/>
                         <input type="submit" class="btn btn-danger"  onclick="myFunction('buttonButton2')" id="buttonButton2" name="buttonButton2" value="2"/>
                         <input type="submit" class="btn btn-info"  onclick="myFunction('buttonButton3')" id="buttonButton3" name="buttonButton3" value="3"/>
@@ -239,10 +231,11 @@
                     </form>
                 </div>
                 <?php
-                 $roomNr = 1;
+                 $roomNr = 1; // default room
+                 /* Whenever you press a room button, the room number will change */
                  if(isset($_POST['buttonButton1']) || isset($_POST['buttonButton2']) || isset($_POST['buttonButton3']) || isset($_POST['buttonButton4']) || isset($_POST['buttonButton5']) )
                  {
-                     if(isset($_POST['buttonButton1']))
+                    if(isset($_POST['buttonButton1']))
                     {
                         $roomNr = $_POST['buttonButton1'];
                     }
@@ -262,14 +255,21 @@
                     {
                         $roomNr = $_POST['buttonButton5'];
                     }
-                    $_SESSION['roomNr'] = $roomNr;
-                    $sql1 = "SELECT reservation.date,reservation.roomNumber, reservation.timeIn, reservation.timeOut, user.userName FROM reservation,user,userreservation WHERE userreservation.userNumber = user.userNumber and userreservation.reservationNumber = reservation.reservationNumber and reservation.roomNumber = {$_SESSION['roomNr']}";
+                    $_SESSION['roomNr'] = $roomNr; // Storing the current room in a session
                     
-                    $array[][] = [[]];
-                    $r = 0;
-                    $result = mysqli_query($DBConnect, $sql1);// or die("Say something!!!".mysqli_error($DBConnect));
+                    /* Get all the users reservation */
+                    $sql1 = "SELECT reservation.date,reservation.roomNumber, reservation.timeIn, reservation.timeOut, user.userName "
+                    . "FROM reservation,user,userReservation WHERE userReservation.userNumber = user.userNumber "
+                    . "and userReservation.reservationNumber = reservation.reservationNumber and reservation.roomNumber = {$_SESSION['roomNr']}";
+                    
+                    $array[][] = [[]]; // Stores the result of the above query
+                    $r = 0; // helps storing the results into the array
+                    $result = mysqli_query($DBConnect, $sql1); // executes the query
+                    
+                    /* If there are reservations */
                     if(($row = mysqli_num_rows($result)) > 0)
                     {
+                        // stores reservations into the array
                         while($res = mysqli_fetch_assoc($result))
                         {
                             $array[$r]['timeIn'] = $res['timeIn'];
@@ -281,10 +281,14 @@
                         }
                     }
                  }else{
-                       $sql1 = "SELECT reservation.date,reservation.roomNumber, reservation.timeIn, reservation.timeOut, user.userName FROM reservation,user,userreservation WHERE userreservation.userNumber = user.userNumber and userreservation.reservationNumber = reservation.reservationNumber and reservation.roomNumber = 1";
+                    /* Default behaviour stores the result for room 1 */
+                    $sql1 = "SELECT reservation.date,reservation.roomNumber, reservation.timeIn, reservation.timeOut, user.userName"
+                     . " FROM reservation,user,userReservation WHERE userReservation.userNumber = user.userNumber and userReservation.reservationNumber = reservation.reservationNumber "
+                     . "and reservation.roomNumber = 1";
+                       
                     $array[][] = [[]];
                     $r = 0;
-                    $result = mysqli_query($DBConnect, $sql1);// or die("Say something!!!".mysqli_error($DBConnect));
+                    $result = mysqli_query($DBConnect, $sql1);
                     if(($row = mysqli_num_rows($result)) > 0)
                     {
                         while($res = mysqli_fetch_assoc($result))
@@ -302,9 +306,9 @@
                 </p>
             </div>
               <?php
-                $days[] = array();
-                $order[] = array(); 
-                $hours[] = array( );
+                $days[] = array(); // array storing the days
+                $order[] = array(); // order the days array
+                $hours[] = array( ); // array storing the hours
                 $hours["08:00:00"] = 1;
                 $hours["09:00:00"] = 2;
                 $hours["10:00:00"] = 3;
@@ -318,8 +322,8 @@
                 $hours["18:00:00"] = 11;
                 $hours["19:00:00"] = 12;
                 $hours["20:00:00"] = 13;
-                $date = 0;
-                $date1 = date("Y-m-d");
+                $date = 0; // default date
+                /* Checks if the date is set */
                 if(isset($_SESSION['date']))
                      $date = $_SESSION['date'];
                 else
@@ -331,7 +335,7 @@
                 }
         ?>
             <?php
-                
+                /* Week after and week before */
                 if(!isset($_POST["wBefore"]))
                 {
                     if(!isset($_SESSION["before"]))
@@ -352,10 +356,9 @@
                        $before--;
                     }
                 }
-               
               
                ?>
-            <!--weeks buttons-->
+            <!--week buttons-->
             <div class="col-sm-4 col-xs-4"><p></p></div>
             <div class="week col-sm-4 col-xs-4">
                 <p>
@@ -369,15 +372,14 @@
             </div>
         </div>
         
-       <?php
+        <?php
+        // On current week button click, the session stores the current date
         if(isset($_POST['currentWeek']))
-          {
-                    $_SESSION['date'] = date("Y-m-d");
-                    $date = $_SESSION['date'];
-                    $before = 0;
-           }
-                
-                
+        {
+            $_SESSION['date'] = date("Y-m-d");
+            $date = $_SESSION['date'];
+			$before = 0;
+         }     
        ?>
         
         <!-- Room navigation bar END -->
@@ -386,9 +388,7 @@
         <div class="row">
             <div class="RoomName col-sm-12 col-xs-12" id="name">
                 <!--displays the room name-->
-                <p>Room <label id="name1"><?php echo $roomNr;
-                ?></label></p>
-                
+                <p>Room <label id="name1"><?php echo $roomNr;?></label></p>  
             </div>
         </div>
 
@@ -399,6 +399,7 @@
                     <tr>
                       <td>Room name</td>
                       <td>Monday<br><?php 
+                      /* Sets the date as the desired format for each weekday */
                       if($date1['wday'] == 1)
                       {
                            echo $date;
@@ -466,6 +467,7 @@
                       }    
                       ?>
                           <!--the table-->
+                          <!-- Color mapping -->
                       </td>
                     </tr>
                     <tr>
@@ -597,7 +599,7 @@
                               <div class="modal-body">
                                 <form action="#" method="POST">       
                                     <div id="contentForm">
-                                    <p> Are you sure that you want to book this????</p>
+                                    <p> Are you sure that you want to book this?</p>
                                    
                                     <input type="submit" name="button123" value="YES" onclick=""/>
                                     <input type="submit" value="NO"/>
@@ -616,15 +618,10 @@
                     </div>                   
                 <!-- Booking button pop up END -->
             </div>
-
-        <!--footer -->
-       
-        <!-- footer end -->
     </div>
         <!-- Javascript -->
         <script>
-              
-             //displaying the room when you enter the website
+            //displaying the room when you enter the website
             document.getElementById('Room5').style.display = 'block';
             function myFunction(elementID) {
                 switch(elementID){
@@ -673,7 +670,7 @@
                 registerButton.style = "block";
             }
             
-            //giving the cells color
+            // giving the cells color
             function read(some){
                 if(document.getElementById(some).style.backgroundColor != "red")
                 if(document.getElementById(some).style.backgroundColor == "darkgreen")
@@ -682,7 +679,7 @@
                        document.getElementById(some).style.backgroundColor = "darkgreen";    
             }
             
-            //displays the user that booked the room on the cell in red
+            // displays the user that booked the room on the cell in red
             function displayData()
             {
                  var array = <?php echo json_encode($array); ?>;
@@ -690,7 +687,7 @@
                  var days =  <?php echo json_encode($days); ?>;
                  var order = <?php echo json_encode($order);?>;
                  var hours = <?php echo json_encode($hours);?>;
-                 
+                 document.getElementById("mytable").style.color = "white"; // fix the bug with gray colored table, after registration form submission
                  var x = document.getElementById("mytable").getElementsByTagName("td");
                  for(var p = 0; p < size; p++)
                  {
@@ -720,7 +717,7 @@
                 }, 200); 
             }
             
-            //checking if you have selected more then one day
+            // checking if you have selected more then one day
             function checkDaysChecked(){
                 var sw = true;
                 var days = [0,0,0,0,0];
@@ -749,7 +746,7 @@
             } 
             
             
-            //getting the date and time of the cell selected
+            // getting the date and time of the cell selected
             function getSomeColor()
             { 
                 
@@ -783,11 +780,29 @@
                      document.getElementById("contentForm").style.display = "none";
                   }
             }
+            
+            // If the user type changes, change the domain of the email
+            function radioButtonChange(radio)
+            {
+                switch(radio.value)
+                {
+                    case "Student":
+                        document.getElementById("emailDomain").textContent = " @student.stenden.com";
+                        break;
+                    case "Teacher":
+                        document.getElementById("emailDomain").textContent = " @stenden.com";
+                        break;
+                    case "Admin":
+                        document.getElementById("emailDomain").textContent = " @stenden.com";
+                        break;
+                }
+            }
         </script>
         
         <!--push data to the database(e.g. the date, time,user etc...)-->
         <div>
             <?php
+                /* Week location mesmerization */
                  $_SESSION["before"] = $before;
                   if(isset($_POST['after']) || isset($_POST['before']) || isset($_POST["currentWeek"])){
                       $_SESSION["yourDate"] = $days;
@@ -812,7 +827,6 @@
                   else {
                     $d = 1;
                   }
-                  echo $_SESSION["yourDate"][$a];
                     if(strlen($b) == 1)
                     {
                         $b = "0".$b.":00:00";
@@ -832,7 +846,7 @@
                     $result = mysqli_query($DBConnect, $sql);
                     $res = mysqli_fetch_assoc($result);
                     $resNumber = $res['reservationNumber'];
-                    $sql = "INSERT INTO `userreservation`(`userNumber`, `reservationNumber`) VALUES ({$_SESSION['userNumber']},{$resNumber})";
+                    $sql = "INSERT INTO `userReservation`(`userNumber`, `reservationNumber`) VALUES ({$_SESSION['userNumber']},{$resNumber})";
                     mysqli_query($DBConnect, $sql) or die("Something happend: ".mysqli_error($DBConnect));
                     }else{
                         echo "<script> alert('You need to login, for reserving a room!!!'); </script>";
@@ -869,8 +883,9 @@
         }
         
         // If there is a session and the user logged in, is admin, show him the registration button
-        if(isset($_SESSION['userNumber']) && $adminAccess > 0)
+        if(isset($_SESSION['userNumber']) )
         {
+			if($_SESSION['admin'] > 0)
             echo '<script type="text/javascript">',
             'showRegistration();',
             '</script>';

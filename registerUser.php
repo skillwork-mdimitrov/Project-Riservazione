@@ -15,13 +15,23 @@ $invalidEmail = 0;
 $invalidPW = 0;
 $emptyStudentNumber = 0;
 
+/* Depending on the user type make the email domain */
+if($userType == 'Student')
+{
+    $userEmail = $userEmail . "@student.stenden.com";
+}
+elseif($userType == 'Teacher' || $userType == 'Admin')
+{
+    $userEmail = $userEmail . "@stenden.com";
+}
+
 $checkUserExists = "SELECT COUNT(userEmail) FROM $UserTable WHERE userEmail='$userEmail'";
 $checkUserExistsQuery = mysqli_query($DBConnect, $checkUserExists) ;
-    if($checkUserExists == false)
+    if($checkUserExistsQuery == false)
     {
        echo "<p style=color:red;>There was an error while checking if the name is available. " . mysqli_error($DBConnect) . "</p>" ;
     }
-    if($checkUserExistsQuery !== false)
+    else
     {
             $userRow = mysqli_fetch_row($checkUserExistsQuery) ;
             if($userRow[0] > 0)
@@ -33,13 +43,7 @@ $checkUserExistsQuery = mysqli_query($DBConnect, $checkUserExists) ;
      }   
 
     // Different checks. Not so strict, administrator will be the only one with access to registration
-     /* If the email address was not valid */
-    if (filter_var($userEmail, FILTER_VALIDATE_EMAIL) === false)
-    {
-        $errorCount++;
-        $invalidEmail++;
-    }
-
+     
     /* If the password was empty or too short */
     if(strlen($userPw) <= 6 || empty($userPw) == true)
     {
@@ -61,9 +65,10 @@ $checkUserExistsQuery = mysqli_query($DBConnect, $checkUserExists) ;
     
     if($errorCount == 0)  
     {
+		
         /* Gets the role of the current user */
         $roleIDString = "SELECT roleID
-                        FROM $URoleTable
+                        FROM userRole
                         WHERE roleName = '$userType'
                         LIMIT 1"; // select the ID of the role that the user specified. For example userType was student, *selects 3*
         $roleIDQuery = mysqli_query($DBConnect, $roleIDString); // execute the query
@@ -127,4 +132,3 @@ $checkUserExistsQuery = mysqli_query($DBConnect, $checkUserExists) ;
         
     }
 ?>
-

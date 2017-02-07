@@ -1,5 +1,6 @@
 <?php
-$DBConnect = mysqli_connect("networkict", "root", "gds9pegngc9a9"); // Connection to Julian's server
+// Connection to Julian's server
+$DBConnect = mysqli_connect("networkict", "root", "gds9pegngc9a9"); 
 
 // Database variables
 $DBName = 'sql4' ;

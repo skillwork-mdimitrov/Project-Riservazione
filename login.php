@@ -1,5 +1,5 @@
 <?php
-include "dbConnection.php";
+include "dbConnV2.php";
 $adminAccess = 0; // everyone is treated as normal user, unless he's granted admin access
 $CheckingString = "SELECT userNumber, studentNumber, userName, userEmail, roleID FROM $UserTable WHERE userEmail='$userEmail' AND userPasswordHash='".substr(md5($userPw), 0, 30)."'";
 $CheckingQuery = mysqli_query($DBConnect, $CheckingString) ;
@@ -35,8 +35,9 @@ else
     $adminRowToInt = implode($adminRow, " "); // extract the userNumber from the array. Delimeter space
     if(isset($_SESSION['userNumber']) && $_SESSION['userNumber'] == $adminRowToInt)
     {
-        $adminAccess = 1;
+        $adminAccess = 1; 
+		
     }
+	$_SESSION['admin'] = $adminAccess;
 }
 ?>
-

@@ -1,6 +1,6 @@
 <?php
 // Database connection
-$DBConnect = mysqli_connect("localhost", "root", "gds9pegngc9a9") ;
+$DBConnect = mysqli_connect("localhost", "root", "") ; // password removed gds9pegngc9a9 from " "
 
 // Database variables
 $DBName = 'riservatzione' ;

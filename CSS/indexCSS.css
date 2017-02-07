@@ -26,7 +26,8 @@ div
 
 body
 {
-    background-image: url(../images/back1.png); 
+    background-image: url('../Images/back1.PNG'); 
+    backgroud-color: pink;
     background-size: cover;  
     left: 0;
     right: 0;
@@ -186,8 +187,6 @@ td, tr
 {
     color: white;
 }
-
-
 
 #roomText
 {

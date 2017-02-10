@@ -202,4 +202,9 @@ td, tr
     height: 40px
 }
 
+/* Room name and room number */
+#roomAndNumber 
+{
+    margin-bottom: 0; 
+}
 /* === BODY section end === */

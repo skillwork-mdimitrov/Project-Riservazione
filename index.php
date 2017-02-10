@@ -388,7 +388,7 @@
         <div class="row">
             <div class="RoomName col-sm-12 col-xs-12" id="name">
                 <!--displays the room name-->
-                <p>Room <label id="name1"><?php echo $roomNr;?></label></p>  
+                <p id="roomAndNumber">Room <label id="name1"><?php echo $roomNr;?></label></p>  
             </div>
         </div>
 

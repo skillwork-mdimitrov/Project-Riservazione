@@ -1,13 +1,13 @@
 <?php
 // Database connection
-$DBConnect = mysqli_connect("localhost", "root", "gds9pegngc9a9") ;
+$DBConnect = mysqli_connect("localhost", "root", "") ; // password removed gds9pegngc9a9 from " "
 
 // Database variables
-$DBName = 'reservationSystem' ;
+$DBName = 'riservatzione' ;
 $ReservTable = 'reservation' ;
 $UserTable = 'user';
-$UReservTable = 'userReservation' ;
-$URoleTable = 'userRole' ;
+$UReservTable = 'userreservation' ;
+$URoleTable = 'userrole' ;
 
 // Check connection
 if(!$DBConnect)
@@ -20,3 +20,4 @@ if(!$SelectDB)
     echo "<p>There was an error while selecting the database. " . mysqli_error($DBConnect) . "</p>";
 }
 ?>
+

@@ -1,5 +1,5 @@
 <?php
-    session_start();
+    session_start(); 
     $adminAccess = 0; // only if an admin logs in, he can be granted access
     
     // PHP functions area 
@@ -14,7 +14,7 @@
     {
         $userEmail = stripslashes($_POST['email']); // stripslashes for security
         $userPw = stripslashes($_POST['password']); // stripslashes for security
-        require 'login.php';
+        require 'login.php'; // Login requires by itself dbConnection. dbConnection is included in index, indirectly.
     } 
     
     // If logout button is pressed
@@ -30,13 +30,21 @@
         require 'registerUser.php';
     }
     
+    // If the booking button is pressed, refresh the page
+    if(isset($_POST['button123']))
+    {
+        header('Location: '.$_SERVER['REQUEST_URI']); // so that the booking is instantly visible
+    }
+    
+    require "dbConnV2.php";
+  
 ?>
 <!DOCTYPE html> <!-- in order for the browsers to use the latest rendering standards. -->
 <html lang="en"> <!-- useful for search engines and screen readers -->
 <?php
     include 'headSection.php';
 ?>
-<body>
+    <body onload="displayData()">
     <div class="fluid-container"> <!-- WRAPPER. The bootstrap grid used below requires such container. 
     The xs(phone), sm(tablets), md(desktop) and lg(lager desktop) grids(Example: class="col-sm-3 col-xs-3") 
     will all "stack" vertically on screens/viewports less tdan 768 pixels. 
@@ -48,42 +56,12 @@
                 <!-- LOGO -->
                 <div class="col-sm-3 col-xs-3"><img src="Images/logo.png" class="logo clickable img-responsive" alt="logo" onclick="window.location.reload();"></div> 
                 
-                <!-- NEEDS TO BE REMOVED and everything else pushed to the right? -->
+                <!-- Middle container, currently empty -->
                 <div class="col-sm-5 col-xs-5"><p></p></div> 
 
                 <!-- Button holder. Holds the user buttons. Login, logout, register user, my profile -->
                 <div class="sl col-sm-4 col-xs-4"> 
-                    <!--Sign up button-->
-                    <!--<button type="button" class="signupLogin btn btn-info btn-md" data-toggle="modal" data-target="#signUp">Sign Up</button>-->
-                    <!--Thing that pops up-->
-                    <!--
-                    <div class="modal fade" id="signUp" role="dialog">
-                        <div class="modal-dialog">    
-                            <div class="modal-content">
-                              <div class="modal-header">
-                                <button type="button" class="close" data-dismiss="modal">&times;</button>
-                                <h4 class="modal-title">Sign Up</h4>
-                              </div>
-                              <div class="modal-body">
-                                <p>
-                                <form action="index.php">
-                                    Username:<br>
-                                    <input type="text" name="username"><br>
-                                    Password:<br>
-                                    <input type="password" name="password"><br>
-                                    Re-enter password:<br>
-                                    <input type="password" name="repassword"><br><br>
-                                    <input type="submit" value="Submit">
-                                </form>
-                                </p>
-                              </div>
-                              <div class="modal-footer">
-                                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                              </div>
-                            </div>
-                        </div>
-                    </div>-->
-                    <!--End of thing that pops up-->
+                    
 
                     <!--Log in button, initially hidden-->
                     <button type="button" class="signupLogin btn btn-danger btn-md" id="login" data-toggle="modal" data-target="#logIn" style="display:none">Log in</button>
@@ -116,6 +94,7 @@
                     <!--Log out button, initially hidden-->
                     <form action="#" method="POST">
                         <input type="submit" value="Log out" name="LogOut" class="signupLogin btn btn-danger btn-md" id="logout" style="display:none"> 
+                        
                     </form>
                     
                     <!-- My profile button, initially hidden -->
@@ -131,19 +110,58 @@
                                   <h4 class="modal-title">My profile</h4>
                                 </div>
                                 <div class="modal-body">
-                                    <p>User email:
+                                    <p>My email:
                                       <?php 
                                       if(isset($_SESSION['userEmail']))
                                       {
-                                          echo $_SESSION['userEmail'];
+                                          echo $_SESSION['userEmail']; // displays the user email
                                       }
-                                      // else is currently unreachable, but just in case
-                                      else
+                                      // in case session is lost
+                                      else 
                                       {
-                                          echo "Unknown";
+                                          echo "<p>Unknown</p>"; 
                                       }
                                       ?>
                                     </p>
+                                    <p>My username:
+                                        <?php
+                                        if(isset($_SESSION['userName']))
+                                        {
+                                            echo $_SESSION['userName']; // displays the user name
+                                        }
+                                        // in case session is lost
+                                        else
+                                        {
+                                            echo "<p>Unnamed</p>";
+                                        }
+                                        ?>
+                                    </p>
+                                    <p>My role:
+                                        <?php
+                                        if(isset($_SESSION['roleID']))
+                                        {
+                                            $roleIDSession = $_SESSION['roleID']; // store the session's role id in a variable
+                                            $roleNameSelect =   "SELECT roleName
+                                                                FROM userRole
+                                                                WHERE roleID = '$roleIDSession'"; // select the role name of the current session
+                                            $roleNameQuery = mysqli_query($DBConnect, $roleNameSelect); // execute the selecting query
+                                            $roleNameRow = mysqli_fetch_assoc($roleNameQuery); // // fetch that row as an array
+                                            $roleNameAsString = implode($roleNameRow, " "); // convert the array to String
+                                            echo $roleNameAsString; // display what the user role is
+                                        }
+                                        else
+                                        {
+                                            echo "<p>Undefined role</p>";
+                                        }
+                                        ?>
+                                    </p>
+                                    <?php 
+                                    /* if the user logged in, happens to be a student (different than 0 student number) display his student number */
+                                    if($_SESSION['studentNumber'] != 0)
+                                    {
+                                        echo "<p>My student number: " . $_SESSION['studentNumber'] . "</p>";
+                                    }
+                                    ?>
                                 </div>
                                 <div class="modal-footer">
                                   <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
@@ -152,13 +170,13 @@
                         </div>
                     </div>   
                     <!-- My profile pop up END -->
-                    
+                     
                     <!-- Register user button, initially hidden -->
-                    <form action="#" method="POST">
+                    <form action="#" method="POST" name="registrationForm">
                         <button type="button" class="signupLogin btn btn-danger btn-md" id="registration" data-toggle="modal"
                         data-target="#registerUsers" style="display:none">Register user</button>
+                        
                     </form>
-                    
                     <!-- Register user pop up -->
                     <div class="modal fade" id="registerUsers" role="dialog">
                         <div class="modal-dialog">    
@@ -170,11 +188,16 @@
                               <div class="modal-body">
                                 <form action="#" method="POST">                              
                                     Email address:<br>
-                                    <input type="email" name="userEmail"><br>
+                                    <input type="text" name="userEmail"><span id="emailDomain"> @student.stenden.com</span>
+                                    <br>
                                     Password:<br>
                                     <input type="password" name="userPassword"><br>
-                                    Picture:<br>
-                                    <input type="file" name="userPicture"><br>
+                                    Student number:<br>
+                                    <input type="number" name="studentNumber" placeholder="If applicable"><br>
+                                    User type:<br>
+                                    <input type="radio" name="userType" value="Student" checked="checked" onclick="radioButtonChange(this)"> Student<br>
+                                    <input type="radio" name="userType" value="Teacher" onclick="radioButtonChange(this)"> Teacher<br>
+                                    <input type="radio" name="userType" value="Admin" onclick="radioButtonChange(this)"> Admin<br><br>
                                     <input type="submit" value="Submit" name="registerUser"> 
                                 </form>    
                               </div>
@@ -197,662 +220,364 @@
         <div class="row" id="buttons">
             <div class="col-sm-4 col-xs-4">
                 <p>
-                <div class="whiteColor"><span id="roomText">Room: </span>
-                    <button type="button" class="btn btn-info" onclick="myFunction('Room1')" id="buttonButton">1</button>
-                    <button type="button" class="btn btn-danger"  onclick="myFunction('Room2')" id="buttonButton">2</button>
-                    <button type="button" class="btn btn-info"  onclick="myFunction('Room3')" id="buttonButton">3</button>
-                    <button type="button" class="btn btn-danger"  onclick="myFunction('Room4')" id="buttonButton">4</button>
-                    <button type="button" class="btn btn-info"  onclick="myFunction('Room5')" id="buttonButton">5</button>
-                    </div>
+                <div class="whiteColor">
+                    <form action="#" method="POST">
+                        <!-- Room buttons 1 to 5 -->
+                        <input type="submit" class="btn btn-info" onclick="myFunction('buttonButton1')" id="buttonButton1" name="buttonButton1" value="1"/>
+                        <input type="submit" class="btn btn-danger"  onclick="myFunction('buttonButton2')" id="buttonButton2" name="buttonButton2" value="2"/>
+                        <input type="submit" class="btn btn-info"  onclick="myFunction('buttonButton3')" id="buttonButton3" name="buttonButton3" value="3"/>
+                        <input type="submit" class="btn btn-danger"  onclick="myFunction('buttonButton4')" id="buttonButton4" name="buttonButton4" value="4"/>
+                        <input type="submit" class="btn btn-info"  onclick="myFunction('buttonButton5')" id="buttonButton5" name="buttonButton5" value="5"/>
+                    </form>
+                </div>
+                <?php
+                 $roomNr = 1; // default room
+                 /* Whenever you press a room button, the room number will change */
+                 if(isset($_POST['buttonButton1']) || isset($_POST['buttonButton2']) || isset($_POST['buttonButton3']) || isset($_POST['buttonButton4']) || isset($_POST['buttonButton5']) )
+                 {
+                    if(isset($_POST['buttonButton1']))
+                    {
+                        $roomNr = $_POST['buttonButton1'];
+                    }
+                    if(isset($_POST['buttonButton2']))
+                    {
+                         $roomNr = $_POST['buttonButton2'];
+                    }
+                    if(isset($_POST['buttonButton3']))
+                    {
+                         $roomNr = $_POST['buttonButton3'];
+                    }
+                    if(isset($_POST['buttonButton4']))
+                    {
+                        $roomNr = $_POST['buttonButton4'];
+                    }
+                    if(isset($_POST['buttonButton5']))
+                    {
+                        $roomNr = $_POST['buttonButton5'];
+                    }
+                    $_SESSION['roomNr'] = $roomNr; // Storing the current room in a session
+                    
+                    /* Get all the users reservation */
+                    $sql1 = "SELECT reservation.date,reservation.roomNumber, reservation.timeIn, reservation.timeOut, user.userName "
+                    . "FROM reservation,user,userReservation WHERE userReservation.userNumber = user.userNumber "
+                    . "and userReservation.reservationNumber = reservation.reservationNumber and reservation.roomNumber = {$_SESSION['roomNr']}";
+                    
+                    $array[][] = [[]]; // Stores the result of the above query
+                    $r = 0; // helps storing the results into the array
+                    $result = mysqli_query($DBConnect, $sql1); // executes the query
+                    
+                    /* If there are reservations */
+                    if(($row = mysqli_num_rows($result)) > 0)
+                    {
+                        // stores reservations into the array
+                        while($res = mysqli_fetch_assoc($result))
+                        {
+                            $array[$r]['timeIn'] = $res['timeIn'];
+                            $array[$r]['timeOut'] = $res['timeOut'];
+                            $array[$r]['date'] = $res['date'];
+                            $array[$r]['userName'] = $res['userName'];
+                            $array[$r]['roomNumber'] = $res['roomNumber'];
+                            $r++;
+                        }
+                    }
+                 }else{
+                    /* Default behaviour stores the result for room 1 */
+                    $sql1 = "SELECT reservation.date,reservation.roomNumber, reservation.timeIn, reservation.timeOut, user.userName"
+                     . " FROM reservation,user,userReservation WHERE userReservation.userNumber = user.userNumber and userReservation.reservationNumber = reservation.reservationNumber "
+                     . "and reservation.roomNumber = 1";
+                       
+                    $array[][] = [[]];
+                    $r = 0;
+                    $result = mysqli_query($DBConnect, $sql1);
+                    if(($row = mysqli_num_rows($result)) > 0)
+                    {
+                        while($res = mysqli_fetch_assoc($result))
+                        {
+                            $array[$r]['timeIn'] = $res['timeIn'];
+                            $array[$r]['timeOut'] = $res['timeOut'];
+                            $array[$r]['date'] = $res['date'];
+                            $array[$r]['userName'] = $res['userName'];
+                            $array[$r]['roomNumber'] = $res['roomNumber'];
+                            $r++;
+                        }
+                    }
+                 }
+                ?>
                 </p>
             </div>
+              <?php
+                $days[] = array(); // array storing the days
+                $order[] = array(); // order the days array
+                $hours[] = array( ); // array storing the hours
+                $hours["08:00:00"] = 1;
+                $hours["09:00:00"] = 2;
+                $hours["10:00:00"] = 3;
+                $hours["11:00:00"] = 4;
+                $hours["12:00:00"] = 5;
+                $hours["13:00:00"] = 6;
+                $hours["14:00:00"] = 7;
+                $hours["15:00:00"] = 8;
+                $hours["16:00:00"] = 9;
+                $hours["17:00:00"] = 10;
+                $hours["18:00:00"] = 11;
+                $hours["19:00:00"] = 12;
+                $hours["20:00:00"] = 13;
+                $date = 0; // default date
+                /* Checks if the date is set */
+                if(isset($_SESSION['date']))
+                     $date = $_SESSION['date'];
+                else
+                    $date = date("Y-m-d");
+                $date1 = getdate();
+                if($date1['wday'] == 0)
+                {
+                    $date1['wday'] = 7;
+                }
+        ?>
+            <?php
+                /* Week after and week before */
+                if(!isset($_POST["wBefore"]))
+                {
+                    if(!isset($_SESSION["before"]))
+                            $before = 0;
+                       else
+                           $before = $_SESSION["before"];
+                }else{
+                    $before = $_POST["wBefore"];
+                    if(isset($_POST['after']))
+                    {
+                        $date = date('Y-m-d', strtotime($date. ' + 7 days'));
+                        $before++;
+                    }
+                    
+                     if(isset($_POST['before']) && $before > 0)
+                    {
+                       $date = date('Y-m-d', strtotime($date. ' - 7 days'));
+                       $before--;
+                    }
+                }
+              
+               ?>
+            <!--week buttons-->
             <div class="col-sm-4 col-xs-4"><p></p></div>
             <div class="week col-sm-4 col-xs-4">
                 <p>
-                    <button type="button" class="week1 btn btn-danger" >week before</button> 
-                    <button type="button" class="week1 btn btn-info">week after</button>
+                    <form action="#" method="POST">
+                        <input type="submit" class="week1 btn btn-danger" name="after" value="Week after"/>
+                        <input type="submit" class="week1 btn btn-info" name="before" value="Week before"/>
+                        <input type="submit" class="week1 btn btn-danger" name="currentWeek" value="Current week"/>
+                        <input type="hidden" value="<?php echo $before; ?>" name="wBefore"/>
+                    </form>
                 </p>
             </div>
         </div>
+        
+        <?php
+        // On current week button click, the session stores the current date
+        if(isset($_POST['currentWeek']))
+        {
+            $_SESSION['date'] = date("Y-m-d");
+            $date = $_SESSION['date'];
+			$before = 0;
+         }     
+       ?>
+        
         <!-- Room navigation bar END -->
-
-        <!-- Public google calendar embedded -->
-
-
-        <!--table 1-->
-        <div id="Room1" class="whiteColor">
-        <div class="row" id="name">
-            <div class="RoomName col-sm-12 col-xs-12"><p>Room 1</p></div>
-        </div>
-
-        <div class="row">
-            <div class="col-sm-12 col-xs-12">
-                <?php
-                $date = date("Y-m-d");;
-                ?>
-                <table class="table">
-                    <tr>
-                      <td>Room name</td>
-                      <td>Monday<br><?php echo date('Y-m-d'); ?></td> 
-                      <td>Tuesday<br><?php echo date('Y-m-d', strtotime($date. ' + 1 days')); ?></td>
-                      <td>Wednesday<br><?php echo date('Y-m-d', strtotime($date. ' + 2 days')); ?></td>
-                      <td>Thursday<br><?php echo date('Y-m-d', strtotime($date. ' + 3 days')); ?></td>
-                      <td>Friday<br><?php echo date('Y-m-d', strtotime($date. ' + 4 days')); ?></td>
-                    </tr>
-                    <tr>
-                      <td>0800</td>
-                      <td></td> 
-                      <td></td>
-                      <td></td>
-                      <td></td> 
-                      <td></td>
-                    </tr>
-                    <tr>
-                      <td>0900</td>
-                      <td></td> 
-                      <td></td>
-                      <td></td>
-                      <td></td> 
-                      <td></td>
-                    </tr>
-                    <tr>
-                      <td>1000</td>
-                      <td></td> 
-                      <td></td>
-                      <td></td>
-                      <td></td> 
-                      <td></td>
-                    </tr>
-                    <tr>
-                      <td>1100</td>
-                      <td></td> 
-                      <td></td>
-                      <td></td>
-                      <td></td> 
-                      <td></td>
-                    </tr>
-                    <tr>
-                      <td>1200</td>
-                      <td></td> 
-                      <td></td>
-                      <td></td>
-                      <td></td> 
-                      <td></td>
-                    </tr>
-                    <tr>
-                      <td>1300</td>
-                      <td></td> 
-                      <td></td>
-                      <td></td>
-                      <td></td> 
-                      <td></td>
-                    </tr>
-                    <tr>
-                      <td>1400</td>
-                      <td></td> 
-                      <td></td>
-                      <td></td>
-                      <td></td> 
-                      <td></td>
-                    </tr>
-                    <tr>
-                      <td>1500</td>
-                      <td></td> 
-                      <td></td>
-                      <td></td>
-                      <td></td> 
-                      <td></td>
-                    </tr>
-                    <tr>
-                      <td>1600</td>
-                      <td></td> 
-                      <td></td>
-                      <td></td>
-                      <td></td> 
-                      <td></td>
-                    </tr>
-                    <tr>
-                      <td>1700</td>
-                      <td></td> 
-                      <td></td>
-                      <td></td>
-                      <td></td> 
-                      <td></td>
-                    </tr>
-                    <tr>
-                      <td>1800</td>
-                      <td></td> 
-                      <td></td>
-                      <td></td>
-                      <td></td> 
-                      <td></td>
-                    </tr>
-                    <tr>
-                      <td>1900</td>
-                      <td></td> 
-                      <td></td>
-                      <td></td>
-                      <td></td> 
-                      <td></td>
-                    </tr>
-                    <tr>
-                      <td>2000</td>
-                      <td></td> 
-                      <td></td>
-                      <td></td>
-                      <td></td> 
-                      <td></td>
-                    </tr>
-                </table>
-            </div>
-        </div>
-        </div>
-
-        <!--table 2-->
-        <div id="Room2" style="display:none;" class="whiteColor">
-        <div class="row" id="name">
-            <div class="RoomName col-sm-12 col-xs-12"><p>Room 2</p></div>
-        </div>
-
-        <div class="row">
-            <div class="col-sm-12 col-xs-12">
-                <table class="table">
-                    <tr>
-                      <td>Room name</td>
-                      <td>Monday<br><?php echo date('Y-m-d'); ?></td> 
-                      <td>Tuesday<br><?php echo date('Y-m-d', strtotime($date. ' + 1 days')); ?></td>
-                      <td>Wednesday<br><?php echo date('Y-m-d', strtotime($date. ' + 2 days')); ?></td>
-                      <td>Thursday<br><?php echo date('Y-m-d', strtotime($date. ' + 3 days')); ?></td>
-                      <td>Friday<br><?php echo date('Y-m-d', strtotime($date. ' + 4 days')); ?></td>
-                    </tr>
-                    <tr>
-                      <td>0800</td>
-                      <td></td> 
-                      <td></td>
-                      <td></td>
-                      <td></td> 
-                      <td></td>
-                    </tr>
-                    <tr>
-                      <td>0900</td>
-                      <td></td> 
-                      <td></td>
-                      <td></td>
-                      <td></td> 
-                      <td></td>
-                    </tr>
-                    <tr>
-                      <td>1000</td>
-                      <td></td> 
-                      <td></td>
-                      <td></td>
-                      <td></td> 
-                      <td></td>
-                    </tr>
-                    <tr>
-                      <td>1100</td>
-                      <td></td> 
-                      <td></td>
-                      <td></td>
-                      <td></td> 
-                      <td></td>
-                    </tr>
-                    <tr>
-                      <td>1200</td>
-                      <td></td> 
-                      <td></td>
-                      <td></td>
-                      <td></td> 
-                      <td></td>
-                    </tr>
-                    <tr>
-                      <td>1300</td>
-                      <td></td> 
-                      <td></td>
-                      <td></td>
-                      <td></td> 
-                      <td></td>
-                    </tr>
-                    <tr>
-                      <td>1400</td>
-                      <td></td> 
-                      <td></td>
-                      <td></td>
-                      <td></td> 
-                      <td></td>
-                    </tr>
-                    <tr>
-                      <td>1500</td>
-                      <td></td> 
-                      <td></td>
-                      <td></td>
-                      <td></td> 
-                      <td></td>
-                    </tr>
-                    <tr>
-                      <td>1600</td>
-                      <td></td> 
-                      <td></td>
-                      <td></td>
-                      <td></td> 
-                      <td></td>
-                    </tr>
-                    <tr>
-                      <td>1700</td>
-                      <td></td> 
-                      <td></td>
-                      <td></td>
-                      <td></td> 
-                      <td></td>
-                    </tr>
-                    <tr>
-                      <td>1800</td>
-                      <td></td> 
-                      <td></td>
-                      <td></td>
-                      <td></td> 
-                      <td></td>
-                    </tr>
-                    <tr>
-                      <td>1900</td>
-                      <td></td> 
-                      <td></td>
-                      <td></td>
-                      <td></td> 
-                      <td></td>
-                    </tr>
-                    <tr>
-                      <td>2000</td>
-                      <td></td> 
-                      <td></td>
-                      <td></td>
-                      <td></td> 
-                      <td></td>
-                    </tr>
-                </table>
-            </div>
-        </div>
-        </div>
-        <!--table 3-->
-        <div id="Room3" style="display:none;" class="whiteColor">
-        <div class="row" id="name">
-            <div class="RoomName col-sm-12 col-xs-12"><p>Room 3</p></div>
-        </div>
-
-        <div class="row">
-            <div class="col-sm-12 col-xs-12">
-                <table class="table">
-                    <tr>
-                      <td>Room name</td>
-                      <td>Monday<br><?php echo date('Y-m-d'); ?></td> 
-                      <td>Tuesday<br><?php echo date('Y-m-d', strtotime($date. ' + 1 days')); ?></td>
-                      <td>Wednesday<br><?php echo date('Y-m-d', strtotime($date. ' + 2 days')); ?></td>
-                      <td>Thursday<br><?php echo date('Y-m-d', strtotime($date. ' + 3 days')); ?></td>
-                      <td>Friday<br><?php echo date('Y-m-d', strtotime($date. ' + 4 days')); ?></td>
-                    </tr>
-                    <tr>
-                      <td>0800</td>
-                      <td></td> 
-                      <td></td>
-                      <td></td>
-                      <td></td> 
-                      <td></td>
-                    </tr>
-                    <tr>
-                      <td>0900</td>
-                      <td></td> 
-                      <td></td>
-                      <td></td>
-                      <td></td> 
-                      <td></td>
-                    </tr>
-                    <tr>
-                      <td>1000</td>
-                      <td></td> 
-                      <td></td>
-                      <td></td>
-                      <td></td> 
-                      <td></td>
-                    </tr>
-                    <tr>
-                      <td>1100</td>
-                      <td></td> 
-                      <td></td>
-                      <td></td>
-                      <td></td> 
-                      <td></td>
-                    </tr>
-                    <tr>
-                      <td>1200</td>
-                      <td></td> 
-                      <td></td>
-                      <td></td>
-                      <td></td> 
-                      <td></td>
-                    </tr>
-                    <tr>
-                      <td>1300</td>
-                      <td></td> 
-                      <td></td>
-                      <td></td>
-                      <td></td> 
-                      <td></td>
-                    </tr>
-                    <tr>
-                      <td>1400</td>
-                      <td></td> 
-                      <td></td>
-                      <td></td>
-                      <td></td> 
-                      <td></td>
-                    </tr>
-                    <tr>
-                      <td>1500</td>
-                      <td></td> 
-                      <td></td>
-                      <td></td>
-                      <td></td> 
-                      <td></td>
-                    </tr>
-                    <tr>
-                      <td>1600</td>
-                      <td></td> 
-                      <td></td>
-                      <td></td>
-                      <td></td> 
-                      <td></td>
-                    </tr>
-                    <tr>
-                      <td>1700</td>
-                      <td></td> 
-                      <td></td>
-                      <td></td>
-                      <td></td> 
-                      <td></td>
-                    </tr>
-                    <tr>
-                      <td>1800</td>
-                      <td></td> 
-                      <td></td>
-                      <td></td>
-                      <td></td> 
-                      <td></td>
-                    </tr>
-                    <tr>
-                      <td>1900</td>
-                      <td></td> 
-                      <td></td>
-                      <td></td>
-                      <td></td> 
-                      <td></td>
-                    </tr>
-                    <tr>
-                      <td>2000</td>
-                      <td></td> 
-                      <td></td>
-                      <td></td>
-                      <td></td> 
-                      <td></td>
-                    </tr>
-                </table>
-            </div>
-        </div>
-        </div>
-        <!--table 4-->
-        <div id="Room4" style="display:none;" class="whiteColor">
-        <div class="row">
-            <div class="RoomName col-sm-12 col-xs-12" id="name"><p>Room 4</p></div>
-        </div>
-
-        <div class="row">
-            <div class="col-sm-12 col-xs-12">
-                <table class="table">
-                    <tr>
-                      <td>Room name</td>
-                      <td>Monday<br><?php echo date('Y-m-d'); ?></td> 
-                      <td>Tuesday<br><?php echo date('Y-m-d', strtotime($date. ' + 1 days')); ?></td>
-                      <td>Wednesday<br><?php echo date('Y-m-d', strtotime($date. ' + 2 days')); ?></td>
-                      <td>Thursday<br><?php echo date('Y-m-d', strtotime($date. ' + 3 days')); ?></td>
-                      <td>Friday<br><?php echo date('Y-m-d', strtotime($date. ' + 4 days')); ?></td>
-                    </tr>
-                    <tr>
-                      <td>0800</td>
-                      <td></td> 
-                      <td></td>
-                      <td></td>
-                      <td></td> 
-                      <td></td>
-                    </tr>
-                    <tr>
-                      <td>0900</td>
-                      <td></td> 
-                      <td></td>
-                      <td></td>
-                      <td></td> 
-                      <td></td>
-                    </tr>
-                    <tr>
-                      <td>1000</td>
-                      <td></td> 
-                      <td></td>
-                      <td></td>
-                      <td></td> 
-                      <td></td>
-                    </tr>
-                    <tr>
-                      <td>1100</td>
-                      <td></td> 
-                      <td></td>
-                      <td></td>
-                      <td></td> 
-                      <td></td>
-                    </tr>
-                    <tr>
-                      <td>1200</td>
-                      <td></td> 
-                      <td></td>
-                      <td></td>
-                      <td></td> 
-                      <td></td>
-                    </tr>
-                    <tr>
-                      <td>1300</td>
-                      <td></td> 
-                      <td></td>
-                      <td></td>
-                      <td></td> 
-                      <td></td>
-                    </tr>
-                    <tr>
-                      <td>1400</td>
-                      <td></td> 
-                      <td></td>
-                      <td></td>
-                      <td></td> 
-                      <td></td>
-                    </tr>
-                    <tr>
-                      <td>1500</td>
-                      <td></td> 
-                      <td></td>
-                      <td></td>
-                      <td></td> 
-                      <td></td>
-                    </tr>
-                    <tr>
-                      <td>1600</td>
-                      <td></td> 
-                      <td></td>
-                      <td></td>
-                      <td></td> 
-                      <td></td>
-                    </tr>
-                    <tr>
-                      <td>1700</td>
-                      <td></td> 
-                      <td></td>
-                      <td></td>
-                      <td></td> 
-                      <td></td>
-                    </tr>
-                    <tr>
-                      <td>1800</td>
-                      <td></td> 
-                      <td></td>
-                      <td></td>
-                      <td></td> 
-                      <td></td>
-                    </tr>
-                    <tr>
-                      <td>1900</td>
-                      <td></td> 
-                      <td></td>
-                      <td></td>
-                      <td></td> 
-                      <td></td>
-                    </tr>
-                    <tr>
-                      <td>2000</td>
-                      <td></td> 
-                      <td></td>
-                      <td></td>
-                      <td></td> 
-                      <td></td>
-                    </tr>
-                </table>
-            </div>
-        </div>
-        </div>
-        <!--table 5-->
+        <!--table to display data-->
         <div id="Room5" style="display:none;" class="whiteColor">
         <div class="row">
-            <div class="RoomName col-sm-12 col-xs-12" id="name"><p>Room 5</p></div>
+            <div class="RoomName col-sm-12 col-xs-12" id="name">
+                <!--displays the room name-->
+                <p id="roomAndNumber">Room <label id="name1"><?php echo $roomNr;?></label></p>  
+            </div>
         </div>
 
         <div class="row">
-            <div class="col-sm-12 col-xs-12">
-                <table class="table">
+            <div class="col-sm-12 col-xs-12" id="tableDiv" >
+                <!--displays the date-->
+                <table class="table" id="mytable">
                     <tr>
                       <td>Room name</td>
-                      <td>Monday<br><?php echo date('Y-m-d'); ?></td> 
-                      <td>Tuesday<br><?php echo date('Y-m-d', strtotime($date. ' + 1 days')); ?></td>
-                      <td>Wednesday<br><?php echo date('Y-m-d', strtotime($date. ' + 2 days')); ?></td>
-                      <td>Thursday<br><?php echo date('Y-m-d', strtotime($date. ' + 3 days')); ?></td>
-                      <td>Friday<br><?php echo date('Y-m-d', strtotime($date. ' + 4 days')); ?></td>
+                      <td>Monday<br><?php 
+                      /* Sets the date as the desired format for each weekday */
+                      if($date1['wday'] == 1)
+                      {
+                           echo $date;
+                           //echo date('Y-m-d'); 
+                           $days[0] = "".date("Y-m-d");
+                           $order[$days[0]] = 7;
+                      }
+                     else {
+                          echo date('Y-m-d', strtotime($date. ' - '.($date1['wday'] - 1).' days'));
+                          $days[0] = "".date('Y-m-d', strtotime($date. ' - '.$date1['wday'].' days'.'+ 1 days')); 
+                          $order[$days[0]] = 7;
+                     }
+                      ?></td> 
+                      <td>Tuesday<br><?php 
+                       if($date1['wday'] == 2)
+                      { 
+                           echo $date;
+                           //echo date('Y-m-d'); 
+                           $days[1] = $date;
+                           $order[$days[1]] = 8;
+                      }else{
+                         echo date('Y-m-d', strtotime($date. ' - '.$date1['wday'].' days'.'+ 2 days'));
+                         $days[1] = "".date('Y-m-d', strtotime($date. ' - '.$date1['wday'].' days'.'+ 2 days'));
+                         $order[$days[1]] = 8;
+                      }                         
+                      ?></td>
+                      <td>Wednesday<br><?php 
+                       if($date1['wday'] == 3)
+                      {
+                            echo $date;
+                           //echo date('Y-m-d');  
+                           $days[2] = $date;
+                           $order[$days[2]] = 9;
+                       }else{
+                         echo date('Y-m-d', strtotime($date. ' - '.$date1['wday'].' days'.'+ 3 days'));  
+                         $days[2] = "".date('Y-m-d', strtotime($date. ' - '.$date1['wday'].' days'.'+ 3 days'));  
+                         $order[$days[2]] = 9;
+                      }   
+                      ?></td>
+                      <td>Thursday<br><?php 
+                       if($date1['wday'] == 4)
+                      {
+                            echo $date;
+                           //echo date('Y-m-d'); 
+                           $days[3] = $date;
+                           $order[$days[3]] = 10;
+                      }else{
+                         echo date('Y-m-d', strtotime($date. ' - '.$date1['wday'].' days'.'+ 4 days'));  
+                         $days[3] = "".date('Y-m-d', strtotime($date. ' - '.$date1['wday'].' days'.'+ 4 days'));
+                         $order[$days[3]] = 10;
+                          
+                      }   
+                      ?></td>
+                      <td>Friday<br><?php 
+                       if($date1['wday'] == 5)
+                      {
+                            echo $date;
+                           //echo date('Y-m-d');  
+                           $days[4] = $date;
+                           $order[$days[4]] = 11;
+                      }else{
+                         echo date('Y-m-d', strtotime($date. ' - '.$date1['wday'].' days'.'+ 5 days'));  
+                         $days[4] = "".date('Y-m-d', strtotime($date. ' - '.$date1['wday'].' days'.'+ 5 days'));
+                         $order[$days[4]] = 11;
+                      }    
+                      ?>
+                          <!--the table-->
+                          <!-- Color mapping -->
+                      </td>
                     </tr>
                     <tr>
-                      <td>0800</td>
-                      <td></td> 
-                      <td></td>
-                      <td></td>
-                      <td></td> 
-                      <td></td>
+                      <td>08:00</td>
+                      <td id="cell1" onclick="read('cell1')"></td> 
+                      <td id="cell2" onclick="read('cell2')"></td>
+                      <td id="cell3" onclick="read('cell3')"></td>
+                      <td id="cell4" onclick="read('cell4')"></td> 
+                      <td id="cell5" onclick="read('cell5')"></td>
                     </tr>
                     <tr>
-                      <td>0900</td>
-                      <td></td> 
-                      <td></td>
-                      <td></td>
-                      <td></td> 
-                      <td></td>
+                      <td>09:00</td>
+                      <td id="cell6" onclick="read('cell6')"></td> 
+                      <td id="cell7" onclick="read('cell7')"></td>
+                      <td id="cell8" onclick="read('cell8')"></td>
+                      <td id="cell9" onclick="read('cell9')"></td> 
+                      <td id="cell10" onclick="read('cell10')"></td>
                     </tr>
                     <tr>
-                      <td>1000</td>
-                      <td></td> 
-                      <td></td>
-                      <td></td>
-                      <td></td> 
-                      <td></td>
+                      <td>10:00</td>
+                      <td id="cell11" onclick="read('cell11')"></td> 
+                      <td id="cell12" onclick="read('cell12')"></td>
+                      <td id="cell13" onclick="read('cell13')"></td>
+                      <td id="cell14" onclick="read('cell14')"></td> 
+                      <td id="cell15" onclick="read('cell15')"></td>
                     </tr>
                     <tr>
-                      <td>1100</td>
-                      <td></td> 
-                      <td></td>
-                      <td></td>
-                      <td></td> 
-                      <td></td>
+                      <td>11:00</td>
+                      <td id="cell16" onclick="read('cell16')"></td> 
+                      <td id="cell17" onclick="read('cell17')"></td>
+                      <td id="cell18" onclick="read('cell18')"></td>
+                      <td id="cell19" onclick="read('cell19')"></td> 
+                      <td id="cell20" onclick="read('cell20')"></td>
                     </tr>
                     <tr>
-                      <td>1200</td>
-                      <td></td> 
-                      <td></td>
-                      <td></td>
-                      <td></td> 
-                      <td></td>
+                      <td>12:00</td>
+                      <td id="cell21" onclick="read('cell21')"></td>
+                      <td id="cell22" onclick="read('cell22')"></td>
+                      <td id="cell23" onclick="read('cell23')"></td> 
+                      <td id="cell24" onclick="read('cell24')"></td>
+                      <td id="cell25" onclick="read('cell25')"></td>
                     </tr>
                     <tr>
-                      <td>1300</td>
-                      <td></td> 
-                      <td></td>
-                      <td></td>
-                      <td></td> 
-                      <td></td>
+                      <td>13:00</td>
+                      <td id="cell26" onclick="read('cell26')"></td> 
+                      <td id="cell27" onclick="read('cell27')"></td>
+                      <td id="cell28" onclick="read('cell28')"></td>
+                      <td id="cell29" onclick="read('cell29')"></td> 
+                      <td id="cell30" onclick="read('cell30')"></td>
                     </tr>
                     <tr>
-                      <td>1400</td>
-                      <td></td> 
-                      <td></td>
-                      <td></td>
-                      <td></td> 
-                      <td></td>
+                      <td>14:00</td>
+                      <td id="cell31" onclick="read('cell31')"></td> 
+                      <td id="cell32" onclick="read('cell32')"></td>
+                      <td id="cell33" onclick="read('cell33')"></td>
+                      <td id="cell34" onclick="read('cell34')"></td> 
+                      <td id="cell35" onclick="read('cell35')"></td>
                     </tr>
                     <tr>
-                      <td>1500</td>
-                      <td></td> 
-                      <td></td>
-                      <td></td>
-                      <td></td> 
-                      <td></td>
+                      <td>15:00</td>
+                      <td id="cell36" onclick="read('cell36')"></td> 
+                      <td id="cell37" onclick="read('cell37')"></td>
+                      <td id="cell38" onclick="read('cell38')"></td>
+                      <td id="cell39" onclick="read('cell39')"></td> 
+                      <td id="cell40" onclick="read('cell40')"></td>
                     </tr>
                     <tr>
-                      <td>1600</td>
-                      <td></td> 
-                      <td></td>
-                      <td></td>
-                      <td></td> 
-                      <td></td>
+                      <td>16:00</td>
+                      <td id="cell41" onclick="read('cell41')"></td> 
+                      <td id="cell42" onclick="read('cell42')"></td>
+                      <td id="cell43" onclick="read('cell43')"></td>
+                      <td id="cell44" onclick="read('cell44')"></td> 
+                      <td id="cell45" onclick="read('cell45')"></td>
                     </tr>
                     <tr>
-                      <td>1700</td>
-                      <td></td> 
-                      <td></td>
-                      <td></td>
-                      <td></td> 
-                      <td></td>
+                      <td>17:00</td>
+                      <td id="cell46" onclick="read('cell46')"></td> 
+                      <td id="cell47" onclick="read('cell47')"></td>
+                      <td id="cell48" onclick="read('cell48')"></td>
+                      <td id="cell49" onclick="read('cell49')"></td> 
+                      <td id="cell50" onclick="read('cell50')"></td>
                     </tr>
                     <tr>
-                      <td>1800</td>
-                      <td></td> 
-                      <td></td>
-                      <td></td>
-                      <td></td> 
-                      <td></td>
+                      <td>18:00</td>
+                      <td id="cell51" onclick="read('cell51')"></td> 
+                      <td id="cell52" onclick="read('cell52')"></td>
+                      <td id="cell53" onclick="read('cell53')"></td>
+                      <td id="cell54" onclick="read('cell54')"></td> 
+                      <td id="cell55" onclick="read('cell55')"></td>
                     </tr>
                     <tr>
-                      <td>1900</td>
-                      <td></td> 
-                      <td></td>
-                      <td></td>
-                      <td></td> 
-                      <td></td>
+                      <td>19:00</td>
+                      <td id="cell56" onclick="read('cell56')"></td> 
+                      <td id="cell57" onclick="read('cell57')"></td>
+                      <td id="cell58" onclick="read('cell58')"></td>
+                      <td id="cell59" onclick="read('cell59')"></td> 
+                      <td id="cell60" onclick="read('cell60')"></td>
                     </tr>
                     <tr>
-                      <td>2000</td>
-                      <td></td> 
-                      <td></td>
-                      <td></td>
-                      <td></td> 
-                      <td></td>
+                      <td>20:00</td>
+                      <td id="cell61" onclick="read('cell61')"></td> 
+                      <td id="cell62" onclick="read('cell62')"></td>
+                      <td id="cell63" onclick="read('cell63')"></td>
+                      <td id="cell64" onclick="read('cell64')"></td> 
+                      <td id="cell65" onclick="read('cell65')"></td>
                     </tr>
                 </table>
             </div>
         </div>
-       <!--
-        <div id="calendar">
-        <iframe src="https://calendar.google.com/calendar/embed?showPrint=0&amp;height=600&amp;wkst=1&amp;bgcolor=%23ffffff&amp;src=3m5vmovfngbf3f47r65gn60jag%40group.calendar.google.com&amp;color=%238D6F47&amp;ctz=Europe%2FAmsterdam"
-        style="border:solid 1px #777" width="800" height="600" frameborder="0" scrolling="no"></iframe>
-        </div>
-       -->
+            
         </div> 
          <div class="row">
             <div class="col-sm-8 col-xs-8"><p></p></div>
@@ -860,88 +585,60 @@
 
                 <p>
                 <!--Booking button-->
-                <button type="button" class="booking btn btn-success btn-md" data-toggle="modal" data-target="#booking">Booking</button>
+                <button type="submit" class="booking btn btn-success btn-md"  data-toggle="modal"
+                        data-target="#booking"  onclick="getSomeColor()" value="Booking">Booking</button>
+                    <input type="hidden" value="something" name="pptppt" id="proc"/>
                 <!--Booking button pop up-->
                 <div class="modal fade" id="booking" role="dialog">
-                    <div class="modal-dialog">    
-                        <div class="modal-content">
-                          <div class="modal-header">
-                            <button type="button" class="close" data-dismiss="modal">&times;</button>
-                            <h4 class="modal-title">Booking</h4>
-                          </div>
-                          <div class="modal-body">
-                            <p>
-                            <p>Enter the Room number and then the date and time to book the room.</p>
-                            <form action="#">
-                                Room :<br>
-                                <input type="text" name="roomName"><br>
-                                Date :<br>
-                                <input type="text" name="date"><br>
-                                Time :<br>
-                                <input type="text" name="time"><br>
-                                <input type="submit" value="Submit" name="bookRoom">
-                            </form>
-                            </p>
-                          </div>
-                          <div class="modal-footer">
-                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                          </div>
-                        </div>
-                  </div>
-                </p>
-                </div>
+                        <div class="modal-dialog">    
+                            <div class="modal-content">
+                              <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                <h4 class="modal-title">Booking's</h4>
+                              </div>
+                              <div class="modal-body">
+                                <form action="#" method="POST">       
+                                    <div id="contentForm">
+                                    <p> Are you sure that you want to book this?</p>
+                                   
+                                    <input type="submit" name="button123" value="YES" onclick=""/>
+                                    <input type="submit" value="NO"/>
+                                    <input type="hidden" value="" name="dateIn" id="dateIn"/>
+                                    <input type="hidden" value="" name="timeIn" id="timeIn"/>
+                                    <input type="hidden" value="" name="timeOut" id="timeOut"/>
+                                    <input type="hidden" value="" name="roomNumber" id="roomNumber"/>
+                                    </div>
+                                </form>    
+                              </div>
+                              <div class="modal-footer">
+                                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                              </div>
+                            </div>
+                      </div>
+                    </div>                   
                 <!-- Booking button pop up END -->
             </div>
-
-        <!--footer -->
-        <?php
-            // include 'footerSection.php';
-        ?>
-        <!-- footer end -->
     </div>
         <!-- Javascript -->
         <script>
-            
-            $(document).ready(function(){
-                $('[data-toggle="popover"]').popover();   
-            });
-            
+            //displaying the room when you enter the website
+            document.getElementById('Room5').style.display = 'block';
             function myFunction(elementID) {
                 switch(elementID){
-                    case 'Room1':
-                        document.getElementById('Room1').style.display = 'block';
-                        document.getElementById('Room2').style.display = 'none';
-                        document.getElementById('Room3').style.display = 'none';
-                        document.getElementById('Room4').style.display = 'none';
-                        document.getElementById('Room5').style.display = 'none';
+                    case 'buttonButton1':
+                        document.getElementById('name1').innerHTML = '1';
                         break;
-                    case 'Room2':
-                        document.getElementById('Room1').style.display = 'none';
-                        document.getElementById('Room2').style.display = 'block';
-                        document.getElementById('Room3').style.display = 'none';
-                        document.getElementById('Room4').style.display = 'none';
-                        document.getElementById('Room5').style.display = 'none';
+                    case 'buttonButton2':
+                        document.getElementById('name1').innerHTML = '2';
                         break;
-                    case 'Room3':
-                        document.getElementById('Room1').style.display = 'none';
-                        document.getElementById('Room2').style.display = 'none';
-                        document.getElementById('Room3').style.display = 'block';
-                        document.getElementById('Room4').style.display = 'none';
-                        document.getElementById('Room5').style.display = 'none';
+                    case 'buttonButton3':
+                        document.getElementById('name1').innerHTML = '3';
                         break;
-                    case 'Room4':
-                        document.getElementById('Room1').style.display = 'none';
-                        document.getElementById('Room2').style.display = 'none';
-                        document.getElementById('Room3').style.display = 'none';
-                        document.getElementById('Room4').style.display = 'block';
-                        document.getElementById('Room5').style.display = 'none';
+                    case 'buttonButton4':
+                        document.getElementById('name1').innerHTML = '4';
                         break;
-                    case 'Room5':
-                        document.getElementById('Room1').style.display = 'none';
-                        document.getElementById('Room2').style.display = 'none';
-                        document.getElementById('Room3').style.display = 'none';
-                        document.getElementById('Room4').style.display = 'none';
-                        document.getElementById('Room5').style.display = 'block';
+                    case 'buttonButton5':
+                        document.getElementById('name1').innerHTML = '5';
                         break;
                 }
             }            
@@ -972,8 +669,194 @@
                 var registerButton = document.getElementById('registration');
                 registerButton.style = "block";
             }
+            
+            // giving the cells color
+            function read(some){
+                if(document.getElementById(some).style.backgroundColor != "red")
+                if(document.getElementById(some).style.backgroundColor == "darkgreen")
+                       document.getElementById(some).style.backgroundColor = "transparent";
+                    else
+                       document.getElementById(some).style.backgroundColor = "darkgreen";    
+            }
+            
+            // displays the user that booked the room on the cell in red
+            function displayData()
+            {
+                 var array = <?php echo json_encode($array); ?>;
+                 var size =  <?php echo json_encode($r); ?>;
+                 var days =  <?php echo json_encode($days); ?>;
+                 var order = <?php echo json_encode($order);?>;
+                 var hours = <?php echo json_encode($hours);?>;
+                 document.getElementById("mytable").style.color = "white"; // fix the bug with gray colored table, after registration form submission
+                 var x = document.getElementById("mytable").getElementsByTagName("td");
+                 for(var p = 0; p < size; p++)
+                 {
+                     
+                    q = order[array[p]['date']];
+                    w = hours[array[p]['timeIn']];
+                    e = hours[array[p]['timeOut']];
+                    sw = 0;
+                    for(t = 7; t <= 11 && sw == 0; t++)
+                    {
+                          if(q == t)
+                                sw = 1;
+                    }
+                    
+                    for(o = w; o <= e && sw == 1; o++)
+                    {
+                        s = ((7*o)-(o-1))+ (q - 7);
+                        x[s].style.backgroundColor = "red";
+                        x[s].innerHTML = array[p]['userName'];
+                    }
+                 }
+            }
+            
+            function tableRefresh(){
+                 setInterval(function() {
+                  window.location.reload();
+                }, 200); 
+            }
+            
+            // checking if you have selected more then one day
+            function checkDaysChecked(){
+                var sw = true;
+                var days = [0,0,0,0,0];
+                var x = document.getElementById("mytable").getElementsByTagName("td");
+                for(var i = 1; i <= 13; i++)
+                {   
+                    var k = (7*i)-(i-1);
+                    for(var j = 0; j <= 4; j++)
+                    {
+                        if(x[k+j].style.backgroundColor == "darkgreen")
+                        {
+                            days[j]=1;
+                        }
+                    }
+                }
+                
+                
+                var l = 0;
+                for(var p = 0; p <= 4; p++)
+                {
+                    l += days[p];
+                }
+                if(l == 0 || l > 1)
+                      return false;
+                return sw;
+            } 
+            
+            
+            // getting the date and time of the cell selected
+            function getSomeColor()
+            { 
+                
+                var nameOfRoom = document.getElementById("name1").innerHTML;
+                document.getElementById("roomNumber").value = nameOfRoom;
+                var date = <?php echo json_encode($days); ?>;
+                var dateOut = 0;
+                var x = document.getElementById("mytable").getElementsByTagName("td");
+                if(checkDaysChecked()){
+                     document.getElementById("contentForm").style.display = "block";
+                for(var i = 1; i <= 13; i++)
+                {
+                    var k = (7*i)-(i-1);
+                    for(var j = 0; j <= 4; j++)
+                    {
+                         if(x[k+j].style.backgroundColor == "darkgreen"){
+                           // x[k+j].innerHTML = "Colum: "+(j+1)+" Row: "+ i;
+                            if(dateOut == 0)
+                            document.getElementById("dateIn").value = j;
+                           
+                            if(dateOut == 0){
+                             document.getElementById("timeIn").value = i+7;
+                         }
+                            dateOut = i+7;
+                         }
+                    }
+                }
+               document.getElementById("timeOut").value = dateOut;
+                 }else{
+                     alert("Please select a field, you can't have empty!! You can't check more than one column!!");
+                     document.getElementById("contentForm").style.display = "none";
+                  }
+            }
+            
+            // If the user type changes, change the domain of the email
+            function radioButtonChange(radio)
+            {
+                switch(radio.value)
+                {
+                    case "Student":
+                        document.getElementById("emailDomain").textContent = " @student.stenden.com";
+                        break;
+                    case "Teacher":
+                        document.getElementById("emailDomain").textContent = " @stenden.com";
+                        break;
+                    case "Admin":
+                        document.getElementById("emailDomain").textContent = " @stenden.com";
+                        break;
+                }
+            }
         </script>
-        <!-- end of Javascript-->
+        
+        <!--push data to the database(e.g. the date, time,user etc...)-->
+        <div>
+            <?php
+                /* Week location mesmerization */
+                 $_SESSION["before"] = $before;
+                  if(isset($_POST['after']) || isset($_POST['before']) || isset($_POST["currentWeek"])){
+                      $_SESSION["yourDate"] = $days;
+                      $_SESSION["date"] = $date;
+                  }
+                  
+                  if(!isset($_SESSION["yourDate"]) || empty($_SESSION["yourDate"]))
+                  {
+                     $_SESSION["yourDate"] = $days;
+                  }
+                 if(isset($_POST["button123"]))
+                { 
+                  if(isset($_SESSION["userNumber"]))
+                 {
+                    $a = $_POST['dateIn'];
+                    $b = $_POST['timeIn'];
+                    $c = $_POST['timeOut'];
+                    if(!empty($_SESSION["roomNr"])){
+                      $d = $_SESSION["roomNr"];
+                    $_SESSION["roomNr"] = 1;
+                    }
+                  else {
+                    $d = 1;
+                  }
+                    if(strlen($b) == 1)
+                    {
+                        $b = "0".$b.":00:00";
+                    }else{
+                        $b = $b.":00:00";
+                    }
+                    
+                     if(strlen($c) == 1)
+                    {
+                        $c = "0".$c.":00:00";
+                    }else{
+                        $c = $c.":00:00";
+                    }
+                    $sql = "INSERT INTO `reservation`(`date`, `timeIn`, `timeOut`, `roomNumber`) VALUES ('{$_SESSION['yourDate'][$a]}','{$b}','{$c}','{$d}')";
+                    mysqli_query($DBConnect, $sql) or die("Something happend: ".mysqli_error($DBConnect));
+                    $sql = "SELECT reservationNumber FROM reservation ORDER BY reservationNumber DESC LIMIT 1";
+                    $result = mysqli_query($DBConnect, $sql);
+                    $res = mysqli_fetch_assoc($result);
+                    $resNumber = $res['reservationNumber'];
+                    $sql = "INSERT INTO `userReservation`(`userNumber`, `reservationNumber`) VALUES ({$_SESSION['userNumber']},{$resNumber})";
+                    mysqli_query($DBConnect, $sql) or die("Something happend: ".mysqli_error($DBConnect));
+                    }else{
+                        echo "<script> alert('You need to login, for reserving a room!!!'); </script>";
+                    }
+                    $_SESSION['yourDate']="";
+               }
+             
+            ?>
+        </div>
+        <!-- END of Javascript-->
         
         <!-- Area for php scripts that NEED the javascript functions first -->       
         <?php
@@ -1000,13 +883,13 @@
         }
         
         // If there is a session and the user logged in, is admin, show him the registration button
-        if(isset($_SESSION['userNumber']) && $adminAccess > 0)
+        if(isset($_SESSION['userNumber']) )
         {
+			if($_SESSION['admin'] > 0)
             echo '<script type="text/javascript">',
             'showRegistration();',
             '</script>';
         }
-        ?>
-        
+        ?>      
   </body>
 </html>

@@ -1,8 +1,9 @@
 <?php
-$DBConnect = mysqli_connect("www.bunte-bloecke.de", "sql4", "sEuBpzQakp"); // Connection to Julian's server
+// Connection to Julian's server
+$DBConnect = mysqli_connect("networkict", "root", "gds9pegngc9a9"); 
 
 // Database variables
-$DBName = 'riservatzione' ;
+$DBName = 'sql4' ;
 $ReservTable = 'reservation' ;
 $RoomTable = 'room' ;
 $UserTable = 'user';

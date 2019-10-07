@@ -1,13 +1,14 @@
 <?php
 // Database connection
-$DBConnect = mysqli_connect("localhost", "root", "gds9pegngc9a9") ;
+$DBConnect = mysqli_connect("networkict", "root", "gds9pegngc9a9") ;
 
 // Database variables
-$DBName = 'reservationSystem' ;
+$DBName = 'riservatzione' ;
 $ReservTable = 'reservation' ;
+$RoomTable = 'room' ;
 $UserTable = 'user';
-$UReservTable = 'userReservation' ;
-$URoleTable = 'userRole' ;
+$UReservTable = 'userreservation' ;
+$URoleTable = 'userrole' ;
 
 // Check connection
 if(!$DBConnect)
